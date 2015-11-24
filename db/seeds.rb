@@ -14,22 +14,21 @@ Role.create!(id: 4, rolename:'techsuport')
 Role.create!(id: 5, rolename:'admin')
 
 phonecodes = [550, 555, 559, 771, 772, 777, 543, 701, 705, 700]
+password = 'password'
 
-5.times do
+10.times do
   User.create!(
       name: Faker::Name.name,
       surname: Faker::Name.last_name,
       middlename: Faker::Name.first_name,
       gender: ['male', 'female'].sample,
       birthdate: Faker::Date.backward,
-      phone1: 0 + phonecodes.sample + rand(100000..999999),
-      phone2: 0 + phonecodes.sample + rand(100000..999999),
-      skype: Faker::Name.name,
+      phone1: ('+996' + phonecodes.sample.to_s + rand(100000..999999).to_s),
+      phone2: ('0' + phonecodes.sample.to_s + rand(100000..999999).to_s),
+      skype: ((Faker::Name.name.downcase!).split(' ')).join('_'),
       passportdetails: Faker::Lorem.word,
-
-      #TODO after setting Devise
-      # email:Faker::Internet.email,
-      # password:password,
-      # password_confirmation:password
+      email:Faker::Internet.email,
+      password:password,
+      password_confirmation:password
   )
 end
