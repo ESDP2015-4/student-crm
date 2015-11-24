@@ -13,6 +13,23 @@ Role.create!(id: 3, rolename:'tutor')
 Role.create!(id: 4, rolename:'techsuport')
 Role.create!(id: 5, rolename:'admin')
 
-password = 'password'
+phonecodes = [550, 555, 559, 771, 772, 777, 543, 701, 705, 700]
 
-User.create!(name:'John', surname:'Doe',email:'john@test.com', password:password, password_confirmation:password)
+5.times do
+  User.create!(
+      name: Faker::Name.name,
+      surname: Faker::Name.last_name,
+      middlename: Faker::Name.first_name,
+      gender: ['male', 'female'].sample,
+      birthdate: Faker::Date.backward,
+      phone1: 0 + phonecodes.sample + rand(100000..999999),
+      phone2: 0 + phonecodes.sample + rand(100000..999999),
+      skype: Faker::Name.name,
+      passportdetails: Faker::Lorem.word,
+
+      #TODO after setting Devise
+      # email:Faker::Internet.email,
+      # password:password,
+      # password_confirmation:password
+  )
+end
