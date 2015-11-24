@@ -12,3 +12,7 @@ Role.create!(id: 2, rolename:'manager')
 Role.create!(id: 3, rolename:'tutor')
 Role.create!(id: 4, rolename:'techsuport')
 Role.create!(id: 5, rolename:'admin')
+
+password = 'password'
+
+User.create!(name:'John', surname:'Doe',email:'john@test.com', password:password, password_confirmation:password)
