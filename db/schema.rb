@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151124132743) do
+ActiveRecord::Schema.define(version: 20151124154514) do
 
   create_table "attendances", force: :cascade do |t|
-    t.integer  "student_id"
+    t.integer  "user_id"
     t.integer  "period_id"
     t.boolean  "attended"
     t.datetime "created_at", null: false
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20151124132743) do
   end
 
   add_index "attendances", ["period_id"], name: "index_attendances_on_period_id"
-  add_index "attendances", ["student_id"], name: "index_attendances_on_student_id"
+  add_index "attendances", ["user_id"], name: "index_attendances_on_user_id"
 
   create_table "course_elements", force: :cascade do |t|
     t.integer  "course_id"
@@ -44,14 +44,14 @@ ActiveRecord::Schema.define(version: 20151124132743) do
 
   create_table "group_memberships", force: :cascade do |t|
     t.integer  "group_id"
-    t.integer  "student_id"
+    t.integer  "user_id"
     t.boolean  "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_index "group_memberships", ["group_id"], name: "index_group_memberships_on_group_id"
-  add_index "group_memberships", ["student_id"], name: "index_group_memberships_on_student_id"
+  add_index "group_memberships", ["user_id"], name: "index_group_memberships_on_user_id"
 
   create_table "groups", force: :cascade do |t|
     t.integer  "course_id"
@@ -78,12 +78,18 @@ ActiveRecord::Schema.define(version: 20151124132743) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "students", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "name"
-    t.string   "phone"
-    t.string   "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "surname"
+    t.string   "middlename"
+    t.string   "gender"
+    t.date     "birthdate"
+    t.string   "phone1"
+    t.string   "phone2"
+    t.string   "skype"
+    t.string   "passportdetails"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
 end

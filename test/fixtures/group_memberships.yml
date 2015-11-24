@@ -2,10 +2,10 @@
 
 one:
   group_id: 
-  student_id: 
+  user_id: 
   active: false
 
 two:
   group_id: 
-  student_id: 
+  user_id: 
   active: false
