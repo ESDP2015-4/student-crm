@@ -9,4 +9,6 @@ class User < ActiveRecord::Base
 
   has_many :attendances
   has_many :periods, through: :attendances
+
+  has_and_belongs_to_many :roles
 end
