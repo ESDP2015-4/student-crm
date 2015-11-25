@@ -50,3 +50,7 @@ gem 'bootstrap-sass'
 gem 'faker'
 
 gem 'devise'
+
+gem 'cancancan'
+
+gem 'rolify'

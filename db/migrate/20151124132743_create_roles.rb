@@ -1,9 +1,10 @@
 class CreateRoles < ActiveRecord::Migration
   def change
     create_table :roles do |t|
-      t.string :rolename
+      t.string :name, index: true
+      t.references :resource, :polymorphic => true
 
-      t.timestamps null: false
+      t.timestamps
     end
   end
 end

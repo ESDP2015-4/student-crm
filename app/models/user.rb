@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  #След вызов добавит методы add_role, has_role, remove_role к модели user
+  rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
@@ -10,5 +12,4 @@ class User < ActiveRecord::Base
   has_many :attendances
   has_many :periods, through: :attendances
 
-  has_and_belongs_to_many :roles
 end
