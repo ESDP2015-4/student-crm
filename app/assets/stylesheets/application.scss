@@ -1,5 +1,19 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
-
 @import "main";
 
+/* Alert classes for devise */
+.alert-notice {
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+.alert-alert {
+  background-color: #f2dede;
+  border-color: #eed3d7;
+  color: #b94a48;
+  text-align: left;
+}
+
+/* End of alert classes for devise */

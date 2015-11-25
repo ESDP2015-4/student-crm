@@ -15,3 +15,12 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+//this function calls alert close method to close an alert
+function clearFlash() {
+    $(".alert").alert('close');
+}
+//this function calls clearFlash method after 3 seconds
+var clearFlashOnReady = function () {
+    setTimeout(clearFlash, 3000);
+};
