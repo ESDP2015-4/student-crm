@@ -1,0 +1,78 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xs-offset-0 col-sm-offset-0 toppad">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= @user.surname %> <%= @user.name %> <%= @user.middlename %></h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-4 col-lg-4" align="center">
+            <%= image_tag @user.image.url(:medium), class: 'img-circle img-responsive' %>
+          </div>
+          <div class=" col-md-8 col-lg-8 ">
+            <table class="table table-user-information">
+              <tbody>
+              <tr>
+                <td>Course:</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Group:</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Birth date:</td>
+                <td><%= @user.birthdate %></td>
+              </tr>
+
+              <tr>
+              <tr>
+                <td>Gender:</td>
+                <td><%= @user.gender %></td>
+              </tr>
+              <tr>
+                <td>Skype</td>
+                <td><%= @user.skype %></td>
+              </tr>
+              <tr>
+                <td>Email:</td>
+                <td><%= @user.email %></td>
+              </tr>
+              <td>Phones:</td>
+              <td>
+                <%= @user.phone1 %> <br/>
+                <%= @user.phone2 %>
+              </td>
+              </tr>
+              <tr>
+                <td>Registration date</td>
+                <td><%= @user.created_at.strftime("%d/%m/%Y") %></td>
+              </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer">
+        <p>Some information </p>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Actions</h3>
+      </div>
+      <div class="panel-body">
+        <div class="btn-group-vertical" role="group" aria-label="...">
+          <%= link_to 'Edit profile', edit_user_path(@user), class: 'btn btn-warning' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

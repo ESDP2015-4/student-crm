@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  #Ð¡Ð»ÐµÐ´ Ð²Ñ‹Ð·Ð¾Ð² Ð´Ð¾Ð±Ð°Ð²Ð¸Ñ‚ Ð¼ÐµÑ‚Ð¾Ð´Ñ‹ add_role, has_role, remove_role Ðº Ð¼Ð¾Ð´ÐµÐ»Ð¸ user
+  #Ñëåä âûçîâ äîáàâèò ìåòîäû add_role, has_role, remove_role ê ìîäåëè user
   rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -18,4 +18,14 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :image,
                     content_type: ['image/jpeg', 'image/gif', 'image/png']
 
+  def password_required?
+    new_record? ? false : super
+  end
+
+  validates :name, presence: true, length: {maximum: 250}
+  validates :surname, presence: true, length: {maximum: 250}
+  validates :gender, presence: true
+  validates :phone1, presence: true
+
+  validates :passportdetails, presence: true
 end
