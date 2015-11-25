@@ -33,4 +33,13 @@ password = 'password'
   )
 end
 
-manager = User.create!(name: 'manager', email: 'manager@test.com', password: password, password_confirmation: password)
+manager = User.create!(name: 'manager',
+                       surname: 'shit',
+                       gender: 'male',
+                       birthdate: '02.09.1992',
+                       phone1: '+996772180825',
+                       skype: 'skype.daniyar',
+                       passportdetails:'abijjljlk',
+                       email: 'manager@test.com', password: password, password_confirmation: password)
+
+manager.add_role 'manager'

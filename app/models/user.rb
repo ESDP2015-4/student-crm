@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  #След вызов добавит методы add_role, has_role, remove_role к модели user
+  #this adds methods add_role, has_role, remove_role to user model
   rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
