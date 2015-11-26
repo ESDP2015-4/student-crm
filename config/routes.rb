@@ -4,4 +4,7 @@ Rails.application.routes.draw do
 
   resources :users, :except => [:destroy]
 
+  get 'about' => 'main#about'
+  get 'contact' => 'main#contact'
+
 end
