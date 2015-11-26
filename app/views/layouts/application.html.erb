@@ -6,10 +6,10 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-
-<%= render 'layouts/application/navbar' %>
-
+<body<%= " id=#{@body_id}" if @body_id %>>
+<% unless @body_id=='login_page' %>
+    <%= render 'layouts/application/navbar' %>
+<% end %>
 <div class="container">
 
   <%= flash_messages %>

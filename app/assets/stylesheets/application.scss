@@ -17,3 +17,51 @@
 }
 
 /* End of alert classes for devise */
+
+/* Login page and form styles */
+#login_page{
+  background-size:cover;
+  background-image:url('login-bg.png');
+  min-width: 0;
+  color: #444;
+  font-family: "Open Sans",sans-serif;
+  font-size: 13px;
+  line-height: 1.4em;
+}
+
+#login{
+  width: 320px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+
+#login_form{
+  margin-top: 20px;
+  margin-left: 0;
+  margin-bottom: 10px;
+  padding: 26px 24px 20px;
+  font-weight: 400;
+  overflow: hidden;
+  background: #fff;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.13);
+  box-shadow: 0 3px 5px rgba(0,0,0,.13);
+}
+
+#login_form label{
+  color: #777;
+  font-size: 14px;
+  font-weight: 100;
+}
+
+#login a{
+  text-decoration: none;
+  color: #E1E3E4;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+#login a:hover{
+  color: #00a0d2;
+}
+
+/* End of login page and form styles */
