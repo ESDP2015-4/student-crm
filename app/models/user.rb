@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
     new_record? ? false : super
   end
 
-  after_create { |user| user.send_reset_password_instructions }
+  # after_create { |user| user.send_reset_password_instructions }
 
   validates :name, presence: true, length: {maximum: 250}
   validates :surname, presence: true, length: {maximum: 250}
