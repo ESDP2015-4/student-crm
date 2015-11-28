@@ -2,6 +2,16 @@ class User < ActiveRecord::Base
   #this adds methods add_role, has_role, remove_role to user model
   rolify
 
+  validates :phone1, presence: true
+
+
+  my_regex = /\A(\+996)([0-9]{9})\z/
+
+ validates_format_of :phone1, :phone2,
+                     :with => my_regex,
+                     message: "Phone must be like +996xxxYYYYYY, where xxx - your operator's code and YYYYYY - your phone number"
+
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
@@ -14,10 +24,10 @@ class User < ActiveRecord::Base
   has_many :periods, through: :attendances
 
   has_attached_file :image,
-                    styles: { medium: '300x300>', thumb: '100x100>'},
+                    styles: {medium: '300x300>', thumb: '100x100>'},
                     default_url: '/images/:style/missing.png'
   validates_attachment_content_type :image,
-                    content_type: ['image/jpeg', 'image/gif', 'image/png']
+                                    content_type: ['image/jpeg', 'image/gif', 'image/png']
 
   def password_required?
     new_record? ? false : super

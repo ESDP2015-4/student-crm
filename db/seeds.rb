@@ -16,7 +16,7 @@ Role.create!(id: 5, name: 'admin')
 phonecodes = (550..559).to_a
 phonecodes.push (700..709).to_a
 phonecodes.push (770..779).to_a
-phonecodes.push [543, 545] #I don't know if anyone is still using fonex
+# phonecodes.push [543, 545] #I don't know if anyone is still using fonex
 phonecodes.flatten!
 
 password = 'password'
@@ -29,7 +29,7 @@ password = 'password'
       gender: ['Мужчина', 'Женщина'].sample,
       birthdate: Faker::Date.backward,
       phone1: ('+996' + phonecodes.sample.to_s + rand(100000..999999).to_s),
-      phone2: ('0' + phonecodes.sample.to_s + rand(100000..999999).to_s),
+      phone2: ('+996' + phonecodes.sample.to_s + rand(100000..999999).to_s),
       skype: ((Faker::Name.name.downcase!).split(' ')).join('_'),
       passportdetails: Faker::Lorem.word,
       email: "#{Faker::Name.first_name}.#{Faker::Name.last_name}@gmail.com",
@@ -43,6 +43,7 @@ manager = User.create!(name: 'manager',
                        gender: 'Мужчина',
                        birthdate: '02.09.1992',
                        phone1: '+996772180825',
+                       phone2: '+996772180825',
                        skype: 'skype.daniyar',
                        passportdetails:'abijjljlk',
                        email: 'manager@gmail.com', password: password, password_confirmation: password)
@@ -54,6 +55,7 @@ student = User.create!(name: 'Student',
                        gender: 'Мужчина',
                        birthdate: '02.09.1992',
                        phone1: '+996772180825',
+                       phone2: '+996772180825',
                        skype: 'skype.daniyar',
                        passportdetails:'abijjljlk',
                        email: 'student@gmail.com', password: password, password_confirmation: password)
@@ -65,6 +67,7 @@ admin = User.create!(name: 'Admin',
                        gender: 'Мужчина',
                        birthdate: '02.09.1992',
                        phone1: '+996772180825',
+                       phone2: '+996772180825',
                        skype: 'skype.admin',
                        passportdetails:'MVD 50-01',
                        email: 'admin@gmail.com', password: password, password_confirmation: password)
@@ -76,6 +79,7 @@ tutor = User.create!(name: 'Tutor',
                        gender: 'Мужчина',
                        birthdate: '02.09.1992',
                        phone1: '+996772180825',
+                       phone2: '+996772180825',
                        skype: 'skype.tutor',
                        passportdetails:'MVD 50-01',
                        email: 'tutor@gmail.com', password: password, password_confirmation: password)
