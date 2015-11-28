@@ -1,11 +1,14 @@
 class User < ActiveRecord::Base
   #this adds methods add_role, has_role, remove_role to user model
   rolify
+
+  validates :email, presence: true
+  validates_format_of :email, :with => /@gmail\.com\z/, message: "You can use only gmail account! "
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
-
 
   has_many :group_memberships
   has_many :groups, through: :group_memberships

@@ -13,7 +13,12 @@ Role.create!(id: 3, name: 'tutor')
 Role.create!(id: 4, name: 'techsuport')
 Role.create!(id: 5, name: 'admin')
 
-phonecodes = [550, 555, 559, 771, 772, 777, 543, 701, 705, 700]
+phonecodes = (550..559).to_a
+phonecodes.push (700..709).to_a
+phonecodes.push (770..779).to_a
+phonecodes.push [543, 545] #I don't know if anyone is still using fonex
+phonecodes.flatten!
+
 password = 'password'
 
 10.times do
