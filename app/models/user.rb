@@ -7,9 +7,14 @@ class User < ActiveRecord::Base
 
   my_regex = /\A(\+996)([0-9]{9})\z/
 
- validates_format_of :phone1, :phone2,
+ validates_format_of :phone1,
                      :with => my_regex,
                      message: "Phone must be like +996xxxYYYYYY, where xxx - your operator's code and YYYYYY - your phone number"
+
+  validates_format_of :phone2,
+                      :with => my_regex,
+                      :allow_blank => true,
+  message: "Phone must be like +996xxxYYYYYY, where xxx - your operator's code and YYYYYY - your phone number"
 
 
   # Include default devise modules. Others available are:
