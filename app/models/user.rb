@@ -2,9 +2,6 @@ class User < ActiveRecord::Base
   #this adds methods add_role, has_role, remove_role to user model
   rolify
 
-  validates :email, presence: true
-  validates_format_of :email, :with => /@gmail\.com\z/, message: "You can use only gmail account! "
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
@@ -32,6 +29,7 @@ class User < ActiveRecord::Base
   validates :surname, presence: true, length: {maximum: 250}
   validates :gender, presence: true
   validates :phone1, presence: true
-
+  validates :email, presence: true
+  validates_format_of :email, :with => /@gmail\.com\z/, message: "Допустим только gmail аккаунт"
   validates :passportdetails, presence: true
 end

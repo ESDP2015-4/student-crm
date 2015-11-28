@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-
   before_action :authenticate_user!
+  # Это применит авторизацию ко всем экшнам в этом контроллере
+  load_and_authorize_resource
 
   def index
     @users = User.paginate(page: params[:page], per_page: 10)

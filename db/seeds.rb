@@ -32,7 +32,7 @@ password = 'password'
       phone2: ('0' + phonecodes.sample.to_s + rand(100000..999999).to_s),
       skype: ((Faker::Name.name.downcase!).split(' ')).join('_'),
       passportdetails: Faker::Lorem.word,
-      email: Faker::Internet.safe_email,
+      email: "#{Faker::Name.first_name}.#{Faker::Name.last_name}@gmail.com",
       password: password,
       password_confirmation: password
   )
@@ -45,7 +45,7 @@ manager = User.create!(name: 'manager',
                        phone1: '+996772180825',
                        skype: 'skype.daniyar',
                        passportdetails:'abijjljlk',
-                       email: 'manager@test.com', password: password, password_confirmation: password)
+                       email: 'manager@gmail.com', password: password, password_confirmation: password)
 
 manager.add_role 'manager'
 
@@ -56,7 +56,7 @@ student = User.create!(name: 'Student',
                        phone1: '+996772180825',
                        skype: 'skype.daniyar',
                        passportdetails:'abijjljlk',
-                       email: 'student@test.com', password: password, password_confirmation: password)
+                       email: 'student@gmail.com', password: password, password_confirmation: password)
 
 student.add_role 'student'
 
@@ -67,7 +67,7 @@ admin = User.create!(name: 'Admin',
                        phone1: '+996772180825',
                        skype: 'skype.admin',
                        passportdetails:'MVD 50-01',
-                       email: 'admin@test.com', password: password, password_confirmation: password)
+                       email: 'admin@gmail.com', password: password, password_confirmation: password)
 
 admin.add_role 'admin'
 
@@ -78,6 +78,6 @@ tutor = User.create!(name: 'Tutor',
                        phone1: '+996772180825',
                        skype: 'skype.tutor',
                        passportdetails:'MVD 50-01',
-                       email: 'tutor@test.com', password: password, password_confirmation: password)
+                       email: 'tutor@gmail.com', password: password, password_confirmation: password)
 
 tutor.add_role 'tutor'

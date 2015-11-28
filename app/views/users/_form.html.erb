@@ -1,34 +1,88 @@
-<div class="col-md-6">
-  <%= simple_form_for(@user, html: { class: 'form-horizontal' },
-                      wrapper: :horizontal_form,
-                      wrapper_mappings: {
-                              check_boxes: :horizontal_radio_and_checkboxes,
-                              radio_buttons: :horizontal_radio_and_checkboxes,
-                              file: :horizontal_file_input,
-                              boolean: :horizontal_boolean
-                      }) do |f| %>
-      <%= f.input :email, label:'Эл.почта', placeholder: 'user@domain.com' %>
-      <%= f.input :name, label:'Имя',placeholder: 'First name' %>
-      <%= f.input :surname,label:'Фамилия', placeholder: 'Last name' %>
-      <%= f.input :middlename,label:'Отчество', placeholder: 'Middle name' %>
-      <%= f.input :gender, label:'Пол',as: :radio_buttons,
-                  collection: ['Мужской', 'Женский'] %>
-      <div class="col-sm-3" style="text-align: right">
-        <label for="birthdate" >* Дата рождения</label>
-      </div>
-      <div class="col-sm-9">
-        <%= f.input :birthdate, label:false,start_year:1950, end_year: Date.today.year - 10, order:[:day, :month, :year] %>
+<% if current_user.has_any_role? :admin, :manager %>
+    <%= simple_form_for(@user, html: {class: 'form-horizontal'},
+                        wrapper: :horizontal_form,
+                        wrapper_mappings: {
+                                check_boxes: :horizontal_radio_and_checkboxes,
+                                radio_buttons: :horizontal_radio_and_checkboxes,
+                                file: :horizontal_file_input,
+                                boolean: :horizontal_boolean
+                        }) do |f| %>
 
-      </div>
-      <%= f.input :phone1,label:'Тел.1', placeholder: 'Phone 1' %>
-      <%= f.input :phone2,label:'Тел.2', placeholder: 'Phone 2' %>
-      <%= f.input :passportdetails, label:'Паспорт',placeholder: 'Passport details' %>
-      <%= f.input :image, label:'Фото' %>
-      <%= f.association :roles, label:'Роли',as: :check_boxes %>
+        <div class="row">
+          <div class="col-md-6 col-xs-12">
+            <%= f.input :name, label: 'Имя', placeholder: 'Имя',
+                        input_html: {style: 'width:200px;'} %>
+            <%= f.input :surname, label: 'Фамилия', placeholder: 'Фамилия',
+                        input_html: {style: 'width:200px;'} %>
+            <%= f.input :middlename, label: 'Отчество', placeholder: 'Отчество',
+                        input_html: {style: 'width:200px;'} %>
+            <%= f.input :gender, label: 'Пол', as: :radio_buttons,
+                        collection: ['Мужской', 'Женский'] %>
+            <div class="col-sm-3" style="text-align: right">
+              <label for="birthdate">* Дата рождения</label>
+            </div>
+            <div class="col-sm-9">
+              <%= f.input :birthdate, label: false, start_year: 1950, end_year: Date.today.year - 10, order: [:day, :month, :year] %>
+            </div>
+            <%= f.input :passportdetails, label: 'Паспорт', placeholder: 'Паспортные данные' %>
+            <div class="col-sm-3" style="text-align: right">
+              <label style="margin-top:5px;">Фото</label>
+            </div>
+            <div class="col-sm-offset-3">
+              <%= image_tag @user.image.url(:thumb), class: 'img-circle img-responsive usr-img-form', size: '50' %>
+              <%= f.input :image, label: false %>
+            </div>
 
-      <div class="col-sm-9 col-sm-offset-3">
-        <%= f.button :submit %>
-      </div>
+          </div>
+          <div class="col-md-6 col-xs-12">
+            <%= f.input :email, label: 'Эл.почта', placeholder: 'Только @gmail.com',
+                        input_html: {style: 'width:200px;'} %>
+            <%= f.input :phone1, as: :tel, label: 'Тел.1', placeholder: 'Мобильный номер 1',
+                        input_html: {style: 'width:200px;', maxlength: 12} %>
+            <%= f.input :phone2, label: 'Тел.2', placeholder: 'Мобильный номер 2',
+                        input_html: {style: 'width:200px;', maxlength: 12} %>
+            <%= f.input :skype, label: 'Skype', placeholder: 'Skype',
+                        input_html: {style: 'width:200px;'} %>
+            <%= f.association :roles, label: 'Роли', as: :check_boxes %>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-1 col-md-offset-1">
+            <%= f.button :submit, 'Сохранить' %>
+          </div>
+        </div>
 
-  <% end %>
-</div>
+    <% end %>
+    <!-- Если пользователь студент, препод, или суппорт, то разрешить изменять только эти данные -->
+<% else %>
+    <%= simple_form_for(@user, html: {class: 'form-horizontal'},
+                        wrapper: :horizontal_form,
+                        wrapper_mappings: {
+                                check_boxes: :horizontal_radio_and_checkboxes,
+                                radio_buttons: :horizontal_radio_and_checkboxes,
+                                file: :horizontal_file_input,
+                                boolean: :horizontal_boolean
+                        }) do |f| %>
+
+        <div class="row">
+          <div class="col-md-6 col-xs-12">
+            <%= f.input :email, label: 'Эл.почта', placeholder: 'Только @gmail.com',
+                        input_html: {style: 'width:200px;'} %>
+            <%= f.input :phone1, as: :tel, label: 'Тел.1', placeholder: 'Мобильный номер 1',
+                        input_html: {style: 'width:200px;', maxlength: 12} %>
+            <%= f.input :phone2, label: 'Тел.2', placeholder: 'Мобильный номер 2',
+                        input_html: {style: 'width:200px;', maxlength: 12} %>
+            <%= f.input :skype, label: 'Skype', placeholder: 'Skype',
+                        input_html: {style: 'width:200px;'} %>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-1 col-md-offset-1">
+            <%= f.button :submit, 'Сохранить' %>
+          </div>
+        </div>
+
+    <% end %>
+<% end %>

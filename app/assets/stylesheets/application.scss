@@ -2,6 +2,18 @@
 @import "bootstrap";
 @import "main";
 
+/* Image upload */
+#pbox_user_image{
+  display:inline;
+  margin-right:2px;
+  width:100px;
+}
+.btn-img{
+  display:inline;
+}
+.usr-img-form{
+  margin-bottom:5px;
+}
 /* Alert classes for devise */
 .alert-notice {
   color: #31708f;
@@ -21,12 +33,43 @@
 /* Login page and form styles */
 #login_page{
   background-size:cover;
+  background-image:url('login-bg1.jpg');
+  /*
   background-image:url('login-bg.png');
+  */
   min-width: 0;
   color: #444;
   font-family: "Open Sans",sans-serif;
   font-size: 13px;
   line-height: 1.4em;
+}
+#login_page .btn-primary{
+  color: #fff;
+  background-color: #22415A;
+  border-color: #1D374E;
+}
+#login_page .btn-primary:hover{
+  color: #fff;
+  background-color: #172B3C;
+  border-color: #1D374E;
+}
+
+#login_page .alert-alert{
+  background-color: transparent;
+  border-color: transparent;
+  width:250px;
+  margin: auto;
+  color: #D83065;
+  z-index: 7000;
+  position: absolute;
+  text-align: center;
+  left: 300px;
+  right: 300px;
+}
+
+#login_page .form-control:focus {
+  border-color: #FF0000;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
 }
 
 #login{
@@ -68,7 +111,6 @@
 
 /* Pagination */
 .digg_pagination {
-  background: white;
   cursor: default;
   /* self-clearing method: */ }
 .digg_pagination a, .digg_pagination span, .digg_pagination em {
