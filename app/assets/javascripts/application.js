@@ -24,3 +24,19 @@ function clearFlash() {
 var clearFlashOnReady = function () {
     setTimeout(clearFlash, 3000);
 };
+
+//this function hides and shows avatars of users
+function hideshow(which){
+    if (!document.getElementsByClassName)
+        return
+    for(var i = 0; i < which.length; i++){
+
+        if (which[i].style.display=="block")
+            which[i].style.display="none"
+        else
+            which[i].style.display="block"
+    }
+}
+
+
+

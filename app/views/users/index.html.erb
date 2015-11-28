@@ -1,12 +1,19 @@
 <h1> Все пользователи </h1>
 
+
+
+
 <div class="digg_pagination" style="margin:auto">
-  <%= will_paginate @microposts %>
+  <%= will_paginate @users %>
 </div>
+
+<%= link_to 'Отображение фотографий',
+            "javascript:hideshow(document.getElementsByClassName('photo'))",
+            class: 'btn btn-info' %>
 
 <table class="table table-condensed">
   <tr>
-    <th>Фото</th>
+    <th class="photo">Фото</th>
     <th>Пользователь</th>
     <th>Роли</th>
     <th>Действия</th>
@@ -14,7 +21,9 @@
 
   <% @users.each do |user| %>
       <tr>
-        <td><%= image_tag user.image.url(:thumb), class: 'img-circle img-responsive' %></td>
+        <td class="photo">
+            <%= image_tag user.image.url(:thumb), class: 'img-circle img-responsive' %>
+        </td>
         <td><%= user.name %> <%= user.surname %> <%= user.middlename %></td>
         <td>
           <% user.roles.each do |role| %>
