@@ -31,10 +31,10 @@ function hideshow(which){
         return
     for(var i = 0; i < which.length; i++){
 
-        if (which[i].style.display=="block")
-            which[i].style.display="none"
+        if (which[i].style.display=="none")
+            which[i].style.display="block";
         else
-            which[i].style.display="block"
+            which[i].style.display="none"
     }
 }
 
