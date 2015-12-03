@@ -1,0 +1,25 @@
+<h1>All IT Attractor courses</h1>
+
+<%= link_to 'New Course', new_course_path %>
+
+<table>
+  <tr>
+    <th>Name: </th>
+    <th>Starts at: </th>
+    <th>Ends at: </th>
+  </tr>
+
+  <% @courses.each do |course| %>
+      <tr>
+        <td><%= course.name %></td>
+        <td><%= course.starts_at %></td>
+        <td><%= course.ends_at %></td>
+
+        <td>
+          <%= link_to 'View', course_path(course) %>
+          <%= link_to 'Edit', edit_course_path(course) %>
+          <%= link_to 'Delete', course_path(course), method: :delete, data: {confirm: 'Do you want to remove this product?'} %>
+        </td>
+      </tr>
+  <% end %>
+</table>

@@ -1,0 +1,32 @@
+<%= form_for @course do |f| %>
+
+    <% if @course.errors.any? %>
+        <div class="errors">
+          Total errors: <%= @course.errors.count %>
+          <ul>
+            <% @course.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div>
+      <%= f.label :name %><br/>
+      <%= f.text_field :name %>
+    </div>
+
+    <div>
+      <%= f.label :starts_at %><br/>
+      <%= f.date_select :starts_at %>
+    </div>
+
+    <div>
+      <%= f.label :ends_at %><br/>
+      <%= f.date_select :ends_at %>
+    </div>
+
+    <div>
+      <%= f.submit %>
+    </div>
+<% end %>

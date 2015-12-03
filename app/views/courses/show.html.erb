@@ -1,0 +1,23 @@
+<p><%= @course.name%></p>
+
+<table>
+  <tr>
+    <th>Starts at: </th>
+    <th>Ends at: </th>
+  </tr>
+
+      <tr>
+        <td><%= @course.starts_at %></td>
+        <td><%= @course.ends_at %></td>
+
+        <td>
+          <%= link_to 'View', course_path(@course) %>
+          <%= link_to 'Edit', edit_course_path(@course) %>
+          <%= link_to 'Delete', course_path(@course), method: :delete, data: {confirm: 'Do you want to remove this product?'} %>
+        </td>
+      </tr>
+</table>
+
+<div><%= link_to 'Return', courses_path %></div>
+
+

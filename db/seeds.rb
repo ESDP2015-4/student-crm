@@ -85,3 +85,9 @@ tutor = User.create!(name: 'Tutor',
                        email: 'tutor@gmail.com', password: password, password_confirmation: password)
 
 tutor.add_role 'tutor'
+
+5.times do
+  Course.create!(name: 'RoR',
+  starts_at: '10.11.15',
+  ends_at: '20.4.16')
+end
