@@ -1,12 +1,13 @@
 <h1>All IT Attractor courses</h1>
 
-<%= link_to 'New Course', new_course_path %>
+<h4><%= link_to 'New Course', new_course_path, class: 'btn btn-success' %></h4>
 
-<table>
+<table class="table table-striped">
   <tr>
     <th>Name: </th>
     <th>Starts at: </th>
     <th>Ends at: </th>
+    <th>Actions </th>
   </tr>
 
   <% @courses.each do |course| %>
@@ -16,9 +17,9 @@
         <td><%= course.ends_at %></td>
 
         <td>
-          <%= link_to 'View', course_path(course) %>
-          <%= link_to 'Edit', edit_course_path(course) %>
-          <%= link_to 'Delete', course_path(course), method: :delete, data: {confirm: 'Do you want to remove this product?'} %>
+          <%= link_to 'View', course_path(course), class: 'btn btn-info' %>
+          <%= link_to 'Edit', edit_course_path(course), class: 'btn btn-info' %>
+          <%= link_to 'Delete', course_path(course), method: :delete, data: {confirm: 'Do you want to remove this product?'}, class: 'btn btn-info' %>
         </td>
       </tr>
   <% end %>

@@ -13,7 +13,7 @@
 
     <div>
       <%= f.label :name %><br/>
-      <%= f.text_field :name %>
+      <%= f.text_field :name, class: 'form-control' %>
     </div>
 
     <div>
@@ -25,8 +25,9 @@
       <%= f.label :ends_at %><br/>
       <%= f.date_select :ends_at %>
     </div>
+    <hr>
 
     <div>
-      <%= f.submit %>
+      <%= f.submit class: 'btn btn-primary btn-lg' %>
     </div>
 <% end %>

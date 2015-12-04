@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   resources :users, :except => [:destroy]
   resources :courses
 
+  resources :course_elements
+
   get 'about' => 'main#about'
   get 'contact' => 'main#contact'
+
+
 
 end

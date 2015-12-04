@@ -20,6 +20,7 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
+    @course_elements = CourseElement.where(course_id: params[:id])
   end
 
   def edit
@@ -46,6 +47,7 @@ class CoursesController < ApplicationController
   def course_params
     params.require(:course).permit(:name,
                                    :starts_at,
-                                   :ends_at,)
+                                   :ends_at
+    )
   end
 end

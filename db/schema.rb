@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20151125142715) do
     t.integer  "course_id"
     t.string   "theme"
     t.string   "element_type"
+    t.text     "content"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end

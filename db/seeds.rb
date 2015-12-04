@@ -45,7 +45,7 @@ manager = User.create!(name: 'manager',
                        phone1: '+996772180825',
                        phone2: '+996772180825',
                        skype: 'skype.daniyar',
-                       passportdetails:'abijjljlk',
+                       passportdetails: 'abijjljlk',
                        email: 'manager@gmail.com', password: password, password_confirmation: password)
 
 manager.add_role 'manager'
@@ -57,37 +57,37 @@ student = User.create!(name: 'Student',
                        phone1: '+996772180825',
                        phone2: '+996772180825',
                        skype: 'skype.daniyar',
-                       passportdetails:'abijjljlk',
+                       passportdetails: 'abijjljlk',
                        email: 'student@gmail.com', password: password, password_confirmation: password)
 
 student.add_role 'student'
 
 admin = User.create!(name: 'Admin',
-                       surname: 'Lastname',
-                       gender: 'Мужчина',
-                       birthdate: '02.09.1992',
-                       phone1: '+996772180825',
-                       phone2: '+996772180825',
-                       skype: 'skype.admin',
-                       passportdetails:'MVD 50-01',
-                       email: 'admin@gmail.com', password: password, password_confirmation: password)
+                     surname: 'Lastname',
+                     gender: 'Мужчина',
+                     birthdate: '02.09.1992',
+                     phone1: '+996772180825',
+                     phone2: '+996772180825',
+                     skype: 'skype.admin',
+                     passportdetails: 'MVD 50-01',
+                     email: 'admin@gmail.com', password: password, password_confirmation: password)
 
 admin.add_role 'admin'
 
 tutor = User.create!(name: 'Tutor',
-                       surname: 'Lastname',
-                       gender: 'Мужчина',
-                       birthdate: '02.09.1992',
-                       phone1: '+996772180825',
-                       phone2: '+996772180825',
-                       skype: 'skype.tutor',
-                       passportdetails:'MVD 50-01',
-                       email: 'tutor@gmail.com', password: password, password_confirmation: password)
+                     surname: 'Lastname',
+                     gender: 'Мужчина',
+                     birthdate: '02.09.1992',
+                     phone1: '+996772180825',
+                     phone2: '+996772180825',
+                     skype: 'skype.tutor',
+                     passportdetails: 'MVD 50-01',
+                     email: 'tutor@gmail.com', password: password, password_confirmation: password)
 
 tutor.add_role 'tutor'
 
 5.times do
   Course.create!(name: 'RoR',
-  starts_at: '10.11.15',
-  ends_at: '20.4.16')
+                 starts_at: '10.11.15',
+                 ends_at: '20.4.16')
 end

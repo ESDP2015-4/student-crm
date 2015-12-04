@@ -1,23 +1,46 @@
-<p><%= @course.name%></p>
+<h2>Курс: <%= @course.name %></h2>
 
-<table>
+<p>Starts at: <%= @course.starts_at %></p>
+<p>Ends at: <%= @course.ends_at %></p>
+
+<table >
   <tr>
-    <th>Starts at: </th>
-    <th>Ends at: </th>
+    <td>
+      <%= link_to 'Return', courses_path, class: 'btn btn-info' %>
+      <%= link_to 'Edit', edit_course_path(@course), class: 'btn btn-info' %>
+      <%= link_to 'Delete', course_path(@course), method: :delete, data: {confirm: 'Do you want to remove this product?'}, class: 'btn btn-info' %>
+    </td>
   </tr>
-
-      <tr>
-        <td><%= @course.starts_at %></td>
-        <td><%= @course.ends_at %></td>
-
-        <td>
-          <%= link_to 'View', course_path(@course) %>
-          <%= link_to 'Edit', edit_course_path(@course) %>
-          <%= link_to 'Delete', course_path(@course), method: :delete, data: {confirm: 'Do you want to remove this product?'} %>
-        </td>
-      </tr>
 </table>
 
-<div><%= link_to 'Return', courses_path %></div>
+
+<hr>
+
+<p><%= link_to 'Добавить элемент курса', new_course_element_path(:course_id => @course.id), class: 'btn btn-success' %></p>
+
+<h3>Элементы курса</h3>
+
+<table class="table table-striped">
+  <tr>
+    <th>Тип урока</th>
+    <th>Тема</th>
+    <th>Контент</th>
+    <th>Действия</th>
+  </tr>
+
+  <% @course_elements.each do |course_element| %>
+
+  <tr>
+    <td><%= course_element.element_type %></td>
+    <td><%= course_element.theme %></td>
+    <td><%= course_element.content %></td>
+    <td>
+      <%= link_to 'Редактировать', edit_course_element_path(course_element), class: 'btn btn-info' %>
+    </td>
+  </tr>
+      <% end %>
+</table>
+
+
 
 

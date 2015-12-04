@@ -1,0 +1,2 @@
+module CourseElementsHelper
+end
