@@ -40,9 +40,10 @@ class CoursesController < ApplicationController
   end
 
   def destroy
-    @course = Course.destroy(params[:id])
+    @course = Course.find(params[:id])
+    @course.destroy
 
-    redirect_to course_path
+    redirect_to courses_path
   end
 
   private
