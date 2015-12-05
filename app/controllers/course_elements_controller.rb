@@ -4,6 +4,7 @@ class CourseElementsController < ApplicationController
 
   def new
     @course_element = CourseElement.new
+    session[:course_id] = params[:course_id]
   end
 
   def create
@@ -24,7 +25,7 @@ class CourseElementsController < ApplicationController
     if @course_element.update(course_element_params)
        redirect_to course_path(@course_element.course)
     else
-      render 'new'
+      render 'edit'
     end
   end
 

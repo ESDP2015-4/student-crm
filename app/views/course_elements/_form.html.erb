@@ -1,3 +1,5 @@
+
+
 <% if current_user.has_any_role? :admin, :manager %>
     <%= simple_form_for(@course_element, html: {class: 'form-horizontal'},
                         wrapper: :horizontal_form,
@@ -21,7 +23,7 @@
 
 
             <% if @course_element.new_record? %>
-                <%= f.hidden_field :course_id, value: params[:course_id] %>
+                <%=  f.hidden_field :course_id, value: session[:course_id] %>
             <% else %>
                 <%= f.hidden_field :course_id, value: @course_element.course.id %>
             <% end %>
@@ -40,3 +42,6 @@
     <% end %>
 
 <% end %>
+
+
+
