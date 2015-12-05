@@ -24,16 +24,14 @@
   <tr>
     <th>Тип урока</th>
     <th>Тема</th>
-    <th>Контент</th>
     <th>Действия</th>
   </tr>
 
   <% @course_elements.each do |course_element| %>
 
   <tr>
-    <td><%= course_element.element_type %></td>
+    <td><%= link_to course_element.element_type, course_element_path(course_element) %></td>
     <td><%= course_element.theme %></td>
-    <td><%= course_element.content %></td>
     <td>
       <%= link_to 'Редактировать', edit_course_element_path(course_element), class: 'btn btn-info' %>
     </td>

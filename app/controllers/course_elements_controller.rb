@@ -7,6 +7,10 @@ class CourseElementsController < ApplicationController
     session[:course_id] = params[:course_id]
   end
 
+  def show
+    @course_element = CourseElement.find(params[:id])
+  end
+
   def create
     @course_element = CourseElement.new(course_element_params)
     if @course_element.save
