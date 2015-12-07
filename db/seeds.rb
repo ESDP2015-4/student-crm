@@ -88,6 +88,6 @@ tutor.add_role 'tutor'
 
 5.times do
   Course.create!(name: 'RoR',
-                 starts_at: '10.11.15',
-                 ends_at: '20.4.16')
+                 starts_at: '2015.11.15',
+                 ends_at: '2016.4.16')
 end
