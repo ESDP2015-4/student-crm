@@ -1,0 +1,23 @@
+<h1>Список всех групп</h1>
+<%= link_to 'Добавить новую группу', new_group_path, class: 'btn btn-success' %>
+<br/>
+<br/>
+
+<table class="table table-striped">
+  <tr>
+    <th>Группа:</th>
+    <th>Курс:</th>
+    <th>Действия</th>
+  </tr>
+
+  <% @groups.each do |group| %>
+      <tr>
+        <td><%= link_to group.name, group_path(group) %></td>
+        <td><%= link_to group.course.name, course_path(group.course_id) %></td>
+        <td>
+          <%= link_to 'View', group_path(group), class: 'btn btn-info' %>
+          <%= link_to 'Edit', edit_group_path(group), class: 'btn btn-info' %>
+        </td>
+      </tr>
+  <% end %>
+</table>
