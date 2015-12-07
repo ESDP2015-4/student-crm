@@ -23,7 +23,7 @@
           <% if @end_of_course_date < @date_today %>
               <fieldset disabled>
                 <%= f.label 'Курс (уже завершен)' %>
-                <%= f.collection_select :course_id, @actual_courses, :id, :name, {}, class: 'form-control', id: 'disabledSelect' %>
+                <%= f.collection_select :course_id, @courses, :id, :name, {}, class: 'form-control', id: 'disabledSelect' %>
               </fieldset>
           <% else %>
               <%= f.label 'Курс' %>
