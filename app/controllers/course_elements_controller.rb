@@ -26,6 +26,7 @@ class CourseElementsController < ApplicationController
   end
 
   def update
+    
     @course_element = CourseElement.find(params[:id])
     if @course_element.update(course_element_params)
        redirect_to course_path(@course_element.course)

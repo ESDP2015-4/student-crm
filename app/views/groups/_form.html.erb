@@ -19,7 +19,7 @@
         <br/>
         <div>
           <%= f.label 'Курс' %>
-          <%= f.collection_select :course_id, @actual_courses, :id, :name, {}, class: 'form-control' %>
+          <%= f.collection_select :course_id, Course.find_by_sql("SELECT id, name, ends_at FROM courses WHERE ends_at > '#{Date.today.as_json}'"), :id, :name, {}, class: 'form-control' %>
         </div>
         <hr>
         <div>
