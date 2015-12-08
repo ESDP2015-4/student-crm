@@ -1,0 +1,36 @@
+<h3>Список преподователей</h3>
+
+<div class="digg_pagination" style="margin:auto">
+  <%= will_paginate @tutors %>
+</div>
+
+<div class="row">
+  <%= link_to 'Отображение фотографий',
+              "javascript:hideshow(document.getElementsByClassName('photo'))",
+              class: 'btn btn-primary' %>
+  <%= link_to 'Добавить преподователя', new_user_path, class:'btn btn-primary' %>
+</div>
+
+
+<table class="table table-condensed">
+  <tr>
+    <th class="photo">Фото</th>
+    <th>Препод</th>
+    <th>Действия</th>
+  </tr>
+
+  <% @tutors.each do |tutor| %>
+      <tr>
+        <td class="photo">
+          <%= link_to (image_tag tutor.image.url(:thumb), class: 'img-circle img-responsive'),
+                      user_path(tutor) %>
+        </td>
+        <td><%= link_to tutor.full_name, user_path(tutor) %></td>
+
+        <td><%= link_to 'Просмотреть', user_path(tutor), class: 'btn btn-info' %>
+          <%= link_to 'Редактировать', edit_user_path(tutor), class: 'btn btn-warning' %>
+        </td>
+      </tr>
+  <% end %>
+</table>
+

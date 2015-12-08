@@ -1,14 +1,15 @@
-<h2>Курс: <%= @course.name %></h2>
+<h3>Курс: <%= @course.name %></h3>
 
-<p>Starts at: <%= @course.starts_at %></p>
-<p>Ends at: <%= @course.ends_at %></p>
+<p>Дата начала: <%= @course.starts_at %></p>
+<p>Дата окончания: <%= @course.ends_at %></p>
 
 <table >
   <tr>
     <td>
-      <%= link_to 'Return', courses_path, class: 'btn btn-info' %>
-      <%= link_to 'Edit', edit_course_path(@course), class: 'btn btn-info' %>
-      <%= link_to 'Delete', course_path(@course), method: :delete, data: {confirm: 'Do you want to remove this product?'}, class: 'btn btn-info' %>
+      <%= link_to 'Назад', courses_path, class: 'btn btn-info' %>
+      <%= link_to 'Редактировать', edit_course_path(@course), class: 'btn btn-warning' %>
+      <%= link_to 'Удалить', course_path(@course), method: :delete,
+                  data: {confirm: 'Вы дейстивтельно хотите удалить?'}, class: 'btn btn-danger' %>
     </td>
   </tr>
 </table>

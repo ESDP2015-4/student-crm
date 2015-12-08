@@ -39,6 +39,18 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def students
+    student_role = Role.find_by(name: 'student')
+
+    @students = student_role.users.paginate(page: params[:page], per_page: 10)
+  end
+
+  def tutors
+    tutor_role = Role.find_by(name: :tutor)
+
+    @tutors = tutor_role.users.paginate(page:params[:page], per_page: 10)
+  end
+
   private
 
   def user_params

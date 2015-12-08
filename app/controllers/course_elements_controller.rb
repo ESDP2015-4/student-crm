@@ -13,6 +13,7 @@ class CourseElementsController < ApplicationController
 
   def create
     @course_element = CourseElement.new(course_element_params)
+
     if @course_element.save
       redirect_to course_path(@course_element.course)
     else

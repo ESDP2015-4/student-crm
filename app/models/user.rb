@@ -2,21 +2,6 @@ class User < ActiveRecord::Base
   #this adds methods add_role, has_role, remove_role to user model
   rolify
 
-  validates :phone1, presence: true
-
-
-  my_regex = /\A(\+996)([0-9]{9})\z/
-
- validates_format_of :phone1,
-                     :with => my_regex,
-                     message: "Phone must be like +996xxxYYYYYY, where xxx - your operator's code and YYYYYY - your phone number"
-
-  validates_format_of :phone2,
-                      :with => my_regex,
-                      :allow_blank => true,
-  message: "Phone must be like +996xxxYYYYYY, where xxx - your operator's code and YYYYYY - your phone number"
-
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
@@ -47,4 +32,19 @@ class User < ActiveRecord::Base
   validates :email, presence: true
   validates_format_of :email, :with => /@gmail\.com\z/, message: "Допустим только gmail аккаунт"
   validates :passportdetails, presence: true
+
+  validates :phone1, presence: true
+  my_regex = /\A(\+996)([0-9]{9})\z/
+  validates_format_of :phone1,
+                      :with => my_regex,
+                      message: "Phone must be like +996xxxYYYYYY, where xxx - your operator's code and YYYYYY - your phone number"
+
+  validates_format_of :phone2,
+                      :with => my_regex,
+                      :allow_blank => true,
+                      message: "Phone must be like +996xxxYYYYYY, where xxx - your operator's code and YYYYYY - your phone number"
+
+  def full_name
+    "#{name} #{surname} #{middlename}"
+  end
 end
