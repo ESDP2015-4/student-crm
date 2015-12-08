@@ -1,12 +1,12 @@
-# # This file should contain all the record creation needed to seed the database with its default values.
-# # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
+# # # This file should contain all the record creation needed to seed the database with its default values.
+# # # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
+# # #
+# # # Examples:
+# # #
+# # #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
+# # #   Mayor.create(name: 'Emanuel', city: cities.first)
 # #
-# # Examples:
 # #
-# #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-# #   Mayor.create(name: 'Emanuel', city: cities.first)
-#
-#
 Role.create!(id: 1, name: 'student')
 Role.create!(id: 2, name: 'manager')
 Role.create!(id: 3, name: 'tutor')
@@ -87,8 +87,29 @@ tutor = User.create!(name: 'Tutor',
 
 tutor.add_role 'tutor'
 
+element_types = ['Лекция', 'Вебинар', 'Лабараторка', 'Контрольная']
 5.times do
-  Course.create!(name: 'RoR',
-                 starts_at: '2015.11.15',
-                 ends_at: '2016.4.16')
+  course = Course.create!(name: "#{Faker::Hacker.adjective.capitalize} #{Faker::Hacker.noun.capitalize}",
+                 starts_at: '2015-11-15',
+                          ends_at: '2016-4-16')
+
+  10.times do
+    ce = CourseElement.create!(
+            theme:"#{Faker::Hacker.ingverb.capitalize} #{Faker::Hacker.abbreviation.capitalize}",
+            course: course,
+            element_type: element_types.sample,
+            content: Faker::Lorem.paragraphs(5).join
+    )
+  end
+
+  gr_num = 0
+  2.times do
+    gr_num += 1
+    Group.create!(
+             #this takes first letter of each word
+        name: "#{course.name.split.map(&:first).join} GR#{gr_num}",
+        course: course
+    )
+  end
 end
+
