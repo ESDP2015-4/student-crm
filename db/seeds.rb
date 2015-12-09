@@ -21,7 +21,8 @@ phonecodes.flatten!
 
 password = 'password'
 
-10.times do
+#creating students
+50.times do
   User.create!(
       name: Faker::Name.first_name,
       surname: Faker::Name.last_name,
@@ -88,6 +89,8 @@ tutor = User.create!(name: 'Tutor',
 tutor.add_role 'tutor'
 
 element_types = ['Лекция', 'Вебинар', 'Лабараторка', 'Контрольная']
+
+student_id = 0
 5.times do
   course = Course.create!(name: "#{Faker::Hacker.adjective.capitalize} #{Faker::Hacker.noun.capitalize}",
                  starts_at: '2015-11-15',
@@ -105,11 +108,22 @@ element_types = ['Лекция', 'Вебинар', 'Лабараторка', 'К
   gr_num = 0
   2.times do
     gr_num += 1
-    Group.create!(
+    group = Group.create!(
              #this takes first letter of each word
         name: "#{course.name.split.map(&:first).join} GR#{gr_num}",
         course: course
     )
+
+    #create GroupMembership for this group
+    5.times do
+      #increment student_id to get different student ids
+      student_id += 1
+      GroupMembership.create!(
+          group: group,
+          user_id: student_id,
+          active: true)
+    end
+
   end
 end
 

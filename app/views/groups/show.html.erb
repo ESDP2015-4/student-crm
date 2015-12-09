@@ -4,4 +4,29 @@
 <h3>Курс: <%= @group.course.name %></h3>
 <br/>
 <h4>Студенты группы:</h4>
-<h5>тут позже должен быть список студентов данной группы</h5>
+
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>Фото</th>
+    <th>Студент</th>
+    <th>Email</th>
+    <th>Действия</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% if @students %>
+      <% @students.each do |student| %>
+          <tr>
+            <td class="photo">
+              <%= link_to (image_tag student.image.url(:thumb), class: 'img-circle img-responsive'),
+                          user_path(student) %>
+            </td>
+            <td><%= student.full_name %></td>
+            <td><%= student.email %></td>
+            <td>Actions go here</td>
+          </tr>
+      <% end %>
+  <% end %>
+  </tbody>
+</table>

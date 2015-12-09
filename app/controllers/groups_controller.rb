@@ -26,7 +26,8 @@ class GroupsController < ApplicationController
 
   def show
     @group = Group.find(params[:id])
-    # @course_elements = CourseElement.where(course_id: params[:id])
+
+    @students = @group.students
   end
 
   def edit
@@ -55,6 +56,6 @@ class GroupsController < ApplicationController
 
   private
   def group_params
-    params.require(:group).permit(:name, :id, :course_id)
+    params.require(:group).permit(:name, :id, :course_id, {:student_ids => []})
   end
 end
