@@ -8,9 +8,12 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users, :except => [:destroy]
-  resources :courses
+
+  resources :courses do
+    resources :course_elements
+  end
   resources :groups
-  resources :course_elements
+
 
   get 'about' => 'main#about'
   get 'contact' => 'main#contact'

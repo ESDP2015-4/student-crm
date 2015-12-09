@@ -17,7 +17,7 @@
 
 <hr>
 
-<p><%= link_to 'Добавить элемент курса', new_course_element_path(:course_id => @course.id), class: 'btn btn-success' %></p>
+<p><%= link_to 'Добавить элемент курса', new_course_course_element_path(@course.id), class: 'btn btn-success' %></p>
 
 <h3>Элементы курса</h3>
 
@@ -31,10 +31,10 @@
   <% @course_elements.each do |course_element| %>
 
   <tr>
-    <td><%= link_to course_element.element_type, course_element_path(course_element) %></td>
+    <td><%= link_to course_element.element_type, course_course_element_path(@course, course_element) %></td>
     <td><%= course_element.theme %></td>
     <td>
-      <%= link_to 'Редактировать', edit_course_element_path(course_element), class: 'btn btn-info' %>
+      <%= link_to 'Редактировать', edit_course_course_element_path(@course, course_element), class: 'btn btn-info' %>
     </td>
   </tr>
       <% end %>

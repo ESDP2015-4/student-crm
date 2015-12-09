@@ -1,11 +1,9 @@
-
-
 <% if current_user.has_any_role? :admin, :manager %>
-    <%= simple_form_for(@course_element, html: {class: 'form-horizontal'},
+    <%= simple_form_for([@course, @course_element], html: {class: 'form-horizontal'},
                         wrapper: :horizontal_form,
                         wrapper_mappings: {
-                            file: :horizontal_file_input,
-                            boolean: :horizontal_boolean
+                                file: :horizontal_file_input,
+                                boolean: :horizontal_boolean
                         }) do |f| %>
 
         <div class="row">
@@ -21,13 +19,7 @@
             <%= f.input :content, label: 'Контент', placeholder: 'Контент',
                         input_html: {style: 'width:200px;'} %>
 
-
-            <% if @course_element.new_record? %>
-                <%=  f.hidden_field :course_id, value: session[:course_id] %>
-            <% else %>
-                <%= f.hidden_field :course_id, value: @course_element.course.id %>
-            <% end %>
-
+            <%= f.hidden_field :course_id, value: @course.id %>
 
           </div>
 

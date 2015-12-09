@@ -1,10 +1,10 @@
 class CourseElementsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
+  before_action :set_course, only: [:new, :create, :edit, :update]
 
   def new
     @course_element = CourseElement.new
-    session[:course_id] = params[:course_id]
   end
 
   def show
@@ -36,6 +36,10 @@ class CourseElementsController < ApplicationController
   end
 
   private
+
+  def set_course
+    @course = Course.find(params[:course_id])
+  end
 
   def course_element_params
     params.require(:course_element).permit(:theme, :element_type, :content, :course_id)
