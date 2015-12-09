@@ -22,7 +22,7 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
-    @course_elements = CourseElement.where(course_id: params[:id])
+    @course_elements = CourseElement.where(course: @course)
   end
 
   def edit
