@@ -1,0 +1,41 @@
+<% if current_user.has_any_role? :admin, :manager %>
+    <%= link_to "Назад", user_path, class: 'btn btn-default' %>
+    <h3>Список последних изменений для пользователя <%= @user.full_name %></h3>
+    <br/>
+    <% @audit.each do |audit| %>
+        <h4>
+          <%= audit.user.full_name %>
+          изменил у пользователя
+          <%= audit.auditable.full_name %>
+          информацию:</h4>
+        <h5>дата исправления: <%= DateTime.parse(audit.created_at.to_s).strftime("%T %v") %></h5>
+        <table class="table table-condensed table-hover">
+          <tr>
+            <th>Поле</th>
+            <th>старое значение</th>
+            <th>изменено на</th>
+          </tr>
+          <% audit.audited_changes.each do |field, value| %>
+              <!-- audit.audited_changes = edited_field => [old_value, new_value]-->
+              <tr>
+                <td>
+                  <%= field %>
+                </td>
+                <% if value[0] == '' or value[0].nil? %>
+                    <% value[0] = 'пустое значение' %>
+                <% end %>
+                <td>
+                  <%= value[0] %>
+                </td>
+                <% if value[1] == '' or value[1].nil? %>
+                    <% value[1] = 'пустое значение' %>
+                <% end %>
+                <td>
+                  <%= value[1] %>
+                </td>
+              </tr>
+          <% end %>
+        </table>
+        <br/>
+    <% end %>
+<% end %>

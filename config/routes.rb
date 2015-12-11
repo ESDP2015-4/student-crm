@@ -4,6 +4,9 @@ Rails.application.routes.draw do
 
   get 'users/students'
   get 'users/tutors'
+  # get 'user/changes'
+
+  get 'users/:id/change(.:format)' =>	'users#changes', as: 'change_user'
 
   devise_for :users
 

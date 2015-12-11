@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151125142715) do
+ActiveRecord::Schema.define(version: 20151209131556) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer  "user_id"
@@ -23,6 +23,29 @@ ActiveRecord::Schema.define(version: 20151125142715) do
 
   add_index "attendances", ["period_id"], name: "index_attendances_on_period_id"
   add_index "attendances", ["user_id"], name: "index_attendances_on_user_id"
+
+  create_table "audits", force: :cascade do |t|
+    t.integer  "auditable_id"
+    t.string   "auditable_type"
+    t.integer  "associated_id"
+    t.string   "associated_type"
+    t.integer  "user_id"
+    t.string   "user_type"
+    t.string   "username"
+    t.string   "action"
+    t.text     "audited_changes"
+    t.integer  "version",         default: 0
+    t.string   "comment"
+    t.string   "remote_address"
+    t.string   "request_uuid"
+    t.datetime "created_at"
+  end
+
+  add_index "audits", ["associated_id", "associated_type"], name: "associated_index"
+  add_index "audits", ["auditable_id", "auditable_type"], name: "auditable_index"
+  add_index "audits", ["created_at"], name: "index_audits_on_created_at"
+  add_index "audits", ["request_uuid"], name: "index_audits_on_request_uuid"
+  add_index "audits", ["user_id", "user_type"], name: "user_index"
 
   create_table "course_elements", force: :cascade do |t|
     t.integer  "course_id"

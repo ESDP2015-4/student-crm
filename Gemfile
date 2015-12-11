@@ -60,3 +60,5 @@ gem 'will_paginate', '~> 3.0.6'
 gem 'paperclip', '~> 4.3'
 
 gem 'simple_form'
+
+gem 'audited-activerecord', '~> 4.2'
