@@ -1,0 +1,2 @@
+module GetgooglesHelper
+end

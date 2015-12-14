@@ -21,5 +21,11 @@ Rails.application.routes.draw do
   get 'about' => 'main#about'
   get 'contact' => 'main#contact'
 
+  get 'getgoogles/new'
+  resources :getgoogles, only: :index
+  get "/auth/:provider/callback" => 'getgoogles#create'
+  get 'course_elements/new_readings/:id' => 'course_elements#new_readings', as: 'course_elements_new_readings'
+  post 'course_elements/create_readings'
+  delete 'course_elements/destroy_reading/:id' => 'course_elements#destroy_reading', as: 'course_elements_destroy_reading'
 
 end

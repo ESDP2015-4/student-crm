@@ -62,3 +62,9 @@ gem 'paperclip', '~> 4.3'
 gem 'simple_form'
 
 gem 'audited-activerecord', '~> 4.2'
+
+gem 'omniauth', '~> 1.2.2'
+gem 'omniauth-google-oauth2'
+gem 'json'
+gem 'google-api-client'
+gem 'google_drive'

@@ -1,0 +1,45 @@
+<h3>
+  Добавить раздатки к теме
+  <%= link_to @course_element.theme, course_course_element_path(@course_element.course, @course_element) %>
+</h3>
+
+
+<table class="table table-hover">
+  <tr>
+    <th>Название</th>
+    <th>Автор</th>
+    <th>Действия</th>
+  </tr>
+  <% @results.data.items.each do |file| %>
+      <tr>
+        <td>
+          <%= image_tag file.icon_link %><%= link_to file.title, file.alternate_link %>
+        </td>
+        <td>
+          <% unless file.sharing_user.nil? %>
+              <%= file.sharing_user.display_name %>
+          <% end %>
+        </td>
+        <td>
+          <% if @course_element.readings.exists?(file_id: "#{file.id}") %>
+              Добавлено
+          <% else %>
+
+              <%= form_for Reading.new, :url => { :action => 'create_readings' } do |f| %>
+                  <%= f.hidden_field :file_id, :value => file.id %>
+                  <%= f.hidden_field :title, :value => file.title %>
+                  <%= f.hidden_field :icon_link, :value => file.icon_link %>
+                  <%= f.hidden_field :alternate_link, :value => file.alternate_link %>
+                  <%= f.hidden_field :course_element_id, :value => @course_element.id %>
+                  <% file.owners.each do |owner|%>
+                      <%= f.hidden_field :permission_id, :value => owner.permission_id %>
+                  <% end %>
+
+                  <%= f.submit 'Добавить', class: 'btn btn-info' %>
+              <% end %>
+          <% end %>
+        </td>
+      </tr>
+
+  <% end %>
+</table>

@@ -2,3 +2,26 @@
 <h4>Тема: <%= @course_element.theme %></h4>
 <hr>
 <p><b>Контент:</b> <%= @course_element.content %></p>
+
+
+ <hr/>
+
+<table class="table">
+  <% @course_element.readings.each do |reading| %>
+      <tr>
+        <td><%= image_tag reading.icon_link %><%= link_to reading.title, reading.alternate_link, :target => "_blank" %> </td>
+        <td><%= link_to 'Удалить', course_elements_destroy_reading_path(reading),
+                        method: :delete,
+                        data: {confirm: 'Are you sure to remove this reading?'},
+                        class: 'btn btn-danger btn-xs'
+            %>
+        </td>
+      </tr>
+  <% end %>
+</table>
+
+
+
+<hr/>
+
+<%= link_to 'Добавить раздаточный материал', course_elements_new_readings_path(@course_element), class: 'btn btn-primary'  %>

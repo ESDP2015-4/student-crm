@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  course_element_id: 
+  file_id: MyString
+  alternate_link: MyString
+  permission_id: MyString
+  icon_link: MyString
+
+two:
+  title: MyString
+  course_element_id: 
+  file_id: MyString
+  alternate_link: MyString
+  permission_id: MyString
+  icon_link: MyString
