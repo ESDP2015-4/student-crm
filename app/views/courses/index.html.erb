@@ -5,17 +5,12 @@
 <table class="table table-striped">
   <tr>
     <th>Название: </th>
-    <th>Начало: </th>
-    <th>Конец: </th>
     <th>Действия </th>
   </tr>
 
   <% @courses.each do |course| %>
       <tr>
         <td><%= link_to course.name, course_path(course) %></td>
-        <td><%= course.starts_at %></td>
-        <td><%= course.ends_at %></td>
-
         <td>
           <%= link_to 'Редактировать', edit_course_path(course), class: 'btn btn-warning' %>
           <%= link_to 'Удалить', course_path(course), method: :delete, data: {confirm: 'Вы действительно хотите удалить?'}, class: 'btn btn-danger' %>

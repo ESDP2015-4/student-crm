@@ -20,15 +20,8 @@
         </div>
         <br/>
         <div>
-          <% if Group.find(params[:id]).course.ends_at.as_json < Date.today.as_json %>
-              <fieldset disabled>
-                <%= f.label 'Курс (уже завершен)' %>
-                <%= f.collection_select :course_id, Course.all, :id, :name, {}, class: 'form-control', id: 'disabledSelect' %>
-              </fieldset>
-          <% else %>
-              <%= f.label 'Курс' %>
-              <%= f.collection_select :course_id, Course.find_by_sql("SELECT id, name, ends_at FROM courses WHERE ends_at > '#{Date.today.as_json}'"), :id, :name, {}, class: 'form-control' %>
-          <% end %>
+          <%= f.label 'Курс' %>
+          <%= f.collection_select :course_id, Course.all, :id, :name, class: 'form-control' %>
         </div>
         <hr>
         <div>

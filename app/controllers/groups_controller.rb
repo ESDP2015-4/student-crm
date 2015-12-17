@@ -10,8 +10,6 @@ class GroupsController < ApplicationController
     @group = Group.new
     @groups = Group.all
     @courses = Course.all
-    date_today = Date.today.as_json
-    @actual_courses = Course.find_by_sql("SELECT id, name, ends_at FROM courses WHERE ends_at > '#{date_today}'")
   end
 
   def create
@@ -32,10 +30,7 @@ class GroupsController < ApplicationController
 
   def edit
     @group = Group.find(params[:id])
-    @date_today = Date.today.as_json
-    @end_of_course_date = @group.course.ends_at.as_json
     @courses = Course.all
-    @actual_courses = Course.find_by_sql("SELECT id, name, ends_at FROM courses WHERE ends_at > '#{@date_today}'")
   end
 
   def update

@@ -1,8 +1,5 @@
 <h3>Курс: <%= @course.name %></h3>
 
-<p>Дата начала: <%= @course.starts_at %></p>
-<p>Дата окончания: <%= @course.ends_at %></p>
-
 <table >
   <tr>
     <td>
@@ -13,7 +10,6 @@
     </td>
   </tr>
 </table>
-
 
 <hr>
 
@@ -30,14 +26,14 @@
 
   <% @course_elements.each do |course_element| %>
 
-  <tr>
-    <td><%= link_to course_element.element_type, course_course_element_path(@course, course_element) %></td>
-    <td><%= course_element.theme %></td>
-    <td>
-      <%= link_to 'Редактировать', edit_course_course_element_path(@course, course_element), class: 'btn btn-info' %>
-    </td>
-  </tr>
-      <% end %>
+      <tr>
+        <td><%= link_to course_element.element_type, course_course_element_path(@course, course_element) %></td>
+        <td><%= course_element.theme %></td>
+        <td>
+          <%= link_to 'Редактировать', edit_course_course_element_path(@course, course_element), class: 'btn btn-info' %>
+        </td>
+      </tr>
+  <% end %>
 </table>
 
 
