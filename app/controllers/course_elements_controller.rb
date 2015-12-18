@@ -76,7 +76,7 @@ class CourseElementsController < ApplicationController
   end
 
   def course_element_params
-    params.require(:course_element).permit(:theme, :element_type, :content, :course_id)
+    params.require(:course_element).permit(:theme, :element_type, :course_id)
   end
 
   def reading_params

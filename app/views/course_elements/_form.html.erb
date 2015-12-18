@@ -10,13 +10,10 @@
           <div class="col-md-6 col-xs-12">
 
             <%= f.input :element_type, label: 'Тип элемента',
-                        collection: ['Лекция', 'Вебинар', 'Лабараторная работа', 'Контрольная работа'],
+                        collection: ['Лекция', 'Вебинар', 'Лабараторная работа', 'Контрольная работа'], selected: ['Лекция'],
                         input_html: {style: 'width:200px;'} %>
 
             <%= f.input :theme, label: 'Тема', placeholder: 'Тема',
-                        input_html: {style: 'width:200px;'} %>
-
-            <%= f.input :content, label: 'Контент', placeholder: 'Контент',
                         input_html: {style: 'width:200px;'} %>
 
             <%= f.hidden_field :course_id, value: @course.id %>
