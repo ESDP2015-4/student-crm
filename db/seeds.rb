@@ -125,6 +125,3 @@ student_id = 0
   end
 end
 
-Token.create(access_token: 'ya29.SgKqbI2q-PzkkIb2lf37oXoNj4u_M5apTBUfwoeryP5tZLdLzs640PH7ySsqSkS9SKAQyA',
-             refresh_token: '1/JCWdB1M4JUVsNtdQCcXuTCYm4uM3bwEFuaiNnSJ2SF5IgOrJDtdun6zK6XiATCKT',
-             expires_at: '2015-12-14 12:46:12.772118')
