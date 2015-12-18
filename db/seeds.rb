@@ -65,26 +65,26 @@ student = User.create!(name: 'Student',
 student.add_role 'student'
 
 admin = User.create!(name: 'Admin',
-                       surname: 'Lastname',
-                       gender: 'Мужчина',
-                       birthdate: '02.09.1992',
-                       phone1: '+996772180825',
-                       phone2: '+996772180825',
-                       skype: 'skype.admin',
-                       passportdetails:'MVD 50-01',
-                       email: 'admin@gmail.com', password: password, password_confirmation: password)
+                     surname: 'Lastname',
+                     gender: 'Мужчина',
+                     birthdate: '02.09.1992',
+                     phone1: '+996772180825',
+                     phone2: '+996772180825',
+                     skype: 'skype.admin',
+                     passportdetails:'MVD 50-01',
+                     email: 'admin@gmail.com', password: password, password_confirmation: password)
 
 admin.add_role 'admin'
 
 tutor = User.create!(name: 'Tutor',
-                       surname: 'Lastname',
-                       gender: 'Мужчина',
-                       birthdate: '02.09.1992',
-                       phone1: '+996772180825',
-                       phone2: '+996772180825',
-                       skype: 'skype.tutor',
-                       passportdetails:'MVD 50-01',
-                       email: 'tutor@gmail.com', password: password, password_confirmation: password)
+                     surname: 'Lastname',
+                     gender: 'Мужчина',
+                     birthdate: '02.09.1992',
+                     phone1: '+996772180825',
+                     phone2: '+996772180825',
+                     skype: 'skype.tutor',
+                     passportdetails:'MVD 50-01',
+                     email: 'tutor@gmail.com', password: password, password_confirmation: password)
 
 tutor.add_role 'tutor'
 
@@ -92,16 +92,14 @@ element_types = ['Лекция', 'Вебинар', 'Лабараторка', 'К
 
 student_id = 0
 5.times do
-  course = Course.create!(name: "#{Faker::Hacker.adjective.capitalize} #{Faker::Hacker.noun.capitalize}",
-                 starts_at: '2015-11-15',
-                          ends_at: '2016-4-16')
+  course = Course.create!(name: "#{Faker::Hacker.adjective.capitalize} #{Faker::Hacker.noun.capitalize}")
 
   10.times do
     ce = CourseElement.create!(
-            theme:"#{Faker::Hacker.ingverb.capitalize} #{Faker::Hacker.abbreviation.capitalize}",
-            course: course,
-            element_type: element_types.sample,
-            content: Faker::Lorem.paragraphs(5).join
+        theme:"#{Faker::Hacker.ingverb.capitalize} #{Faker::Hacker.abbreviation.capitalize}",
+        course: course,
+        element_type: element_types.sample,
+        content: Faker::Lorem.paragraphs(5).join
     )
   end
 
@@ -109,7 +107,7 @@ student_id = 0
   2.times do
     gr_num += 1
     group = Group.create!(
-             #this takes first letter of each word
+        #this takes first letter of each word
         name: "#{course.name.split.map(&:first).join} GR#{gr_num}",
         course: course
     )
@@ -127,3 +125,6 @@ student_id = 0
   end
 end
 
+Token.create(access_token: 'ya29.SgKqbI2q-PzkkIb2lf37oXoNj4u_M5apTBUfwoeryP5tZLdLzs640PH7ySsqSkS9SKAQyA',
+             refresh_token: '1/JCWdB1M4JUVsNtdQCcXuTCYm4uM3bwEFuaiNnSJ2SF5IgOrJDtdun6zK6XiATCKT',
+             expires_at: '2015-12-14 12:46:12.772118')

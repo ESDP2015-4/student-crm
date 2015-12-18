@@ -20,7 +20,7 @@ class CourseElementsController < ApplicationController
     @course.course_elements.build(course_element_params)
 
     if @course_element.save
-      redirect_to course_path(@course_element.course)
+      redirect_to course_course_element_path(@course, @course_element)
     else
       render 'new'
     end
@@ -30,8 +30,14 @@ class CourseElementsController < ApplicationController
     @course_element = CourseElement.find(params[:id])
   end
 
+  def destroy
+    @course_element = CourseElement.find(params[:id])
+    @course_element.destroy
+
+    redirect_to :back
+  end
+
   def update
-    
     @course_element = CourseElement.find(params[:id])
     if @course_element.update(course_element_params)
        redirect_to course_path(@course_element.course)

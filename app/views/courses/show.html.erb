@@ -13,7 +13,7 @@
 
 <hr>
 
-<p><%= link_to 'Добавить элемент курса', new_course_course_element_path(@course.id), class: 'btn btn-success' %></p>
+<p><%= link_to 'Добавить занятие', new_course_course_element_path(@course.id), class: 'btn btn-success' %></p>
 
 <h3>Элементы курса</h3>
 
@@ -27,10 +27,15 @@
   <% @course_elements.each do |course_element| %>
 
       <tr>
-        <td><%= link_to course_element.element_type, course_course_element_path(@course, course_element) %></td>
-        <td><%= course_element.theme %></td>
+        <td><%= course_element.element_type %></td>
+        <td><%= link_to course_element.theme, course_course_element_path(@course, course_element) %></td>
         <td>
           <%= link_to 'Редактировать', edit_course_course_element_path(@course, course_element), class: 'btn btn-info' %>
+          <%= link_to 'Delete', course_course_element_path(@course, course_element),
+                      method: :delete,
+                      data: {confirm: 'Are you sure to remove this reading?'},
+                      class: 'btn btn-danger btn-xs'
+          %>
         </td>
       </tr>
   <% end %>
