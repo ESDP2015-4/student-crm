@@ -14,6 +14,7 @@ class CourseElementsController < ApplicationController
 
   def show
     @course_element = CourseElement.find(params[:id])
+    @course = Course.all
   end
 
   def create

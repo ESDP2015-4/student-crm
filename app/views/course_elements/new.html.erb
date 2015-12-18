@@ -1,3 +1,12 @@
-<h3>Добавить новый элемент курса к <%= @course.name %> </h3>
+<h3>Добавить новое занятие к курсу <%= @course.name %> </h3>
+
+<table >
+  <tr>
+    <td>
+      <%= link_to 'Назад', course_path(@course), class: 'btn btn-link' %>
+    </td>
+  </tr>
+</table>
+<br />
 
 <%= render 'form' %>

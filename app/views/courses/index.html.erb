@@ -1,4 +1,4 @@
-<h3>Список всех курсов</h3>
+<h3>Курсы</h3>
 
 <h4><%= link_to 'Добавить', new_course_path, class: 'btn btn-primary' %></h4>
 
@@ -12,7 +12,7 @@
       <tr>
         <td><%= link_to course.name, course_path(course) %></td>
         <td>
-          <%= link_to 'Редактировать', edit_course_path(course), class: 'btn btn-warning' %>
+          <%= link_to 'Редактировать', edit_course_path(course), class: 'btn btn-info' %>
           <%= link_to 'Удалить', course_path(course), method: :delete, data: {confirm: 'Вы действительно хотите удалить?'}, class: 'btn btn-danger' %>
         </td>
       </tr>
