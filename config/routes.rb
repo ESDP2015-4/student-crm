@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'users/tutors'
   # get 'user/changes'
 
-  get 'users/:id/change(.:format)' =>	'users#changes', as: 'change_user'
+  get 'users/:id/change(.:format)' => 'users#changes', as: 'change_user'
 
   devise_for :users
 
@@ -14,7 +14,9 @@ Rails.application.routes.draw do
 
   resources :courses do
     resources :course_elements
+    resources :periods
   end
+
   resources :groups
 
 

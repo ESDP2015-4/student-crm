@@ -10,7 +10,15 @@
 
 <hr>
 
-<p><%= link_to 'Добавить занятие', new_course_course_element_path(@course.id), class: 'btn btn-primary' %></p>
+<table>
+  <tr>
+<td>
+  <%= link_to 'Добавить занятие', new_course_course_element_path(@course.id), class: 'btn btn-primary' %>
+  <%= link_to 'Добавить новый период', new_course_period_path(@course.id), class: 'btn btn-success'%>
+  <%= link_to 'Все периоды', course_periods_path(@course), class: 'btn btn-info'%>
+</td>
+  </tr>
+</table>
 
 <h3>Занятия</h3>
 

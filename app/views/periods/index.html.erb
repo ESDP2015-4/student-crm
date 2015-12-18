@@ -1,0 +1,31 @@
+<h3>Все периоды курса </h3>
+
+<p><%= link_to 'Все Курсы', courses_path, class: 'btn btn-success' %></p>
+
+<table class="table table-striped">
+  <tr>
+    <th>Курс</th>
+    <th>Группа</th>
+    <th>Название</th>
+    <th>Тема</th>
+    <th>Тип урока</th>
+    <th>Дата</th>
+    <th>Действия</th>
+  </tr>
+
+
+<% @periods.each do |period| %>
+      <tr>
+        <td><%= period.course.name %></td>
+        <td><%= period.group.name %></td>
+        <td><%= period.title %></td>
+        <td><%= link_to period.course_element.theme, course_period_path(course_id: period.course.id, id: period.id) %></td>
+        <td><%= period.course_element.element_type %></td>
+        <td><%= period.commence_datetime %></td>
+        <td>
+          <%= link_to 'Edit', edit_course_period_path(course_id: period.course.id, id: period.id), class: 'btn btn-warning'  %>
+        </td>
+      </tr>
+<% end %>
+
+</table>
