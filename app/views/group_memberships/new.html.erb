@@ -1,0 +1,12 @@
+<h3>Add students to group</h3>
+
+<%= simple_form_for([@group, @gm]) do |f| %>
+
+
+    <%= f.button :submit, 'Добавить студентов' %>
+    <%= f.association :user, collection: @students,label_method: :full_name, as: :check_boxes %>
+
+
+<% end %>
+
+

@@ -16,8 +16,9 @@ Rails.application.routes.draw do
     resources :course_elements
     resources :periods
   end
-
-  resources :groups
+  resources :groups do
+    resources :group_memberships
+  end
 
 
   get 'about' => 'main#about'

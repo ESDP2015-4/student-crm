@@ -5,13 +5,20 @@ class Ability
     # Define abilities for the passed in user here. For example:
     #
     user ||= User.new # guest user (not logged in)
+
     if user.is_admin?
       #Может управлять всем
       can :manage, :all
-
+      can :assign_roles, User
     elsif user.is_manager?
       #Может управлять всем, пока что
-      can :manage, :all
+      can :manage, Course
+      can :manage, CourseElement
+      can :manage, Period
+      can :manage, Group
+      can :manage, GroupMembership
+      can :manage, Course
+      can :manage, User
 
     elsif user.is_tutor?
       #Может просматривать профили всех пользователей

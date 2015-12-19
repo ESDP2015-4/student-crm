@@ -48,4 +48,10 @@ class User < ActiveRecord::Base
   def full_name
     "#{name} #{surname} #{middlename}"
   end
+
+  def self.all_students_except(student_ids)
+    student_role = Role.find_by(name: :student)
+    students = student_role.users
+    students.where.not(id: student_ids).order(created_at: :desc)
+  end
 end
