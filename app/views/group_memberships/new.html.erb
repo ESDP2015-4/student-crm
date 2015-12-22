@@ -1,9 +1,26 @@
 <h3>Add students to group</h3>
 
+
+
+<%= form_tag new_group_group_membership_path, :method => 'get', id: 'users_search' do %>
+
+    <p>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search", :name => nil %>
+    </p>
+    <div id="users">
+      <% @students = @users.all_students_except(@group.student_ids) %>
+    </div>
+
+<% end %>
+
+
+
 <%= simple_form_for([@group, @gm]) do |f| %>
 
 
     <%= f.button :submit, 'Добавить студентов' %>
+
     <%= f.association :user, collection: @students,label_method: :full_name, as: :check_boxes %>
 
 

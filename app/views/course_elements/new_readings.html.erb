@@ -13,7 +13,7 @@
   <% @results.data.items.each do |file| %>
       <tr>
         <td>
-          <%= image_tag file.icon_link %><%= link_to file.title, file.alternate_link %>
+          <%= image_tag file.icon_link %><%= link_to file.title, file.alternate_link, :target => "_blank" %>
         </td>
         <td>
           <% unless file.sharing_user.nil? %>
@@ -31,11 +31,7 @@
                   <%= f.hidden_field :icon_link, :value => file.icon_link %>
                   <%= f.hidden_field :alternate_link, :value => file.alternate_link %>
                   <%= f.hidden_field :course_element_id, :value => @course_element.id %>
-                  <% file.owners.each do |owner|%>
-                      <%= f.hidden_field :permission_id, :value => owner.permission_id %>
-                  <% end %>
-
-                  <%= f.submit 'Добавить', class: 'btn btn-primary' %>
+                  <%= f.submit 'Добавить', class: 'btn btn-info' %>
               <% end %>
           <% end %>
         </td>

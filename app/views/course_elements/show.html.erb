@@ -13,7 +13,7 @@
 <table class="table">
   <% @course_element.readings.each do |reading| %>
       <tr>
-        <td><%= image_tag reading.icon_link %><%= link_to reading.title, reading.alternate_link, :target => "_blank", class: 'btn btn-info' %> </td>
+        <td><%= image_tag reading.icon_link %><%= link_to reading.title, reading.alternate_link, :target => "_blank" %> </td>
         <td><%= link_to 'Удалить', course_elements_destroy_reading_path(reading),
                         method: :delete,
                         data: {confirm: 'Are you sure to remove this reading?'},

@@ -1,4 +1,5 @@
-<h3> Все пользователи </h3>
+<h3>Пользователи с ролью "<%= @role.name %>"</h3>
+
 
 <%= form_tag users_path, :method => 'get', id: 'users_search' do %>
     <%= hidden_field_tag :direction, params[:direction] %>
@@ -9,16 +10,8 @@
       <%= submit_tag "Search", :name => nil %>
     </p>
     <div id="users">
-      <%= render 'users' %>
+      <%= render 'filter_roles', role_name: @role.name %>
     </div>
 
 <% end %>
-
-
-
-
-
-
-
-
 

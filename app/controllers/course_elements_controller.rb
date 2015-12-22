@@ -55,8 +55,8 @@ class CourseElementsController < ApplicationController
     @drive_api = @client.discovered_api('drive', 'v2')
 
     @results = @client.execute!(
-        :api_method => @drive_api.files.list)
-    @reading = Reading.new
+        :api_method => @drive_api.files.list,
+        :parameters => { :maxResults => 1000 })
   end
 
   def create_readings

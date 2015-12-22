@@ -36,7 +36,21 @@ function hideshow(which){
         else
             which[i].style.display="none"
     }
-}
+};
+
+
+
+$(function() {
+    $(document).delegate("#users th a, #users .pagination a","click", function() {
+        $.getScript(this.href);
+        return false;
+    });
+    $("#users_search input").keyup(function() {
+        $.get($("#users_search").attr("action"), $("#users_search").serialize(), null, "script");
+        return false;
+    });
+});
+
 
 
 

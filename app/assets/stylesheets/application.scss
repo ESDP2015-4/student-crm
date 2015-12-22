@@ -2,6 +2,8 @@
 @import "bootstrap";
 @import "main";
 @import "getgoogles";
+@import "users";
+
 
 /* Navbar fixed top - по умолчанию будет закрывать контент, поэтому ставим отступ */
 body{
@@ -248,6 +250,10 @@ body{
   color: #999999;
 }
 
+.sidebar-nav li.list-group-item {
+  padding: 0px 0px 0px 20px;
+}
+
 .sidebar-nav li a:hover {
   text-decoration: none;
   color: #2f2f2f;
@@ -257,6 +263,14 @@ body{
 .sidebar-nav li a:active,
 .sidebar-nav li a:focus {
   text-decoration: none;
+}
+
+.sidebar-nav .panel-group {
+  margin: 0px;
+}
+
+.sidebar-nav .panel-heading {
+  padding: 0px;
 }
 
 .sidebar-nav > .sidebar-brand {
@@ -301,5 +315,7 @@ body{
     margin-right: 0;
   }
 }
+
+
 
 /* End of sidebar css */

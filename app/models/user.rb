@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
 
   has_many :attendances
   has_many :periods, through: :attendances
+  has_and_belongs_to_many :roles, join_table: :users_roles
 
   has_attached_file :image,
                     styles: {medium: '300x300>', thumb: '100x100>'},
@@ -53,5 +54,13 @@ class User < ActiveRecord::Base
     student_role = Role.find_by(name: :student)
     students = student_role.users
     students.where.not(id: student_ids).order(created_at: :desc)
+  end
+
+  def self.search(search)
+    if search
+      where('users.name || users.surname || users.middlename || users.email || users.phone1 || users.phone2 LIKE ?', "%#{search}%")
+    else
+      default_scoped
+    end
   end
 end

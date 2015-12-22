@@ -1,5 +1,7 @@
 <!-- Sidebar -->
+
 <div id="sidebar-wrapper">
+
   <ul class="sidebar-nav">
     <!-- <li class="sidebar-brand">
       <a href="#">
@@ -11,23 +13,44 @@
       <%= link_to ' Курсы', courses_path, class: 'glyphicon glyphicon-book' %>
     </li>
 
+
     <li style="height: 30px;">
+
       <%= link_to ' Группы', groups_path, class: 'glyphicon glyphicon-list' %>
     </li>
 
-    <li style="height: 30px;">
-      <%= link_to ' Студенты', users_students_path, class: 'glyphicon glyphicon-education' %>
+    <li>
+
+      <div class=panel-group role=tablist>
+        <div class="panel panel-default">
+          <div class=panel-heading role=tab id=collapseListGroupHeading1>
+            <h4 class=panel-title>
+              <a class="collapsed glyphicon glyphicon-user" role=button data-toggle=collapse href=#collapseListGroup1 aria-expanded=false aria-controls=collapseListGroup1> Категории по ролям </a>
+            </h4>
+          </div>
+          <div id=collapseListGroup1 class="panel-collapse collapse" role=tabpanel aria-labelledby=collapseListGroupHeading1>
+            <ul class=list-group>
+              <% Role.all.each do |role| %>
+              <li class="list-group-item"><%= link_to role.name, users_role_filter_path(role) %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+
     </li>
 
-    <li style="height: 30px;">
-      <%= link_to ' Преподователи', users_tutors_path, class: 'glyphicon glyphicon-blackboard' %>
-    </li>
 
     <li style="height: 30px;">
       <%= link_to ' Пользователи', users_path, class: 'glyphicon glyphicon-user' %>
     </li>
 
 
+
   </ul>
+
+
+
 </div>
+
 <!-- /#sidebar-wrapper -->

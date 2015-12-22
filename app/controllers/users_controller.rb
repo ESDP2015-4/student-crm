@@ -2,9 +2,11 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   # Это применит авторизацию ко всем экшнам в этом контроллере
   load_and_authorize_resource
+  helper_method :sort_column, :sort_direction, :role_sort_column
 
   def index
-    @users = User.paginate(page: params[:page], per_page: 10)
+    @users = User.search(params[:search]).joins(:roles).order(sort_column + ' ' + sort_direction).paginate(page: params[:page], per_page: 10)
+
   end
 
   def new
@@ -35,19 +37,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def role_filter
+    @role = Role.find(params[:id])
+    filtered = Role.find_by(name: "#{@role.name}")
+    @users = filtered.users.order(role_sort_column + ' ' + sort_direction).paginate(page: params[:page], per_page: 10)
+  end
+
   def show
     @user = User.find(params[:id])
-  end
-
-  def students
-    student_role = Role.find_by(name: 'student')
-
-    @students = student_role.users.paginate(page: params[:page], per_page: 10)
-  end
-
-  def tutors
-    tutor_role = Role.find_by(name: :tutor)
-    @tutors = tutor_role.users.paginate(page: params[:page], per_page: 10)
   end
 
   def changes
@@ -71,4 +68,19 @@ class UsersController < ApplicationController
                                  :image,
                                  {:role_ids => []})
   end
+
+  def sort_column
+    # params[:sort] || "name"
+    User.column_names.include?(params[:sort]) ? params[:sort] : 'role_id'
+  end
+
+  def role_sort_column
+    User.column_names.include?(params[:sort]) ? params[:sort] : 'name'
+  end
+
+  def sort_direction
+    # params[:direction] || 'asc'
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+  end
+
 end

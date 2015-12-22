@@ -1,0 +1,35 @@
+<div class="digg_pagination" style="margin:auto">
+  <%= will_paginate @users %>
+</div>
+
+<div class="row">
+  <%= link_to "Добавить пользователя - #{role_name}", new_user_path, class:'btn btn-primary' %>
+</div>
+<br />
+<table class="table table-condensed">
+  <tr>
+    <th><%= sortable_f "name", 'Пользователь' %></th>
+    <th></th>
+    <th><%= sortable_f "email" %></th>
+    <th><%= sortable_f "phone1", 'Телефон' %></th>
+    <th><%= sortable_f 'skype' %></th>
+
+  </tr>
+
+  <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.full_name, user_path(user) %></td>
+        <td>
+          <%= link_to '', edit_user_path(user), class: 'glyphicon glyphicon-pencil' %>
+        </td>
+        <td><%= user.email %></td>
+        <td><%= user.phone1 %></td>
+        <td><%= user.skype %></td>
+
+      </tr>
+  <% end %>
+</table>
+
+<div class="digg_pagination" style="margin:auto">
+  <%= will_paginate @users %>
+</div>
