@@ -22,13 +22,16 @@
     <li>
       <div role=tablist>
           <div role=tab id=collapseListGroupHeading1>
-
             <a role=button data-toggle=collapse href=#collapseListGroup1 aria-expanded=false aria-controls=collapseListGroup1><span class="collapsed glyphicon glyphicon-user"> Категории по ролям</span></a>
           </div>
           <div id=collapseListGroup1 class="panel-collapse collapse" role=tabpanel aria-labelledby=collapseListGroupHeading1>
             <ul class=list-group>
               <% Role.all.each do |role| %>
-              <li class="list-group-item"><%= link_to role.name, users_role_filter_path(role) %></li>
+              <li>
+                <%= link_to users_role_filter_path(role) do %>
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="padding-left: 15px;"><%= " #{role.name}" %></span>
+                    <% end %>
+                    </li>
               <% end %>
             </ul>
           </div>
