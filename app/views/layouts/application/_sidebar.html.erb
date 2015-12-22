@@ -1,7 +1,5 @@
 <!-- Sidebar -->
-
 <div id="sidebar-wrapper">
-
   <ul class="sidebar-nav">
     <!-- <li class="sidebar-brand">
       <a href="#">
@@ -9,24 +7,23 @@
       </a>
     </li> -->
 
-    <li style="height: 30px; margin-top: 10px;">
-      <%= link_to ' Курсы', courses_path, class: 'glyphicon glyphicon-book' %>
-    </li>
-
-
-    <li style="height: 30px;">
-
-      <%= link_to ' Группы', groups_path, class: 'glyphicon glyphicon-list' %>
+    <li>
+      <%= link_to courses_path do %>
+          <span class="glyphicon glyphicon-book" aria-hidden="true"> Курсы</span>
+      <% end %>
     </li>
 
     <li>
+      <%= link_to groups_path do %>
+          <span class="glyphicon glyphicon-list" aria-hidden="true"> Группы</span>
+      <% end %>
+    </li>
 
-      <div class=panel-group role=tablist>
-        <div class="panel panel-default">
-          <div class=panel-heading role=tab id=collapseListGroupHeading1>
-            <h4 class=panel-title>
-              <a class="collapsed glyphicon glyphicon-user" role=button data-toggle=collapse href=#collapseListGroup1 aria-expanded=false aria-controls=collapseListGroup1> Категории по ролям </a>
-            </h4>
+    <li>
+      <div role=tablist>
+          <div role=tab id=collapseListGroupHeading1>
+
+            <a role=button data-toggle=collapse href=#collapseListGroup1 aria-expanded=false aria-controls=collapseListGroup1><span class="collapsed glyphicon glyphicon-user"> Категории по ролям</span></a>
           </div>
           <div id=collapseListGroup1 class="panel-collapse collapse" role=tabpanel aria-labelledby=collapseListGroupHeading1>
             <ul class=list-group>
@@ -35,22 +32,16 @@
               <% end %>
             </ul>
           </div>
-        </div>
       </div>
-
     </li>
 
-
-    <li style="height: 30px;">
-      <%= link_to ' Пользователи', users_path, class: 'glyphicon glyphicon-user' %>
+    <li>
+      <%= link_to users_path do %>
+          <span class="glyphicon glyphicon-user" aria-hidden="true"> Пользователи</span>
+      <% end %>
     </li>
-
-
 
   </ul>
-
-
-
 </div>
 
 <!-- /#sidebar-wrapper -->
