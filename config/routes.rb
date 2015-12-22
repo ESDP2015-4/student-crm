@@ -2,8 +2,7 @@ Rails.application.routes.draw do
 
   root 'main#index'
 
-  get 'users/students'
-  get 'users/tutors'
+
   get 'users/role_filter/:id' => 'users#role_filter', as: 'users_role_filter'
   # get 'user/changes'
 

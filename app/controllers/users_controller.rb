@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   def role_filter
     @role = Role.find(params[:id])
     filtered = Role.find_by(name: "#{@role.name}")
-    @users = filtered.users.order(role_sort_column + ' ' + sort_direction).paginate(page: params[:page], per_page: 10)
+    @users = filtered.users.search(params[:search]).order(role_sort_column + ' ' + sort_direction).paginate(page: params[:page], per_page: 10)
   end
 
   def show
