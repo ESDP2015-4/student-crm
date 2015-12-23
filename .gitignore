@@ -20,3 +20,6 @@
 .idea
 
 public/system
+/quickstart.rb
+/Gemfile.lock
+/app/models/token.rb
