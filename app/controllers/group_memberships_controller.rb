@@ -3,7 +3,8 @@ class GroupMembershipsController < ApplicationController
   def new
     @gm = GroupMembership.new
     @group = Group.find(params[:group_id])
-    @users = User.search(params[:search])
+    scoped_users = User.all
+    @users = User.search(params[:search], scoped_users)
   end
 
   def create

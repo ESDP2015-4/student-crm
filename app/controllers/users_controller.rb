@@ -5,8 +5,8 @@ class UsersController < ApplicationController
   helper_method :sort_column, :sort_direction, :role_sort_column
 
   def index
-    @users = User.search(params[:search]).joins(:roles).order(sort_column + ' ' + sort_direction).paginate(page: params[:page], per_page: 10)
-
+    scoped_users = User.all
+    @users = User.search(params[:search], scoped_users).joins(:roles).order(sort_column + ' ' + sort_direction).paginate(page: params[:page], per_page: 10)
   end
 
   def new
@@ -39,8 +39,8 @@ class UsersController < ApplicationController
 
   def role_filter
     @role = Role.find(params[:id])
-    filtered = Role.find_by(name: "#{@role.name}")
-    @users = filtered.users.search(params[:search]).order(role_sort_column + ' ' + sort_direction).paginate(page: params[:page], per_page: 10)
+    scoped_users = Role.find_by(id: "#{params[:id]}").users
+    @users = scoped_users.search(params[:search], scoped_users).order(role_sort_column + ' ' + sort_direction).paginate(page: params[:page], per_page: 10)
   end
 
   def show

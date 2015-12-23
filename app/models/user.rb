@@ -56,11 +56,11 @@ class User < ActiveRecord::Base
     students.where.not(id: student_ids).order(created_at: :desc)
   end
 
-  def self.search(search)
+  def self.search(search, scoped_users)
     if search
-      where('users.name || users.surname || users.middlename || users.email || users.phone1 || users.phone2 LIKE ?', "%#{search}%")
+      where('users.name || users.surname || users.middlename || users.email || users.phone1 || users.phone2 || users.skype LIKE ?', "%#{search}%")
     else
-      default_scoped
+      scoped_users
     end
   end
 end

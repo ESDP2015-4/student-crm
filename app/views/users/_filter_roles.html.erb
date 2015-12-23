@@ -1,9 +1,11 @@
+
+
 <div class="digg_pagination" style="margin:auto">
   <%= will_paginate @users %>
 </div>
 
 <div class="row">
-  <%= link_to "Добавить пользователя - #{role_name}", new_user_path, class:'btn btn-primary' %>
+  <%= link_to "Добавить пользователя - #{@role.name}", new_user_path, class:'btn btn-primary' %>
 </div>
 <br />
 <table class="table table-condensed">
