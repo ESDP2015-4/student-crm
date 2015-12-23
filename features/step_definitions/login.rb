@@ -11,7 +11,7 @@ When(/^пользователь видит форму авторизации с 
   page.has_xpath?("id('user_password')")
   page.has_xpath?("id('login_form')")
 end
-
+#-------------------
 # Scenatio 2
 
 When(/^пользователь находится на странице авторицазии$/) do
@@ -22,17 +22,6 @@ When(/^пользователь вводит в форму логина знач
   fill_in 'Эл. почта', :with => email
   fill_in 'Пароль', :with => passwd
 end
-
-# When(/^пользователь вводит в поле email значение "([^"]*)" и в поле password значение "([^"]*)"$/) do |email, password|
-#   fill_in 'Эл. почта', :with => email
-#   fill_in 'Пароль', :with => password
-# end
-
-# When(/^пользователь вводит в форму логина значения$/) do |table|
-#   # table is a table.hashes.keys # => [:email, :password]
-#   fill_in 'Эл. почта', :with => table.hashes[0][:email]
-#   fill_in 'Пароль', :with => table.hashes[0][:password]
-# end
 
 When(/^нажимает кнопку "([^"]*)"$/) do |button|
   click_button(button)
