@@ -64,7 +64,7 @@ class CourseElementsController < ApplicationController
 
     if @reading.save
       redirect_to course_elements_new_readings_path(@reading.course_element)
-      flash[:notice] = "Added"
+      flash[:success] = "Добавлено"
     else
       flash[:alert] = "You couldn't add"
     end
