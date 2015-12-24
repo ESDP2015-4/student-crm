@@ -99,7 +99,7 @@ student_id = 0
         theme:"#{Faker::Hacker.ingverb.capitalize} #{Faker::Hacker.abbreviation.capitalize}",
         course: course,
         element_type: element_types.sample,
-        content: Faker::Lorem.paragraphs(5).join
+        # content: Faker::Lorem.paragraphs(5).join
     )
   end
 

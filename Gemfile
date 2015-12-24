@@ -75,3 +75,5 @@ gem 'omniauth-google-oauth2'
 gem 'json'
 gem 'google-api-client'
 gem 'google_drive'
+
+gem 'watu_table_builder', :require => 'table_builder'
