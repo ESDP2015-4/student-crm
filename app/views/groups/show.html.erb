@@ -1,3 +1,8 @@
+<ol class="breadcrumb">
+  <li><a href="/groups/">Группы</a></li>
+  <li class="active">Просмотр группы</li>
+</ol>
+
 <h1>Группа <%= @group.name %></h1>
 <%= link_to 'Редактировать', edit_group_path, class: 'btn btn-default' %>
 <%= link_to 'Добавить студентов', new_group_group_membership_path(@group.id), class: 'btn btn-primary' %>

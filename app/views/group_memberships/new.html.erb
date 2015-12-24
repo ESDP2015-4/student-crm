@@ -1,6 +1,10 @@
+<ol class="breadcrumb">
+  <li><a href="/groups/">Группы</a></li>
+  <li> <%= link_to 'Просмотр группы', group_path(@group) %></li>
+  <li class="active">Новые студенты</li>
+</ol>
+
 <h3>Добавление студентов к группе <b>"<%= @group.name %>"</b></h3>
-
-
 
 <%= form_tag new_group_group_membership_path, :method => 'get', id: 'users_search' do %>
 

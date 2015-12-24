@@ -1,12 +1,10 @@
-<h3>Курс: <%= @course.name %></h3>
+<ol class="breadcrumb">
+  <li><a href="/courses/">Курсы</a></li>
+  <li class="active">Занятия</li>
+</ol>
 
-<table >
-  <tr>
-    <td>
-      <%= link_to 'Курсы', courses_path, class: 'btn btn-link' %>
-    </td>
-  </tr>
-</table>
+
+<h4>Курс: <%= @course.name %></h4>
 
 <hr>
 
@@ -14,9 +12,7 @@
   <tr>
 <td>
   <%= link_to 'Добавить занятие', new_course_course_element_path(@course.id), class: 'btn btn-primary' %>
-  <%= link_to 'Добавить даты занятиям', new_course_period_path(@course.id), class: 'btn btn-success'%>
-  <%= link_to 'Все даты занятий', course_periods_path(@course), class: 'btn btn-info'%>
-</td>
+ </td>
   </tr>
 </table>
 

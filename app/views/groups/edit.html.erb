@@ -1,3 +1,9 @@
+<ol class="breadcrumb">
+  <li><a href="/groups/">Группы</a></li>
+  <li> <%= link_to 'Просмотр группы', group_path(@group) %></li>
+  <li class="active">Редактирование группы</li>
+</ol>
+
 <h3>Редактирование группы</h3>
 
 <% if current_user.has_any_role? :admin, :manager %>

@@ -14,11 +14,18 @@ Rails.application.routes.draw do
 
   resources :courses do
     resources :course_elements
+    # resources :periods
+  end
+
+  resources :groups do
     resources :periods
   end
   resources :groups do
     resources :group_memberships
   end
+
+  resources :periods
+
 
 
   get 'about' => 'main#about'

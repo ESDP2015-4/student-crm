@@ -1,6 +1,12 @@
+<ol class="breadcrumb">
+  <li><a href="/courses/">Курсы</a></li>
+  <li><%= link_to 'Все занятия', course_path(@course_element.course_id) %></li>
+  <li><%= link_to 'Тема занятия', course_course_element_path(@course_element.course, @course_element)  %></li>
+  <li class="active">Новое занятие</li>
+</ol>
+
 <h3>
-  Добавить раздатки к теме
-  <%= link_to @course_element.theme, course_course_element_path(@course_element.course, @course_element) %>
+  Добавить раздатки к теме <%= @course_element.theme %>
 </h3>
 
 

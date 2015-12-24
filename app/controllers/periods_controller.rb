@@ -1,10 +1,11 @@
 class PeriodsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
-  before_action :set_course, only: [:new, :create, :edit, :update]
+  # before_action :set_course, only: [:new, :create, :edit, :update]
 
   def index
-    @periods = Period.where(course_id: params[:course_id]).order(created_at: :desc)
+    @periods = Period.where(group_id: params[:group_id]).order(created_at: :desc)
+    @groups = Group.all.order(created_at: :desc)
   end
 
   def show
@@ -13,13 +14,14 @@ class PeriodsController < ApplicationController
 
   def new
     @period = Period.new
+    @group = Group.all
   end
 
   def create
     @period = Period.new(period_params)
 
     if @period.save
-      redirect_to course_periods_path(@period.course)
+      redirect_to periods_path(@period.course)
     else
       render 'new'
     end
@@ -33,7 +35,7 @@ class PeriodsController < ApplicationController
     @period = Period.find(params[:id])
 
     if @period.update(period_params)
-      redirect_to course_periods_path(@period.course)
+      redirect_to periods_path(@period.course)
     else
       render 'edit'
     end
@@ -41,12 +43,12 @@ class PeriodsController < ApplicationController
 
   private
 
-  def set_course
-    @course = Course.find(params[:course_id])
-  end
+  # def set_course
+  #   @course = Course.find(params[:course_id])
+  # end
 
   def period_params
-    params.require(:period).permit(:title,
+    params.require(:period).permit(
                                    :course_element_id,
                                    :group_id,
                                    :course_id,

@@ -1,9 +1,35 @@
+<h3>Все занятия группы</h3>
 
-<p>Курс: <%= @period.course.name %></p>
-<p>Группа: <%= @period.group.name  %></p>
-<p>Название: <%= @period.title %></p>
-<p>TeMa: <%= @period.course_element.theme %></p>
-<p>Тип урока: <%= @period.course_element.element_type %></p>
-<p>Дата: <%= @period.commence_datetime %></p>
+<table>
+  <tr>
+    <td>
+      <%= link_to 'Все периоды', periods_path(@period), class: 'btn btn-info'%>
+    </td>
+  </tr>
+</table>
+
+<br />
+
+<table class="table table-striped">
+  <tr>
+    <th>Группа</th>
+    <th>Тема занятий</th>
+    <th>Занятие</th>
+    <th>Дата</th>
+    <th>Действия</th>
+  </tr>
 
 
+  <% @periods.each do |period| %>
+      <tr>
+        <td><%= period.group.name %></td>
+        <td><%= link_to period.course_element.theme, period_path(course_id: period.course.id, id: period.id) %></td>
+        <td><%= period.course_element.element_type %></td>
+        <td><%= period.commence_datetime %></td>
+        <td>
+          <%= link_to 'Edit', edit_period_path(course_id: period.course.id, id: period.id), class: 'btn btn-warning'  %>
+        </td>
+      </tr>
+  <% end %>
+
+</table>

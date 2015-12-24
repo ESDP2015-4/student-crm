@@ -1,21 +1,14 @@
+<ol class="breadcrumb">
+  <li><a href="/courses/">Курсы</a></li>
+  <li><%= link_to 'Занятия', course_path(@course_element.course_id) %></li>
+  <li class="active">Тема занятия</li>
+</ol>
+
 <h3>Занятие: <%= @course_element.element_type %></h3>
 <h4>Тема: <%= @course_element.theme %></h4>
 
-
-    <tr>
-      <td>
-        Курс: <%= link_to @course_element.course.name, course_path(@course_element.course_id), class: 'btn btn-link'%>
-      </td>
-    </tr>
-
-<br/>
-
 <table class="table">
-  <tr>
-    <th>Приложенные учебные материалы</th>
-  </tr>
   <% @course_element.readings.each do |reading| %>
-
       <tr>
         <td><%= image_tag reading.icon_link %><%= link_to reading.title, reading.alternate_link, :target => "_blank" %> </td>
         <td><%= link_to 'Удалить', course_elements_destroy_reading_path(reading),
@@ -30,20 +23,4 @@
 
 <hr/>
 
-<%= link_to 'Добавить учебный материал', course_elements_new_readings_path(@course_element), class: 'btn btn-success'  %>
-<hr/>
-
-<p><b>Время проведения назначено к группам:</b></p>
-
-<table class="table table-striped">
-  <tr>
-    <th>Группа</th>
-    <th>Дата проведения</th>
-  </tr>
-  <% @course_element.periods.each do |period| %>
-      <tr>
-        <td><%= link_to period.group.name, group_path(period.group) %></td>
-        <td><%= period.commence_datetime.to_date %>, время <%= period.commence_datetime.to_s(:time) %></td>
-      </tr>
-  <% end %>
-</table>
+<%= link_to 'Добавить раздаточный материал', course_elements_new_readings_path(@course_element), class: 'btn btn-success'  %>
