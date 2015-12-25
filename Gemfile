@@ -76,4 +76,6 @@ gem 'json'
 gem 'google-api-client'
 gem 'google_drive'
 
-gem 'watu_table_builder', :require => 'table_builder'
+gem 'momentjs-rails'
+gem 'fullcalendar-rails'
+gem 'jquery-ui-rails'

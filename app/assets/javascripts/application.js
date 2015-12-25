@@ -13,7 +13,11 @@
 //= require jquery
 //= require bootstrap
 //= require jquery_ujs
+//= require jquery-ui/sortable
+//= require jquery-ui/effect-highlight
 //= require turbolinks
+//= require moment
+//= require fullcalendar
 //= require_tree .
 
 //this function calls alert close method to close an alert
@@ -39,7 +43,7 @@ function hideshow(which){
 };
 
 
-
+// this is for live search/sort for users
 $(function() {
     $(document).delegate("#users th a, #users .pagination a","click", function() {
         $.getScript(this.href);

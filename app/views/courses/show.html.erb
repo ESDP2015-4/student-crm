@@ -6,6 +6,11 @@
 
 <h4>Курс: <%= @course.name %></h4>
 
+<span>У курса есть группы:</span>
+<% @course.groups.each do |group| %>
+    <%= link_to group.name, group_path(group), class: 'btn btn-default btn-xs' %>
+<% end %>
+
 <hr>
 
 <table>
@@ -41,6 +46,8 @@
       </tr>
   <% end %>
 </table>
+
+
 
 
 

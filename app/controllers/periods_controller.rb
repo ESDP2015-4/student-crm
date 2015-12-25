@@ -41,6 +41,16 @@ class PeriodsController < ApplicationController
     end
   end
 
+  def destroy
+    @period = Period.destroy(params[:id])
+    redirect_to root_path
+  end
+
+  def calendar_group
+    @group = Group.find(params[:group_id])
+    @periods = Period.where(group_id: @group.id)
+  end
+
   private
 
   # def set_course
