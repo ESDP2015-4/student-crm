@@ -8,10 +8,14 @@
 
 <%= form_tag new_group_group_membership_path, :method => 'get', id: 'users_search' do %>
 
-    <p>
-      <%= text_field_tag :search, params[:search] %>
-      <%= submit_tag "Search", :name => nil %>
-    </p>
+    <div class="row" id="search-field">
+      <div class="col-md-4">
+        <%= text_field_tag :search, params[:search], class:'form-control' %>
+      </div>
+      <div class="col-md-offset-4">
+        <%= submit_tag "Поиск", :name => nil, class:'btn btn-default' %>
+      </div>
+    </div>
 
 <% end %>
 
