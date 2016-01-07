@@ -1,26 +1,40 @@
+//this for new period simple form
 $(document).bind('page:change', function(){
     var groups = $('#period_group_id').html();
     var course_elements = $('#period_course_element_id').html();
-
     $('#period_course_id').change(function(){
-        var course = $('#period_course_id option:selected').text()
+        var course = $('#period_course_id option:selected').text();
         var options = $(groups).filter("optgroup[label='" + course + "']").html();
         var options_course_el = $(course_elements).filter("optgroup[label='" + course + "']").html();
         if (options) {
             $('#period_group_id').html(options);
         } else {
-            $('#period_group_id').empty
+            $('#period_group_id').empty();
         };
         if (options_course_el){
             $('#period_course_element_id').html(options_course_el);
         } else {
-            $('#period_course_element_id').empty
-        }
+            $('#period_course_element_id').empty();
+        };
     });
-
-
 });
 
+//this is for filtering by group
+$(document).bind('page:change', function(){
+    var groups = $('#group_').html();
+
+    $('#select_course_').change(function(){
+        var course = $('#select_course_ option:selected').text();
+        var options = $(groups).filter("optgroup[label='" + course + "']").html();
+        if (options) {
+            $('#group_').html(options);
+        } else {
+            $('#group_').empty();
+        };
+    });
+});
+
+//this is FullCalendar
 $(document).bind('page:change', function() {
 
     var url = $("#calendar").attr('data-request-url');

@@ -1,13 +1,7 @@
 <% if current_user.has_any_role? :admin, :manager %>
 
     <%= simple_form_for(@period, html: {class: 'form-horizontal'},
-                        wrapper: :horizontal_form,
-                        wrapper_mappings: {
-                                check_boxes: :horizontal_radio_and_checkboxes,
-                                radio_buttons: :horizontal_radio_and_checkboxes,
-                                file: :horizontal_file_input,
-                                boolean: :horizontal_boolean
-                        }) do |f| %>
+                        wrapper: :horizontal_form) do |f| %>
 
             <%= f.input :title %>
             <%= f.input :course_id, collection: Course.all, label_method: :name, include_blank: true %>
@@ -28,7 +22,6 @@
                         include_blank: true
             %>
             <%= f.input :commence_datetime,
-
                         label: 'Дата события'
             %>
 

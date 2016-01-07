@@ -4,9 +4,14 @@ class PeriodsController < ApplicationController
   # before_action :set_course, only: [:new, :create, :edit, :update]
 
   def index
-    @periods = Period.all
+    if params[:group]
+      @periods = Period.where(group_id: params[:group])
+    elsif params[:course]
+      @periods = Period.where(course_id: params[:course])
+    else
+      @periods = Period.all
+    end
     @period = Period.new
-    # @course = @group.course
   end
 
   def show
@@ -22,7 +27,7 @@ class PeriodsController < ApplicationController
     @period = Period.new(period_params)
 
     if @period.save
-      redirect_to periods_path(@period.course)
+      redirect_to periods_path
     else
       render 'new'
     end

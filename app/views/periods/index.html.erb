@@ -1,10 +1,58 @@
-<h1>Общий календарь занятий</h1>
+<h3>Общий календарь событий</h3>
+<hr/>
 
+<%= form_tag periods_path, method: 'get', id: 'selected_periods', class: 'form-horizontal' do %>
+    <div class="form-group">
+        <label for="course" class="col-sm-2 control-label">Календарь курса</label>
+        <%= collection_select :course,
+                              params[:course_id],
+                              Course.all,
+                              :id,
+                              :name,
+                              class: 'form-control',
+                              selected: params[:course],
+                              include_blank: true %>
+        <%= submit_tag 'Выбрать', class: 'btn btn-default' %>
+        <%= link_to 'Очистит', periods_path, class: 'btn btn-default' %>
+    </div>
+<% end %>
+
+<br/>
+
+<%= form_tag periods_path, method: 'get', id: 'selected_periods' do %>
+    <div class="form-group">
+        <label for="course" class="col-sm-2 control-label">Календарь группы</label>
+          <%= collection_select :select_course,
+                                params[:course_id],
+                                Course.all,
+                                :id,
+                                :name,
+                                class: 'form-control',
+                                # selected: params[:select_course],
+                                include_blank: true %>
+        <%= grouped_collection_select :group,
+                                      params[:group_id],
+                                      Course.order(:name),
+                                      :groups,
+                                      :name,
+                                      :id,
+                                      :name,
+                                      class: 'form-control',
+                                      selected: params[:group],
+                                      include_blank: true %>
+        <%= submit_tag 'Выбрать', class: 'btn btn-default' %>
+        <%= link_to 'Очистит', periods_path, class: 'btn btn-default' %>
+    </div>
+<% end %>
+
+
+<hr/>
 
 
 <div class="row">
-  <div id="calendar" data-request-url="<%= periods_path %>" class="col-md-7"> </div>
+  <div id="calendar" data-request-url="<%= periods_path(params) %>" class="col-md-7"> </div>
   <div class="col-md-5">
+    <h4>Создать событие в календаре</h4>
     <%=	 render 'form' %>
   </div>
 </div>
