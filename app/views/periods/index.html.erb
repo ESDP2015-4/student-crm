@@ -1,4 +1,4 @@
-<h3>Общий календарь событий</h3>
+<h4>Календарь событий</h4>
 <hr/>
 
 <%= form_tag periods_path, method: 'get', id: 'selected_periods', class: 'form-horizontal' do %>
@@ -12,8 +12,8 @@
                               class: 'form-control',
                               selected: params[:course],
                               include_blank: true %>
-        <%= submit_tag 'Выбрать', class: 'btn btn-default' %>
-        <%= link_to 'Очистит', periods_path, class: 'btn btn-default' %>
+        <%= submit_tag 'Выбрать', class: 'btn btn-default btn-xs' %>
+        <%= link_to 'Очистит', periods_path, class: 'btn btn-default btn-xs' %>
     </div>
 <% end %>
 
@@ -40,8 +40,8 @@
                                       class: 'form-control',
                                       selected: params[:group],
                                       include_blank: true %>
-        <%= submit_tag 'Выбрать', class: 'btn btn-default' %>
-        <%= link_to 'Очистит', periods_path, class: 'btn btn-default' %>
+        <%= submit_tag 'Выбрать', class: 'btn btn-default btn-xs' %>
+        <%= link_to 'Очистит', periods_path, class: 'btn btn-default btn-xs' %>
     </div>
 <% end %>
 
