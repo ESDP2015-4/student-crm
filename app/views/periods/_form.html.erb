@@ -3,9 +3,10 @@
     <%= simple_form_for(@period, html: {class: 'form-horizontal'},
                         wrapper: :horizontal_form) do |f| %>
 
-            <%= f.input :title %>
-            <%= f.input :course_id, collection: Course.all, label_method: :name, include_blank: true %>
+            <%= f.input :title, label: 'Название' %>
+            <%= f.input :course_id, label: 'Выбрать курс', collection: Course.all, label_method: :name, include_blank: true %>
             <%= f.input :group_id,
+                        label: 'Группа',
                         collection: Course.all,
                         as: :grouped_select,
                         group_method: :groups,
@@ -14,6 +15,7 @@
                         include_blank: true
             %>
             <%= f.input :course_element_id,
+                        label: 'Тема',
                         collection: Course.all,
                         as: :grouped_select,
                         group_method: :course_elements,
@@ -25,7 +27,7 @@
                         label: 'Дата события'
             %>
 
-        <%= f.button :submit, 'Создать занятие', class: 'btn3d btn btn-default' %>
+        <%= f.button :submit, 'Создать занятие', class: 'btn3d btn btn-primary' %>
         <%= link_to 'Отмена', periods_path, class: 'btn3d btn btn-default' %>
     <% end %>
 
