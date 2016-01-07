@@ -1,22 +1,12 @@
-<h3>План занятий групп</h3>
+<h1>Общий календарь занятий</h1>
 
-<p><%= link_to 'Все Курсы', courses_path, class: 'btn btn-success' %></p>
 
-<table class="table table-striped">
-  <tr>
-    <th>Группа</th>
-    <th>Курс</th>
-    <th>Действия</th>
-  </tr>
 
-  <% @groups.each do |group| %>
-      <tr>
-        <td><%= link_to group.name, group_path(group) %></td>
-        <td><%= group.course.name %></td>
-        <td>
-          <%= link_to 'Все занятия группы', periods_path, class: 'btn btn-info' %>
-          <%= link_to 'Создать занятие в календаре', new_period_path(group), class: 'btn btn-success' %>
-        </td>
-      </tr>
-  <% end %>
-</table>
+<div class="row">
+  <div id="calendar" data-request-url="<%= periods_path %>" class="col-md-7"> </div>
+  <div class="col-md-5">
+    <%=	 render 'form' %>
+  </div>
+</div>
+
+

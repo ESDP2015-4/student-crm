@@ -4,8 +4,9 @@ class PeriodsController < ApplicationController
   # before_action :set_course, only: [:new, :create, :edit, :update]
 
   def index
-    @periods = Period.where(group_id: params[:group_id]).order(created_at: :desc)
-    @groups = Group.all.order(created_at: :desc)
+    @periods = Period.all
+    @period = Period.new
+    # @course = @group.course
   end
 
   def show
@@ -62,7 +63,8 @@ class PeriodsController < ApplicationController
                                    :course_element_id,
                                    :group_id,
                                    :course_id,
-                                   :commence_datetime
+                                   :commence_datetime,
+                                   :title
     )
   end
 

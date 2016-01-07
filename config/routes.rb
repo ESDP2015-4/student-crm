@@ -20,14 +20,11 @@ Rails.application.routes.draw do
   resources :groups do
     resources :periods
     get 'periods/calendar_group/:group_id' => 'periods#calendar_group', as: 'periods_calendar_group'
-  end
-  resources :groups do
     resources :group_memberships
   end
 
+
   resources :periods
-
-
 
 
   get 'about' => 'main#about'
