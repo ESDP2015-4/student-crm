@@ -85,10 +85,11 @@ ActiveRecord::Schema.define(version: 20151218114313) do
 
   create_table "periods", force: :cascade do |t|
     t.integer  "course_element_id"
-    t.integer  "group_id"
     t.datetime "commence_datetime"
+    t.string   "title"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.integer  "group_id"
     t.integer  "course_id"
   end
 
