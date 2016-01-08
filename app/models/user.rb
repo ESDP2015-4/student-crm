@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
 
   def self.search(search, scoped_users)
     if search
-      where('users.name || users.surname || users.middlename || users.email || users.phone1 || users.phone2 || users.skype LIKE ?', "%#{search}%")
+      where('users.name || users.surname || users.email || users.phone1 || users.phone2 || users.skype LIKE ?', "%#{search}%")
     else
       scoped_users
     end

@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def index
     scoped_users = User.all
-    @users = User.search(params[:search], scoped_users).joins(:roles).order(sort_column + ' ' + sort_direction).paginate(page: params[:page], per_page: 10)
+    @users = User.search(params[:search], scoped_users).joins(:roles).order(sort_column + ' ' + sort_direction).paginate(page: params[:page], per_page: 10).uniq
   end
 
   def new
