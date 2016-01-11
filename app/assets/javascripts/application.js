@@ -45,7 +45,7 @@ function hideshow(which){
 
 // this is for live search/sort for users
 $(function() {
-    $(document).delegate("#users th a","click", function() {
+    $(document).delegate("#users th a, #users .pagination a","click", function() {
         $.getScript(this.href);
         return false;
     });
