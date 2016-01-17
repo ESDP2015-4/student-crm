@@ -4,8 +4,10 @@ class PeriodsController < ApplicationController
   # before_action :set_course, only: [:new, :create, :edit, :update]
 
   def index
-    if params[:group]
+    if params[:group] != nil && params[:group][0].length > 0
       @periods = Period.where(group_id: params[:group])
+    elsif params[:course] && params[:group] != nil && params[:group][0].length == 0
+      @periods = Period.where(course_id: params[:course])
     elsif params[:course]
       @periods = Period.where(course_id: params[:course])
     else

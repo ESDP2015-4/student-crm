@@ -8,6 +8,8 @@ class GroupMembershipsController < ApplicationController
   end
 
   def create
+    p 000000000000000000
+    p params
     params[:group_membership][:user_id].each do |student_id|
       GroupMembership.create!(group_id: params[:group_id], user_id: student_id)
     end

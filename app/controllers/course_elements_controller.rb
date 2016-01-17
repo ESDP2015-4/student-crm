@@ -49,14 +49,8 @@ class CourseElementsController < ApplicationController
 
   def new_readings
     @course_element = CourseElement.find(params[:id])
+    google_files
 
-    @client = Google::APIClient.new
-    @client.authorization.access_token = Token.last.fresh_token
-    @drive_api = @client.discovered_api('drive', 'v2')
-
-    @results = @client.execute!(
-        :api_method => @drive_api.files.list,
-        :parameters => { :maxResults => 1000 })
   end
 
   def create_readings
@@ -82,6 +76,64 @@ class CourseElementsController < ApplicationController
 
   def reading_params
     params.require(:reading).permit(:course_element_id, :file_id, :alternate_link, :permission_id, :title, :icon_link)
+  end
+
+  def google_files
+    client = Google::APIClient.new
+    client.authorization.access_token = Token.last.fresh_token
+    drive_api = client.discovered_api('drive', 'v2')
+
+    @results = client.execute!(
+        :api_method => drive_api.files.list,
+        :parameters => { :maxResults => 1000 })
+    @root_array = []
+
+    all_array = []
+    @results.data.items.each do |file|
+      all_array.push({
+                         id: file.id,
+                         title: file.title,
+                         parents: file.parents,
+                         icon: file.icon_link,
+                         link: file.alternate_link
+                     })
+    end
+
+    # all_array.each do |file|
+    #   file[:parents].each do |parent|
+    #     if parent[:is_root]
+    #       @root_array.push file
+    #       all_array.delete file
+    #     end
+    #   end
+    #   if file.parents.length == 0
+    #     @root_array.push file
+    #     all_array.delete file
+    #   end
+    # end
+
+    # all_array.each do |file|
+    #   @root_array.each do |folder|
+    #     if file.id == folder.id
+    #       folder[:children].push file
+    #       all_array.delete file
+    #     end
+    #   end
+    # end
+
+    @root_array = all_array
+
+  end
+
+  def google_folders
+    client = Google::APIClient.new
+    client.authorization.access_token = Token.last.fresh_token
+    drive_api = client.discovered_api('drive', 'v2')
+
+    @root = client.execute!(
+        :api_method => drive_api.children.list,
+        :parameters => { 'folderId' => 'root',
+                         :maxResults => 1000 })
   end
 
 end
