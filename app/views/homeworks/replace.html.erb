@@ -1,0 +1,19 @@
+<h3>Изменить ДЗ</h3>
+<br/>
+<% if current_user.has_any_role? :admin, :manager, :student, :teacher %>
+    <%= form_for @homework do |f| %>
+        <%= f.label 'Выберите занятие' %>
+        <br/>
+        <%= f.collection_select(:period_id, Period.all, :id, :title) %>
+        <br/>
+        <br/>
+        <%= f.label 'Выберите архив с заданием' %>
+        <br/>
+        <%= f.file_field :hw_archive, class: 'btn btn-default' %>
+        <h5></h5>
+        <span>* Для загрузки доступны только архивы формата *.rar и *.zip</span>
+        <br/>
+        <br/>
+        <%= f.submit 'Загрузить', class: 'btn btn-success' %>
+    <% end %>
+<% end %>

@@ -33,7 +33,7 @@
     <th>Занятие</th>
     <th>Оценка</th>
     <th>Рецензия</th>
-    <th colspan="2">Действия</th>
+    <th colspan="3">Действия</th>
   </tr>
   <% @homeworks.each do |hw| %>
       <tr>
@@ -65,6 +65,11 @@
         <td>
           <%= link_to edit_homework_path(hw.id), title: 'Оценить домашнее задание' do %>
               <span class="glyphicon glyphicon-pencil" style="padding-top: 3px;"></span>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to replace_homework_path(hw.id), title: 'Загрузить новое ДЗ (для студента)' do %>
+              <span class="glyphicon glyphicon-download-alt" style="padding-top: 3px;"></span>
           <% end %>
         </td>
       </tr>
