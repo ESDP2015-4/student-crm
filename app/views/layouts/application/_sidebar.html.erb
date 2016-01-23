@@ -52,6 +52,20 @@
           <span>&nbsp;Календарь</span>
       <% end %>
     </li>
+    <hr/>
+    <li>
+      <%= link_to new_homework_path do %>
+          <span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
+          <span>&nbsp;Загрузить ДЗ</span>
+      <% end  %>
+    </li>
+    <li>
+      <%= link_to homeworks_path do %>
+          <span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>
+          <span>&nbsp;Просмотреть ДЗ</span>
+      <% end  %>
+    </li>
+
 
 
   </ul>

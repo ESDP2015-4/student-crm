@@ -2,13 +2,15 @@ Rails.application.routes.draw do
 
   root 'main#index'
 
-
   get 'users/role_filter/:id' => 'users#role_filter', as: 'users_role_filter'
-  # get 'user/changes'
-
   get 'users/:id/change(.:format)' => 'users#changes', as: 'change_user'
 
   devise_for :users
+
+  resources :homeworks
+  # post 'homeworks/new' => 'homeworks#create', as: 'post_homeworks'
+  # get 'homeworks/download/:id' => 'homeworks#download', as: 'download_homework'
+  get 'homeworks/estimate/:id' => 'homeworks#estimate', as: 'estimate_homework'
 
   resources :users, :except => [:destroy]
 
@@ -23,13 +25,10 @@ Rails.application.routes.draw do
     resources :group_memberships
   end
 
-
   resources :periods
-
 
   get 'about' => 'main#about'
   get 'contact' => 'main#contact'
-
   get 'getgoogles/new'
   resources :getgoogles, only: :index
   get "/auth/:provider/callback" => 'getgoogles#create'

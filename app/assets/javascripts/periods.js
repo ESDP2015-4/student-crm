@@ -57,12 +57,21 @@ $(document).bind('page:change', function() {
     console.log(url);
 
     $('#calendar').fullCalendar({
+        dayClick:  function(event, jsEvent, view) {
+            // change the day's background color just for fun
+            $(this).css('background-color', 'green');
+            //set the values and open the modal
+            $("#eventInfo").html(event.description);
+            $("#eventLink").attr('href', event.url);
+            $("#eventContent").dialog({ modal: true, title: event.title });
+        },
         events: url + '.json',
         header: {
             left: 'prev,next today',
             center: 'title',
             right: 'month,agendaWeek,agendaDay'
         },
+
         eventRender: function(event, element) {
             var full_time = new Date(Date.parse(event.start));
             var hours = full_time.getHours();

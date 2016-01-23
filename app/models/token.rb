@@ -5,8 +5,8 @@ class Token < ActiveRecord::Base
 
   def to_params
     {'refresh_token' => refresh_token,
-     'client_id' => "",
-     'client_secret' => "",
+     'client_id' => "907497187323-4svde7p9q09s8tqvo6qj14c02jtr03r6.apps.googleusercontent.com",
+     'client_secret' => "yzjuDIehwLebdZYEETQj7Y4h",
      'grant_type' => 'refresh_token'}
   end
 

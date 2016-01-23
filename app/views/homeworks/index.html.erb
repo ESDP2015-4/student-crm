@@ -1,0 +1,72 @@
+<h3>Просмотр ДЗ</h3>
+<br/>
+
+<%= form_tag homeworks_path, method: 'get' do %>
+    <div class="form-group">
+      <label for="course" class="col-sm-2 control-label">Выберите группу</label>
+      <%= collection_select :select_course,
+                            params[:course_id],
+                            Course.all,
+                            :id,
+                            :name,
+                            class: 'form-control',
+                            # selected: params[:select_course],
+                            include_blank: true %>
+      <%= grouped_collection_select :group,
+                                    params[:group_id],
+                                    Course.order(:name),
+                                    :groups,
+                                    :name,
+                                    :id,
+                                    :name,
+                                    class: 'form-control',
+                                    selected: params[:group],
+                                    include_blank: true %>
+      <%= submit_tag 'Выбрать', class: 'btn btn-info btn-xs' %>
+      <%= link_to 'Очистить', homeworks_path, class: 'btn btn-default btn-xs' %>
+    </div>
+<% end %>
+
+<table class="table table-hover">
+  <tr>
+    <th>Архив с заданием</th>
+    <th>Занятие</th>
+    <th>Оценка</th>
+    <th>Рецензия</th>
+    <th colspan="2">Действия</th>
+  </tr>
+  <% @homeworks.each do |hw| %>
+      <tr>
+        <td>
+          <%= hw.hw_archive_file_name %>
+        </td>
+        <td>
+          <%= hw.period.title %>
+        </td>
+        <td>
+          <% if hw.grade >= 2 %>
+              <%= hw.grade %>
+          <% else %>
+          <span>Не проверено</span>
+          <% end %>
+        </td>
+        <td>
+          <% if hw.grade >= 2 %>
+              <%= hw.review %>
+          <% else %>
+              <span>Не проверено</span>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to hw.hw_archive.url, title: 'Загрузить ДЗ' do %>
+              <span class="glyphicon glyphicon-download" style="padding-top: 3px; color: #0F9D58;"></span>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to edit_homework_path(hw.id), title: 'Оценить домашнее задание' do %>
+              <span class="glyphicon glyphicon-pencil" style="padding-top: 3px;"></span>
+          <% end %>
+        </td>
+      </tr>
+  <% end %>
+</table>

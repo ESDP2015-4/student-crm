@@ -26,7 +26,6 @@ class CourseElementsController < ApplicationController
       render 'new'
     end
   end
-
   def edit
     @course_element = CourseElement.find(params[:id])
   end
@@ -34,7 +33,6 @@ class CourseElementsController < ApplicationController
   def destroy
     @course_element = CourseElement.find(params[:id])
     @course_element.destroy
-
     redirect_to :back
   end
 
