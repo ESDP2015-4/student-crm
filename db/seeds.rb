@@ -9,8 +9,8 @@
 # #
 Role.create!(id: 1, name: 'student')
 Role.create!(id: 2, name: 'manager')
-Role.create!(id: 3, name: 'tutor')
-Role.create!(id: 4, name: 'techsuport')
+Role.create!(id: 3, name: 'teacher')
+Role.create!(id: 4, name: 'techsupport')
 Role.create!(id: 5, name: 'admin')
 
 phonecodes = (550..559).to_a
@@ -76,7 +76,7 @@ admin = User.create!(name: 'Admin',
 
 admin.add_role 'admin'
 
-tutor = User.create!(name: 'Tutor',
+teacher = User.create!(name: 'Teacher',
                      surname: 'Lastname',
                      gender: 'Мужчина',
                      birthdate: '02.09.1992',
@@ -84,9 +84,9 @@ tutor = User.create!(name: 'Tutor',
                      phone2: '+996772180825',
                      skype: 'skype.tutor',
                      passportdetails:'MVD 50-01',
-                     email: 'tutor@gmail.com', password: password, password_confirmation: password)
+                     email: 'teacher@gmail.com', password: password, password_confirmation: password)
 
-tutor.add_role 'tutor'
+teacher.add_role 'teacher'
 
 element_types = ['Лекция', 'Вебинар', 'Лабараторка', 'Контрольная']
 
@@ -124,3 +124,6 @@ student_id = 0
 
   end
 end
+
+
+
