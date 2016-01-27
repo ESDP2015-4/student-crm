@@ -1,16 +1,8 @@
-# # # This file should contain all the record creation needed to seed the database with its default values.
-# # # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-# # #
-# # # Examples:
-# # #
-# # #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-# # #   Mayor.create(name: 'Emanuel', city: cities.first)
-# #
-# #
+
 Role.create!(id: 1, name: 'student')
 Role.create!(id: 2, name: 'manager')
 Role.create!(id: 3, name: 'teacher')
-Role.create!(id: 4, name: 'techsupport')
+Role.create!(id: 4, name: 'tech_support')
 Role.create!(id: 5, name: 'admin')
 
 phonecodes = (550..559).to_a
@@ -125,5 +117,51 @@ student_id = 0
   end
 end
 
+######################### start of period seeds ###############
+
+groups = Group.all
+t = Time.now
+t = t.at_midday
 
 
+def set_week_day(time)
+  case time.wday
+    when 1 then time + 2.days
+    when 3 then time + 2.days
+    when 5 then time + 3.days
+    when 2 then time + 2.days
+    when 4 then time + 2.days
+    when 6 then time + 3.days
+    else time + 1.days
+  end
+end
+
+def set_hour(time)
+  case time.hour
+    when 12 then time + 2.hours
+    when 14 then time + 2.hours
+    when 18 then time + 2.hours
+    else time.at_midday
+  end
+end
+
+groups.each do |group|
+  c_el_id = 0
+  t -= 20.days
+  10.times do
+
+    t = set_week_day(t)
+    c_el_id += 1
+    Period.create!(
+        title:"Lesson #{c_el_id}",
+        group_id: group.id,
+        course_id: group.course_id,
+        course_element_id: c_el_id,
+        commence_datetime: t
+    )
+  end
+  t = set_hour(t)
+
+end
+
+########################## end of period seeds ####################
