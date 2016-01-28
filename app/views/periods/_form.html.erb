@@ -6,32 +6,36 @@
     <%= simple_form_for(@period, remote: remote, html: {class: 'form-horizontal'},
                         wrapper: :horizontal_form) do |f| %>
 
-            <%= f.input :title, label: 'Название' %>
-            <%= f.input :course_id, label: 'Выбрать курс', collection: Course.all, label_method: :name, include_blank: true %>
-            <%= f.input :group_id,
-                        label: 'Группа',
-                        collection: Course.all,
-                        as: :grouped_select,
-                        group_method: :groups,
-                        label_method: :name,
-                        value_method: :id,
-                        include_blank: true
-            %>
-            <%= f.input :course_element_id,
-                        label: 'Тема',
-                        collection: Course.all,
-                        as: :grouped_select,
-                        group_method: :course_elements,
-                        label_method: :theme,
-                        value_method: :id,
-                        include_blank: true
-            %>
-            <%= f.input :commence_datetime,
-                        label: 'Дата события',
-                        minute_step: 30,
-                        start_hour: 07,
-                        end_hour: 21
-            %>
+        <%= f.input :title, label: 'Название' %>
+        <%= f.input :course_id, label: 'Выбрать курс', collection: Course.all, label_method: :name, include_blank: true %>
+        <%= f.input :group_id,
+                    label: 'Группа',
+                    collection: Course.all,
+                    as: :grouped_select,
+                    group_method: :groups,
+                    label_method: :name,
+                    value_method: :id,
+                    include_blank: true
+        %>
+        <%= f.input :course_element_id,
+                    label: 'Тема',
+                    collection: Course.all,
+                    as: :grouped_select,
+                    group_method: :course_elements,
+                    label_method: :theme,
+                    value_method: :id,
+                    include_blank: true
+        %>
+        <%= f.input :commence_datetime,
+                    label: 'Дата события',
+                    minute_step: 30,
+                    start_hour: 07,
+                    end_hour: 21
+        %>
+        <%= f.input :deadline,
+                    label: 'Срок сдачи ДЗ'
+        %>
+
 
         <%= f.button :submit, 'Создать занятие', class: 'btn3d btn btn-primary' %>
     <% end %>

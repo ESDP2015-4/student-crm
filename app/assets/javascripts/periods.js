@@ -145,7 +145,7 @@ $(document).bind('page:change', function() {
 
             var course_selected = $('#course_ option:selected').text();
             var course_elements = $('#period_course_element_id').html();
-            console.log(course_selected)
+            console.log(course_selected);
             var options_course_el = $(course_elements).filter("optgroup[label='" + course_selected + "']").html();
             if (options_course_el){
                 $('#period_course_element_id').html(options_course_el);
@@ -159,6 +159,17 @@ $(document).bind('page:change', function() {
 
             var year_m = parseInt(date.year());
             $('#period_commence_datetime_1i').val(year_m);
+
+            var deadline_date = new Date(date.format());
+            deadline_date.setDate(deadline_date.getDate() + 7);
+
+            var deadline_day = deadline_date.getDate();
+            var deadline_month = deadline_date.getMonth() + 1;
+            var deadline_year = deadline_date.getFullYear();
+
+            $('#period_deadline_3i').val(deadline_day);
+            $('#period_deadline_2i').val(deadline_month);
+            $('#period_deadline_1i').val(deadline_year);
 
             $('#myModal').modal('toggle');
         }

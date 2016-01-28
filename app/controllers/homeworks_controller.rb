@@ -1,14 +1,29 @@
 class HomeworksController < ApplicationController
   before_action :authenticate_user!
+
   load_and_authorize_resource
 
   def index
+    if current_user.has_any_role? :student
+      @homeworks = Homework.where("user_id = ?", current_user.id)
+    else
     @homeworks = Homework.all
+    end
+    p params
+    p '----------------------'
   end
 
   def new
     @homework = Homework.new
     @periods = Period.all
+    # date_today = Date.today.to_json
+    # @actual_periods = Period.find_by_sql("SELECT id, title, deadline FROM periods WHERE deadline > '#{date_today}' " )
+    if current_user.groups.empty?
+      redirect_to homeworks_path
+      flash[:alert] = 'Вы не записаны ни в одну группу'
+    else
+      @actual_periods = Period.where("deadline > ? AND group_id = ?", Time.zone.now.beginning_of_day, current_user.groups.first.id)
+    end
   end
 
   def create
@@ -28,26 +43,23 @@ class HomeworksController < ApplicationController
     @homework = Homework.find(params[:id])
   end
 
+  def estimate
+    @homework = Homework.find(params[:id])
+  end
+
   def replace
     @homework = Homework.find(params[:id])
-    rename_archive()
   end
 
   def update
     @homework = Homework.find(params[:id])
-    if current_user.has_any_role? :student
-      rename_archive()
-    end
+    rename_archive()
     if @homework.update(homework_params)
       flash[:success] = 'Изменения успешно внесены'
       redirect_to homeworks_path
     else
       render 'update'
     end
-  end
-
-  def estimate
-    @homework = Homework.find(params[:id])
   end
 
   private
@@ -58,7 +70,7 @@ class HomeworksController < ApplicationController
     unless current_user.groups.first.nil?
       group_name = current_user.groups.first[:name].split.join('-')
     end
-    hw = @homework.period.title
+    hw = @homework.period.title.split.join('-')
     params_array = [name, surname, group_name, hw]
     @homework.hw_archive_file_name = "#{params_array.join('-').downcase! + '.zip'}"
   end

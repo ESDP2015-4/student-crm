@@ -4,7 +4,7 @@
     <%= form_for @homework do |f| %>
         <%= f.label 'Выберите занятие' %>
         <br/>
-        <%= f.collection_select(:period_id, Period.all, :id, :title) %>
+        <%= f.collection_select(:period_id, @actual_periods, :id, :title) %>
         <br/>
         <br/>
         <%= f.label 'Выберите архив с заданием' %>
