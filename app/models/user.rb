@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
   has_many :periods, through: :attendances
   has_and_belongs_to_many :roles, join_table: :users_roles
 
+  has_many :homeworks
+
   has_attached_file :image,
                     styles: {medium: '300x300>', thumb: '100x100>'},
                     default_url: '/images/:style/missing.png'

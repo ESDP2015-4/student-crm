@@ -7,7 +7,7 @@ class HomeworksController < ApplicationController
     if current_user.has_any_role? :student
       @homeworks = Homework.where("user_id = ?", current_user.id)
     else
-    @homeworks = Homework.all
+      @homeworks = Homework.all
     end
     p params
     p '----------------------'
@@ -16,13 +16,20 @@ class HomeworksController < ApplicationController
   def new
     @homework = Homework.new
     @periods = Period.all
-    # date_today = Date.today.to_json
-    # @actual_periods = Period.find_by_sql("SELECT id, title, deadline FROM periods WHERE deadline > '#{date_today}' " )
     if current_user.groups.empty?
       redirect_to homeworks_path
       flash[:alert] = 'Вы не записаны ни в одну группу'
     else
-      @actual_periods = Period.where("deadline > ? AND group_id = ?", Time.zone.now.beginning_of_day, current_user.groups.first.id)
+      today_date = Time.zone.now.beginning_of_day.to_json
+      #   @actual_periods = Period.where("deadline > ? AND group_memberships.user_id = ?", today_date, current_user.id)
+      @actual_periods = Period.find_by_sql("SELECT
+      periods.title,
+          groups.name
+      FROM periods
+      INNER JOIN group_memberships ON periods.group_id = group_memberships.group_id
+      INNER JOIN groups ON periods.group_id = groups.id
+      WHERE deadline > #{today_date}
+      AND group_memberships.user_id = #{current_user.id};")
     end
   end
 
@@ -41,20 +48,16 @@ class HomeworksController < ApplicationController
 
   def edit
     @homework = Homework.find(params[:id])
-  end
-
-  def estimate
-    @homework = Homework.find(params[:id])
-  end
-
-  def replace
-    @homework = Homework.find(params[:id])
+    @actual_periods = Period.where("deadline > ? AND group_id = ?", Time.zone.now.beginning_of_day, current_user.groups.first.id)
+    if current_user.has_any_role? :student
+      rename_archive()
+    end
   end
 
   def update
     @homework = Homework.find(params[:id])
-    rename_archive()
     if @homework.update(homework_params)
+      rename_archive()
       flash[:success] = 'Изменения успешно внесены'
       redirect_to homeworks_path
     else
