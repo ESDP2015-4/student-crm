@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   root 'main#index'
 
+  patch '/choose_role', to: 'users#set_user_role', as: :choose_role
+
   get 'users/role_filter/:id' => 'users#role_filter', as: 'users_role_filter'
   get 'users/:id/change(.:format)' => 'users#changes', as: 'change_user'
 
@@ -23,7 +25,7 @@ Rails.application.routes.draw do
   end
 
   resources :groups do
-    resources :periods
+    #resources :periods
     get 'periods/calendar_group/:group_id' => 'periods#calendar_group', as: 'periods_calendar_group'
     resources :group_memberships
   end

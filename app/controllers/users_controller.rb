@@ -52,6 +52,10 @@ class UsersController < ApplicationController
     @audit = @user.audits
   end
 
+  def set_user_role
+    choose_role(params[:role])
+  end
+
   private
 
   def user_params

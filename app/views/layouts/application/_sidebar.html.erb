@@ -1,9 +1,9 @@
 <% if current_user %>
-    <% if current_user.is_admin? %>
+    <% if session[:current_user_role] == "admin" %>
         <%= render 'layouts/application/admin_menu' %>
-    <% elsif current_user.is_teacher? %>
+    <% elsif session[:current_user_role] == "teacher" %>
         <%= render 'layouts/application/teacher_menu' %>
-    <% elsif current_user.is_student? %>
+    <% elsif session[:current_user_role] == "student" %>
         <%= render 'layouts/application/student_menu' %>
     <% end %>
 
