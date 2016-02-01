@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
     User.current_user = current_user
   end
 
-  # Sets default role on login
+  # Выбираем роль по умолчанию при логине. Роль с большими полномочиями имеет больший вес
   def set_default_role
     if current_user.has_any_role? :admin
       choose_role(:admin)
