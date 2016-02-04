@@ -9,7 +9,13 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :group_memberships
-  has_many :groups, through: :group_memberships
+  has_many :student_groups, through: :group_memberships, source: :group
+
+  has_many :teachers_groups
+  has_many :teacher_groups, through: :teachers_groups, source: :group
+
+  has_many :supports_groups
+  has_many :techsupport_groups, through: :supports_groups, source: :group
 
   has_many :attendances
   has_many :periods, through: :attendances

@@ -1,6 +1,7 @@
 class GroupMembership < ActiveRecord::Base
   belongs_to :group
-  belongs_to :user
+  belongs_to :student, class_name: "User"
+
 
   before_save :default_status
 

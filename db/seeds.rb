@@ -2,7 +2,7 @@
 Role.create!(id: 1, name: 'student')
 Role.create!(id: 2, name: 'manager')
 Role.create!(id: 3, name: 'teacher')
-Role.create!(id: 4, name: 'tech_support')
+Role.create!(id: 4, name: 'techsupport')
 Role.create!(id: 5, name: 'admin')
 
 phonecodes = (550..559).to_a
@@ -80,6 +80,18 @@ teacher = User.create!(name: 'Teacher',
 
 teacher.add_role 'teacher'
 
+support = User.create!(name: 'Tech',
+                     surname: 'Support',
+                     gender: 'Мужчина',
+                     birthdate: '02.09.1992',
+                     phone1: '+996772180825',
+                     phone2: '+996772180825',
+                     skype: 'skype.tutor',
+                     passportdetails:'MVD 50-01',
+                     email: 'techsupport@gmail.com', password: password, password_confirmation: password)
+
+support.add_role 'techsupport'
+
 element_types = ['Лекция', 'Вебинар', 'Лабараторка', 'Контрольная']
 
 student_id = 0
@@ -113,6 +125,14 @@ student_id = 0
           user_id: student_id,
           active: true)
     end
+
+    TeachersGroup.create!(group: group,
+          user_id: teacher.id,
+          active: true)
+
+    SupportsGroup.create!(group: group,
+          user_id: support.id,
+          active: true)
 
   end
 end

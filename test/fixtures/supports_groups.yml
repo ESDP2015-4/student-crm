@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: 
+  active: 
+  group_id: 
+
+two:
+  user: 
+  active: 
+  group_id: 
