@@ -1,17 +1,14 @@
-<% if current_user %>
-    <% if session[:current_user_role] == "admin" %>
-        <%= render 'layouts/application/admin_menu' %>
-    <% elsif session[:current_user_role] == "teacher" %>
-        <%= render 'layouts/application/teacher_menu' %>
-    <% elsif session[:current_user_role] == "student" %>
-        <%= render 'layouts/application/student_menu' %>
-    <% else %>
-        <%= render 'layouts/application/techsupport_menu' %>
-    <% end %>
+<!-- Sidebar -->
+<div id="sidebar-wrapper">
+  <ul class="sidebar-nav">
 
-<% else %>
-    <%= render 'layouts/application/guest_menu' %>
-<% end %>
+    <li>
+      <%= link_to courses_path do %>
+          <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+          <span>&nbsp;Курсы</span>
+      <% end %>
+    </li>
+
     <li>
       <%= link_to groups_path do %>
           <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
@@ -55,27 +52,7 @@
           <span>&nbsp;Календарь</span>
       <% end %>
     </li>
-    <hr/>
-    <li>
-      <%= link_to new_homework_path do %>
-          <span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
-          <span>&nbsp;Загрузить ДЗ</span>
-      <% end %>
-    </li>
-    <li>
-      <% if !current_user.nil? and current_user.has_any_role? :admin, :teacher, :manager, :tutor %>
-          <%= link_to periods_homework_path do %>
-              <span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>
-              <span>&nbsp;Просмотреть ДЗ</span>
-              <span class="badge" style="text-indent: 0px;"><%= Homework.where(grade: 1).length %></span>
-          <% end %>
-      <% else %>
-          <%= link_to homeworks_path do %>
-              <span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>
-              <span>&nbsp;Просмотреть ДЗ</span>
-          <% end %>
-      <% end %>
-    </li>
+
   </ul>
 </div>
 
