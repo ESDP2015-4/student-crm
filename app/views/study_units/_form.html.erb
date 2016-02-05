@@ -1,0 +1,23 @@
+<%= simple_form_for @study_unit do |f| %>
+
+    <% if @study_unit.errors.any? %>
+        <div class="errors">
+          Total errors: <%= @study_unit.errors.count %>
+          <ul>
+            <% @study_unit.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div>
+      <%= f.label 'Название' %><br/>
+      <%= f.text_field :title, class: 'form-control' %>
+    </div>
+
+    <hr>
+    <div>
+      <%= f.submit class: 'btn btn-primary' %>
+    </div>
+<% end %>

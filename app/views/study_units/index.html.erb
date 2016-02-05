@@ -1,0 +1,24 @@
+<h2>Учебные блоки</h2>
+
+<%= link_to 'Создать', new_study_unit_path, class:'btn btn-default' %>
+
+<hr>
+
+<div class="col-md-6">
+  <table class="table table-condensed">
+    <thead>
+      <th>Учебный блок</th>
+      <th>Действия</th>
+    </thead>
+    <tbody>
+    <% @study_units.each do |study_unit| %>
+        <tr>
+          <td><%= study_unit.title %></td>
+          <td>
+            <%= link_to 'Редактировать', edit_study_unit_path(study_unit) %>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

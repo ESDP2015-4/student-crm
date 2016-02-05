@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  resources :attendances, only: :index
+  resources :study_units, except: [:destroy, :show]
+
   root 'main#index'
 
   patch '/choose_role', to: 'users#set_user_role', as: :choose_role
