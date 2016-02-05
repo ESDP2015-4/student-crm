@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160204164907) do
+ActiveRecord::Schema.define(version: 20160205113109) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer  "user_id"
@@ -108,11 +108,13 @@ ActiveRecord::Schema.define(version: 20160204164907) do
     t.integer  "group_id"
     t.integer  "course_id"
     t.datetime "deadline"
+    t.integer  "study_unit_id"
   end
 
   add_index "periods", ["course_element_id"], name: "index_periods_on_course_element_id"
   add_index "periods", ["course_id"], name: "index_periods_on_course_id"
   add_index "periods", ["group_id"], name: "index_periods_on_group_id"
+  add_index "periods", ["study_unit_id"], name: "index_periods_on_study_unit_id"
 
   create_table "readings", force: :cascade do |t|
     t.string   "title"
@@ -137,6 +139,12 @@ ActiveRecord::Schema.define(version: 20160204164907) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], name: "index_roles_on_name"
+
+  create_table "study_units", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "supports_groups", force: :cascade do |t|
     t.integer  "user_id"
