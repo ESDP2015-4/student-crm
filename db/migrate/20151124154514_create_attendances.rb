@@ -3,7 +3,7 @@ class CreateAttendances < ActiveRecord::Migration
     create_table :attendances do |t|
       t.references :user, index: true, foreign_key: true
       t.references :period, index: true, foreign_key: true
-      t.boolean :attended
+      t.boolean :attended, default: false
 
       t.timestamps null: false
     end

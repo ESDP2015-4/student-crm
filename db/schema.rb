@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160126001649) do
+ActiveRecord::Schema.define(version: 20160204164907) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "period_id"
-    t.boolean  "attended"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "attended",   default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   add_index "attendances", ["period_id"], name: "index_attendances_on_period_id"
@@ -66,9 +66,9 @@ ActiveRecord::Schema.define(version: 20160126001649) do
   create_table "group_memberships", force: :cascade do |t|
     t.integer  "group_id"
     t.integer  "user_id"
-    t.boolean  "active"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "active",     default: true
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   add_index "group_memberships", ["group_id"], name: "index_group_memberships_on_group_id"
@@ -137,6 +137,28 @@ ActiveRecord::Schema.define(version: 20160126001649) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], name: "index_roles_on_name"
+
+  create_table "supports_groups", force: :cascade do |t|
+    t.integer  "user_id"
+    t.boolean  "active",     default: true
+    t.integer  "group_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "supports_groups", ["group_id"], name: "index_supports_groups_on_group_id"
+  add_index "supports_groups", ["user_id"], name: "index_supports_groups_on_user_id"
+
+  create_table "teachers_groups", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.boolean  "active",     default: true
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "teachers_groups", ["group_id"], name: "index_teachers_groups_on_group_id"
+  add_index "teachers_groups", ["user_id"], name: "index_teachers_groups_on_user_id"
 
   create_table "tokens", force: :cascade do |t|
     t.string   "access_token"
