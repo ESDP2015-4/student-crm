@@ -5,6 +5,13 @@ Role.create!(id: 3, name: 'teacher')
 Role.create!(id: 4, name: 'techsupport')
 Role.create!(id: 5, name: 'admin')
 
+StudyUnit.create!(title:'Первый')
+StudyUnit.create!(title:'Второй')
+StudyUnit.create!(title:'Третий')
+StudyUnit.create!(title:'Четвертый')
+StudyUnit.create!(title:'Пятый')
+
+
 phonecodes = (550..559).to_a
 phonecodes.push (700..709).to_a
 phonecodes.push (770..779).to_a
@@ -169,7 +176,6 @@ groups.each do |group|
   c_el_id = 0
   t -= 20.days
   10.times do
-
     t = set_week_day(t)
     c_el_id += 1
     Period.create!(
