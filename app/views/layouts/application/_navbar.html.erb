@@ -28,7 +28,7 @@
                 <ul class="dropdown-menu">
                   <li><%= link_to 'Личный кабинет', user_path(current_user) %></li>
                   <% if current_user.roles.count > 1 %>
-                      <li><a href="" data-toggle="modal" data-target="#chooseRoleModal">Выбрать роль</a></li>
+                      <li><a href="" data-toggle="modal" data-target="#chooseRoleModal">Сменить роль</a></li>
                   <% end %>
                   <li class="divider"></li>
                   <li><%= link_to 'Выйти', destroy_user_session_path, method: :delete %></li>
