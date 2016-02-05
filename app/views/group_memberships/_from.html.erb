@@ -7,7 +7,7 @@
 
     <%= f.button :submit, 'Добавить студентов' %>
 
-    <%= f.association :user, collection: @students,label_method: :full_name, as: :check_boxes %>
+    <%= f.association :student, collection: @students,label_method: :full_name, as: :check_boxes %>
 
 
 <% end %>
