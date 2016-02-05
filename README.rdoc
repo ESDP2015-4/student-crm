@@ -1,28 +1,24 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is an educational project - Student CRM, built using Ruby On Rails 4.2.4
 
-Things you may want to cover:
+Requirements:
 
-* Ruby version
+* Ruby version - 2.1.5 preferred
 
-* System dependencies
+* System requirements: Nodejs, Java JDK (to run RubyMine if you prefer)
 
-* Configuration
+* [Instructions for Ubuntu](../wiki/Руководство-разработчика-для-Ubuntu)
 
-* Database creation
+* [Instructions for Windows](../wiki/Руководство-разработчика-для-Windows)
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* [Instructions for Mac](../wiki/Руководство-разработчика-для-Mac)
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+ESDP 2015, Team No.4
+
+[Altynbek Abdrakhmanov](../../altynbek1977)
+[Maksat Sabyrov](../../rubymax)
+[Daniyar Shamkeev](../../shamkeev)
+[Amirkhan Mullabaev](../../AmirkhanMullabaev)
+[Ramazan](../../ramablack93)
