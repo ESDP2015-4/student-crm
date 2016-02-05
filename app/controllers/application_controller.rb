@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
       choose_role(:manager)
     elsif current_user.has_any_role? :teacher
       choose_role(:teacher)
-    elsif current_user.has_any_role? :techsuppport
+    elsif current_user.has_any_role? :techsupport
       choose_role(:techsupport)
     else
       choose_role(:student)
