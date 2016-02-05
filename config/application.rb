@@ -25,6 +25,7 @@ module StudentCrm
     config.active_record.raise_in_transactional_callbacks = true
   end
 
-  OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+  #OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+  VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
 end
