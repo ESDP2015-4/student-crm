@@ -4,12 +4,8 @@ class PeriodsController < ApplicationController
   # before_action :set_course, only: [:new, :create, :edit, :update]
 
   def index
-    if params[:group] != nil && params[:group][0].length > 0
-      @periods = Period.where(group_id: params[:group])
-    elsif params[:course] && params[:group] != nil && params[:group][0].length == 0
-      @periods = Period.where(course_id: params[:course])
-    elsif params[:course]
-      @periods = Period.where(course_id: params[:course])
+    if params[:group_ids]
+      @periods = Period.where(:group_id => params[:group_ids])
     else
       @periods = Period.all
     end
@@ -54,10 +50,14 @@ class PeriodsController < ApplicationController
     redirect_to root_path
   end
 
-  def calendar_group
-    @group = Group.find(params[:group_id])
-    @periods = Period.where(group_id: @group.id)
+  def selected_groups
+    @periods = Period.where(:group_id => params[:group_ids])
   end
+
+  # def calendar_group
+  #   @group = Group.find(params[:group_id])
+  #   @periods = Period.where(group_id: @group.id)
+  # end
 
   private
 

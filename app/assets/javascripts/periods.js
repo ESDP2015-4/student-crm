@@ -1,32 +1,33 @@
-$(document).ready(function(){
-    var groups = $('#group_').html();
-    var course = $('#course_ option:selected').text();
 
-    if (course.length > 0) {
-        var options = $(groups).filter("optgroup[label='" + course + "']").html();
-        if (options) {
-            $('#group_').html(options);
-            $("#group_").prepend("<option value=''></option>");
+
+$(document).on('page:change', function(){
+    // this for filter check boxes
+    $(".panel-title input:checkbox").cbFamily(function (){
+        return $(this).parents("div:first").next().find("input:checkbox");
+    });
+
+    $('.panel-body label input[type="checkbox"]').change(function(){
+        var group_value = $(this).closest('.panel-body').find('input[type="checkbox"]').val(),
+            title = $(this).parent().text();
+        if($(this).is(':checked')){
+            var html = '<button value="' + group_value + '" type="button" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + title + '</button>';
+            $('.checked_groups').append(html + ' ');
+
         } else {
-            $('#group_').empty();
+            $('button[value="' + group_value + '"]').remove();
         };
-    };
-
-});
-
-$(document).ready(function(){
-    $('#course_').change(function(){
-        $('#group_').empty();
-        $('#filter_calendar').submit();
     });
-    $('#group_').change(function(){
-        $('#filter_calendar').submit();
+
+    $('.checked_groups').click(function(){
+        $('button').click(function(){
+            var group_value = $(this).val()
+            $('input[value="' + group_value + '"]').attr('checked',false);
+            $('button[value="' + group_value + '"]').remove();
+        });
     });
-})
 
 
-//this for new period simple form
-$(document).bind('page:change', function(){
+    //this for new period simple form (modal)
     var groups = $('#period_group_id').html();
     var course_elements = $('#period_course_element_id').html();
     $('#period_course_id').change(function(){
@@ -56,6 +57,8 @@ $(document).bind('page:change', function() {
     var url = $("#calendar").attr('data-request-url');
     console.log(url);
 
+
+
     $('#calendar').fullCalendar({
         dayClick:  function(event, jsEvent, view) {
             // change the day's background color just for fun
@@ -71,6 +74,8 @@ $(document).bind('page:change', function() {
             center: 'title',
             right: 'month,agendaWeek,agendaDay'
         },
+
+        firstDay: 1,
 
         eventRender: function(event, element) {
             var full_time = new Date(Date.parse(event.start));
@@ -172,8 +177,63 @@ $(document).bind('page:change', function() {
             $('#period_deadline_1i').val(deadline_year);
 
             $('#myModal').modal('toggle');
+        },
+        editable: true,
+        eventDrop: function(event, delta, revertFunc) {
+            if (!confirm('Занятие ' + event.title + ' будет перенесено на дату ' +
+                    event.start.format() + '.' + ' Сохранить изменения?')) {
+                revertFunc();
+            }
+        },
+
+        monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+        monthNamesShort: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+        dayNames: ["Воскресенье","Понедельник","Вторник","Среда","Четверг","Пятница","Суббота"],
+        dayNamesShort: ["Воскресенье","Понедельник","Вторник","Среда","Четверг","Пятница","Суббота"],
+
+        buttonText: {
+            today: "Сегодня",
+            month: "Месяц",
+            week: "Неделя",
+            day: "День"
         }
 
+    });
+
+    $('.panel.panel-default').click(function(){
+        var selected_groups = $(".panel-body label input[type=checkbox]:checked").map(function(){
+            return $(this).val()
+        }).get();
+        $.ajax({
+            type: 'GET',
+            url: '/selected_groups/',
+            data: {
+                "group_ids": selected_groups
+            },
+            success: function(data){
+                $('#calendar').fullCalendar('removeEvents');
+                $("#calendar").fullCalendar("addEventSource", data)
+                console.log(data)
+            }
+        });
+    });
+
+    $('.checked_groups').click(function(){
+        var selected_groups = $(".panel-body label input[type=checkbox]:checked").map(function(){
+            return $(this).val()
+        }).get();
+        $.ajax({
+            type: 'GET',
+            url: '/selected_groups/',
+            data: {
+                "group_ids": selected_groups
+            },
+            success: function(data){
+                $('#calendar').fullCalendar('removeEvents');
+                $("#calendar").fullCalendar("addEventSource", data)
+                console.log(data)
+            }
+        });
     });
 
 });

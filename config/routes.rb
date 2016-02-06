@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   end
 
   resources :periods
+  get 'selected_groups' => 'periods#selected_groups', as: 'selected_groups'
 
   get 'about' => 'main#about'
   get 'contact' => 'main#contact'
