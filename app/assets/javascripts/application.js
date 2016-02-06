@@ -18,6 +18,7 @@
 //= require turbolinks
 //= require moment
 //= require fullcalendar
+//= require cbFamily
 //= require_tree .
 
 //this function calls alert close method to close an alert
