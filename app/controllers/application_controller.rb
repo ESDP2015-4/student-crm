@@ -13,4 +13,9 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     user_path(current_user)
   end
+  before_filter :set_current_user
+
+  def set_current_user
+    User.current_user = current_user
+  end
 end

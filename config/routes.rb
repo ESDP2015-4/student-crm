@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   # post 'homeworks/new' => 'homeworks#create', as: 'post_homeworks'
   # get 'homeworks/download/:id' => 'homeworks#download', as: 'download_homework'
   get 'homeworks/:id/estimate' => 'homeworks#estimate', as: 'estimate_homework'
-  get 'homeworks/:id/replace' => 'homeworks#replace', as: 'replace_homework'
+  get 'homework/:id/replace' => 'homeworks#replace', as: 'replace_homework'
+  get 'homework/periods' => 'homeworks#periods', as: 'periods_homework'
+  get 'homework/period/:period_id' => 'homeworks#period', as: 'period_homework'
 
   resources :users, :except => [:destroy]
 

@@ -1,6 +1,20 @@
-<h3>Оценка ДЗ</h3>
-<br/>
-<% if current_user.has_any_role? %>
+<% if current_user.has_any_role? :student %>
+    <h3>Загрузка нового ДЗ</h3>
+    <br/>
+    <%= form_for @homework do |f| %>
+        <br/>
+        <%= f.label 'Выберите архив с заданием' %>
+        <br/>
+        <%= f.file_field :hw_archive, class: 'btn btn-default' %>
+        <h5></h5>
+        <span>* Для загрузки доступны только архивы формата *.rar и *.zip</span>
+        <br/>
+        <br/>
+        <%= f.submit 'Загрузить', class: 'btn btn-success' %>
+    <% end %>
+<% else %>
+    <h3>Оценка ДЗ</h3>
+    <br/>
     <%= simple_form_for @homework do |f| %>
         <%= f.label 'Выставите оценку за домашнее задание' %>
         <br/>
@@ -8,7 +22,7 @@
         <br/>
         <%= f.label 'Краткая рецензия' %>
         <br/>
-        <%= f.input :review, label: false, input_html: { maxlength: 300 } %>
+        <%= f.input :review, label: false, input_html: {maxlength: 300} %>
         <h6>* До 300 символов</h6>
         <br/>
         <br/>

@@ -57,17 +57,22 @@
       <%= link_to new_homework_path do %>
           <span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
           <span>&nbsp;Загрузить ДЗ</span>
-      <% end  %>
+      <% end %>
     </li>
     <li>
-      <%= link_to homeworks_path do %>
-          <span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>
-          <span>&nbsp;Просмотреть ДЗ</span>
-      <% end  %>
+      <% if !current_user.nil? and current_user.has_any_role? :admin, :teacher, :manager, :tutor %>
+          <%= link_to periods_homework_path do %>
+              <span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>
+              <span>&nbsp;Просмотреть ДЗ</span>
+              <span class="badge" style="text-indent: 0px;"><%= Homework.where(grade: 1).length %></span>
+          <% end %>
+      <% else %>
+          <%= link_to homeworks_path do %>
+              <span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>
+              <span>&nbsp;Просмотреть ДЗ</span>
+          <% end %>
+      <% end %>
     </li>
-
-
-
   </ul>
 </div>
 

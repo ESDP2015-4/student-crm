@@ -1,14 +1,6 @@
-$(document).bind('page:change', function () {
-    var groups = $('#group_').html();
-
-    $('#select_course_').change(function () {
-        var course = $('#select_course_ option:selected').text();
-        var options = $(groups).filter("optgroup[label='" + course + "']").html();
-        if (options) {
-            $('#group_').html(options);
-        } else {
-            $('#group_').empty();
-        }
-        ;
+$('page:change', function(){
+    // this for filter check boxes
+    $(".panel-title input:checkbox").cbFamily(function (){
+        return $(this).parents("div:first").next().find("input:checkbox");
     });
 });

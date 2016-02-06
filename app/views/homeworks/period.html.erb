@@ -1,0 +1,61 @@
+<%= link_to 'Назад', periods_homework_path, class: 'btn btn-default' %>
+<h3>Студенты группы <%= @period.group.name %></h3>
+<h4><%= @period.title %></h4>
+<br/>
+<table class="table table-hover">
+
+  <tr>
+    <th>ФИО</th>
+    <th>Сдал?</th>
+    <th>Оценка</th>
+    <th>Рецензия</th>
+    <th colspan="2">Действия</th>
+  </tr>
+  <% @period.group.students.each do |student| %>
+      <% hw = Homework.where(period_id: @period.id, user_id: student.id) %>
+      <tr>
+        <td>
+          <%= student.full_name %>
+        </td>
+        <td>
+          <% if hw.blank? %>
+              <span class="glyphicon glyphicon-remove" style="color: red;"></span>
+          <% else %>
+              <span class="glyphicon glyphicon-ok" style="color: green;"></span>
+          <% end %>
+        </td>
+        <td>
+          <% hw.each do |h| %>
+              <% if h.grade >= 2 %>
+                  <%= h.grade %>
+              <% else %>
+                  <span>Не проверено</span>
+              <% end %>
+          <% end %>
+        </td>
+        <td>
+          <% hw.each do |h| %>
+              <% if h.grade >= 2 %>
+                  <%= h.review %>
+              <% else %>
+                  <span>Не проверено</span>
+              <% end %>
+          <% end %>
+        </td>
+        <td>
+          <% hw.each do |h| %>
+              <%= link_to h.hw_archive.url, title: 'Загрузить ДЗ' do %>
+                  <span class="glyphicon glyphicon-download" style="padding-top: 3px; color: #0F9D58;"></span>
+              <% end %>
+          <% end %>
+        </td>
+        <td>
+          <% hw.each do |h| %>
+              <%= link_to edit_homework_path(h.id), title: 'Оценить домашнее задание' do %>
+                  <span class="glyphicon glyphicon-pencil" style="padding-top: 3px;"></span>
+              <% end %>
+          <% end %>
+        </td>
+      </tr>
+  <% end %>
+</table>

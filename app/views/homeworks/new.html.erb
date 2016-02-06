@@ -1,19 +1,24 @@
 <h3>Загрузить ДЗ</h3>
 <br/>
 <% if current_user.has_any_role? :admin, :manager, :student, :teacher %>
-    <%= form_for @homework do |f| %>
-        <%= f.label 'Выберите занятие' %>
-        <br/>
-        <%= f.collection_select(:period_id, @actual_periods, :id, :title) %>
-        <br/>
-        <br/>
-        <%= f.label 'Выберите архив с заданием' %>
-        <br/>
-        <%= f.file_field :hw_archive, class: 'btn btn-default' %>
-        <h5></h5>
-        <span>* Для загрузки доступны только архивы формата *.rar и *.zip</span>
-        <br/>
-        <br/>
-        <%= f.submit 'Загрузить', class: 'btn btn-success' %>
+    <% if @actual_periods == [] %>
+        <h3><span>Вы уже загрузили все домашние задания</span></h3>
+    <% else %>
+        <%= form_for @homework do |f| %>
+            <%= f.label 'Выберите занятие' %>
+            <br/>
+            <%= f.collection_select(:period_id, @actual_periods, :id, :title) %>
+            <br/>
+            <br/>
+            <%= f.label 'Выберите архив с заданием' %>
+            <br/>
+            <%= f.file_field :hw_archive, class: 'btn btn-default' %>
+            <h5></h5>
+            <span>* Для загрузки доступны только архивы формата *.rar и *.zip</span>
+            <br/>
+            <br/>
+            <%= f.submit 'Загрузить', class: 'btn btn-success' %>
+        <% end %>
     <% end %>
 <% end %>
+<%= sdf %>

@@ -1,0 +1,28 @@
+<h3>Домашние задания</h3>
+
+<table class="table table-hover">
+  <tr>
+    <th>Тема</th>
+    <th>Сдано</th>
+    <th>Занятие</th>
+    <th>Группа</th>
+    <th>Курс</th>
+    <th>Дата лекции</th>
+    <th>Дедлайн</th>
+  </tr>
+  <% @passed_periods.each do |period| %>
+
+      <% how_many_uploaded = Homework.find_by_sql("SELECT homeworks.*, users.* FROM homeworks
+           INNER JOIN users on users.id = homeworks.user_id WHERE homeworks.period_id = #{period.id}") %>
+
+      <tr>
+        <td><%= link_to period.title, period_homework_path(period.id) %></td>
+        <td><%= how_many_uploaded.length %>/<%= period.group.students.length %></td>
+        <td><%= period.course_element.theme %></td>
+        <td><%= period.group.name %></td>
+        <td><%= period.course.name %></td>
+        <td><%= period.commence_datetime.strftime('%d.%m.%y') %></td>
+        <td><%= period.deadline.strftime('%d.%m.%y') %></td>
+      </tr>
+  <% end %>
+</table>
