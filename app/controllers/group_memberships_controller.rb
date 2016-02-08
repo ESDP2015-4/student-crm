@@ -1,5 +1,6 @@
 class GroupMembershipsController < ApplicationController
-
+  load_and_authorize_resource :group
+  load_and_authorize_resource :group_membership, through: :group
   def new
     @gm = GroupMembership.new
     @group = Group.find(params[:group_id])
