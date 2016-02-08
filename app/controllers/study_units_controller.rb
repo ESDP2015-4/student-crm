@@ -1,4 +1,5 @@
 class StudyUnitsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_study_unit, only: [:update, :edit]
   def index
     @study_units = StudyUnit.all
