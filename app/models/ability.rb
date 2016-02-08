@@ -38,11 +38,15 @@ class Ability
 
       can :manage, Attendance
 
+      can :manage, Homework
+
     elsif user.is_techsupport?
       #Может просматривать профили всех пользователей
       can :read, User
       #Может управлять своим профилем
       can [:show, :update], User, :id => user.id
+
+      can :manage, Homework
 
     elsif user.is_student?
       #Может управлять своим профилем
