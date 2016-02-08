@@ -12,14 +12,9 @@
 <% end %>
 
 <hr>
-
-<table>
-  <tr>
-<td>
+<% if admin? or manager? or teacher? %>
   <%= link_to 'Добавить занятие', new_course_course_element_path(@course.id), class: 'btn btn-primary' %>
- </td>
-  </tr>
-</table>
+<% end %>
 
 <h3>Занятия</h3>
 
@@ -27,7 +22,9 @@
   <tr>
     <th>Тип урока</th>
     <th>Тема</th>
+    <% if admin? or manager? or teacher? %>
     <th>Действия</th>
+    <% end %>
   </tr>
 
   <% @course_elements.each do |course_element| %>
@@ -35,6 +32,7 @@
       <tr>
         <td><%= course_element.element_type %></td>
         <td><%= link_to course_element.theme, course_course_element_path(@course, course_element) %></td>
+        <% if admin? or manager? or teacher? %>
         <td>
           <%= link_to 'Редактировать', edit_course_course_element_path(@course, course_element), class: 'btn btn-info btn-xs' %>
           <%= link_to 'Удалить', course_course_element_path(@course, course_element),
@@ -43,6 +41,7 @@
                       class: 'btn btn-danger btn-xs'
           %>
         </td>
+        <% end %>
       </tr>
   <% end %>
 </table>
