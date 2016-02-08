@@ -3,7 +3,15 @@ class CoursesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @courses = Course.all
+    if student?
+      @courses = current_user.student_courses
+    elsif teacher?
+      @courses = current_user.teacher_courses
+    elsif techsupport?
+      @courses = current_user.techsupport_courses
+    else
+      @courses = Course.all
+    end
   end
 
   def new
