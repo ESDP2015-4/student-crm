@@ -17,8 +17,9 @@
         <td><%= link_to group.course.name, course_path(group.course_id) %></td>
         <td><%= group.students.count %></td>
         <td>
-          <%= link_to 'View', group_path(group), class: 'btn btn-info' %>
-          <%= link_to 'Edit', edit_group_path(group), class: 'btn btn-warning' %>
+          <%= link_to 'Добавить студентов', new_group_group_membership_path(group), class: 'btn btn-primary' %>
+          <%= link_to 'Просмотр', group_path(group), class: 'btn btn-info' %>
+          <%= link_to 'Редактировать', edit_group_path(group), class: 'btn btn-warning' %>
         </td>
       </tr>
   <% end %>
