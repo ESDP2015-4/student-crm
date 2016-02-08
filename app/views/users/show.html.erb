@@ -68,7 +68,9 @@
       <div class="panel-body">
         <div class="btn-group-vertical" role="group" aria-label="...">
           <%= link_to 'Редактировать профиль', edit_user_path(@user), class: 'btn btn-warning' %>
-          <%= link_to 'История изменений', change_user_path(@user) , class: 'btn btn-warning' %>
+          <% if admin? or manager? %>
+              <%= link_to 'История изменений', change_user_path(@user), class: 'btn btn-warning' %>
+          <% end %>
         </div>
       </div>
     </div>
