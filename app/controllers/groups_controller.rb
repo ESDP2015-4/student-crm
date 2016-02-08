@@ -3,7 +3,13 @@ class GroupsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @groups = Group.all.order(created_at: :desc)
+    if teacher?
+      @groups = current_user.teacher_groups.order(created_at: :desc)
+    elsif techsupport?
+      @groups = current_user.techsupport_grops.order(created_at: :desc)
+    else
+      @groups = Group.all.order(created_at: :desc)
+    end
   end
 
   def new
