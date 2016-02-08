@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     set_default_role
-    user_path(current_user)
+    root_path
   end
   before_filter :set_current_user
 
