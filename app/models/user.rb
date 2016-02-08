@@ -9,17 +9,21 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :group_memberships
-  has_many :student_groups, through: :group_memberships, source: :group
+  has_many :student_groups,     through: :group_memberships,  source: :group
 
   has_many :teachers_groups
-  has_many :teacher_groups, through: :teachers_groups, source: :group
+  has_many :teacher_groups,     through: :teachers_groups,    source: :group
 
   has_many :supports_groups
-  has_many :techsupport_groups, through: :supports_groups, source: :group
+  has_many :techsupport_groups, through: :supports_groups,    source: :group
+
+  has_many :student_courses,     -> { distinct }, through: :student_groups,     source: :course
+  has_many :teacher_courses,     -> { distinct }, through: :teacher_groups,     source: :course
+  has_many :techsupport_courses, -> { distinct }, through: :techsupport_groups, source: :course
 
   has_many :attendances
   has_many :periods, through: :attendances
-  has_and_belongs_to_many :roles, join_table: :users_roles
+  #has_and_belongs_to_many :roles, join_table: :users_roles  #might not need this one, if no error, delete this line
 
   has_many :homeworks
 
