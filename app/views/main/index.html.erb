@@ -1,2 +1,9 @@
 <h1>Education process management system</h1>
 <h2>ESDP team #4</h2>
+
+<% if student? %>
+    <h3>Мои курсы:</h3>
+  <% current_user.student_courses.each do |course|%>
+        <h3><%= link_to course.name, course_path(course) %></h3>
+    <% end %>
+<% end %>
