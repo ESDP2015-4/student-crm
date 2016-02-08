@@ -1,20 +1,26 @@
 <h3>Курсы</h3>
 
-<h4><%= link_to 'Добавить', new_course_path, class: 'btn btn-primary' %></h4>
-
+<% if admin? or manager? %>
+    <h4><%= link_to 'Добавить', new_course_path, class: 'btn btn-primary' %></h4>
+<% end %>
 <table class="table table-striped">
   <tr>
-    <th>Название: </th>
-    <th>Действия </th>
+    <th>Название:</th>
+    <% if admin? or manager? %>
+        <th>Действия</th>
+    <% end %>
   </tr>
 
   <% @courses.each do |course| %>
       <tr>
         <td><%= link_to course.name, course_path(course) %></td>
-        <td>
-          <%= link_to 'Редактировать', edit_course_path(course), class: 'btn btn-info' %>
-          <%= link_to 'Удалить', course_path(course), method: :delete, data: {confirm: 'Вы действительно хотите удалить?'}, class: 'btn btn-danger' %>
-        </td>
+        <% if admin? or manager? %>
+            <td>
+              <%= link_to 'Редактировать', edit_course_path(course), class: 'btn btn-info' %>
+              <%= link_to 'Удалить', course_path(course), method: :delete, data: {confirm: 'Вы действительно хотите удалить?'}, class: 'btn btn-danger' %>
+            </td>
+        <% end %>
       </tr>
   <% end %>
 </table>
+<% console %>
