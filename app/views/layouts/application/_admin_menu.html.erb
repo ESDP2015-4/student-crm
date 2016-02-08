@@ -53,6 +53,13 @@
       <% end %>
     </li>
     <li>
+      <%= link_to periods_homework_path do %>
+          <span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>
+          <span>&nbsp;Просмотреть ДЗ</span>
+          <span class="badge" style="text-indent: 0px;"><%= Homework.where(grade: 1).length %></span>
+      <% end %>
+    </li>
+    <li>
       <%= link_to study_units_path do %>
           <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
           <span>&nbsp;Учебные блоки</span>
