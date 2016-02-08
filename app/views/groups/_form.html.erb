@@ -1,4 +1,4 @@
-<% if current_user.has_any_role? :admin, :manager %>
+<% if admin? or manager? %>
     <%= simple_form_for @group do |f| %>
 
         <% if @group.errors.any? %>
