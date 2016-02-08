@@ -3,8 +3,8 @@ class HomeworksController < ApplicationController
   load_and_authorize_resource
 
   def index
-    if current_user.has_any_role? :student
-      @homeworks = Homework.where("user_id = ?", current_user.id)
+    if student?
+      @homeworks = Homework.where(user: current_user)
     else
       # @homeworks = Homework.all
       if params[:group_ids]
@@ -35,7 +35,7 @@ class HomeworksController < ApplicationController
   end
 
   def new
-    if current_user.groups.empty?
+    if current_user.student_groups.empty?
       redirect_to homeworks_path
       flash[:alert] = 'Вы не записаны ни в одну группу'
     end
