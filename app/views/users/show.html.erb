@@ -14,11 +14,11 @@
               <tbody>
               <tr>
                 <td>Course:</td>
-                <td></td>
+                <td><%= @user.student_courses.pluck(:name).join(', ') %></td>
               </tr>
               <tr>
                 <td>Group:</td>
-                <td></td>
+                <td><%= @user.student_groups.pluck(:name).join(', ') %></td>
               </tr>
               <tr>
                 <td>Birth date:</td>
@@ -76,6 +76,7 @@
     </div>
   </div>
 </div>
+<% console %>
 
 
 
