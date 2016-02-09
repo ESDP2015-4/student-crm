@@ -17,7 +17,7 @@
             <%= f.input :middlename, label: 'Отчество', placeholder: 'Отчество',
                         input_html: {style: 'width:200px;'} %>
             <%= f.input :gender, label: 'Пол', as: :radio_buttons,
-                        collection: ['Мужчина', 'Женщина'] %>
+                        collection: User.get_genders, label_method: :last, value_method: :first %>
             <div class="col-sm-3" style="text-align: right">
               <label for="birthdate">* Дата рождения</label>
             </div>

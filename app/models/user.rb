@@ -76,7 +76,22 @@ class User < ActiveRecord::Base
     end
   end
 
-  class << self
+  GENDERS = ['female', 'male']
+  GENDERS_LABELS = ['Женщина', 'Мужчина']
+
+  def self.get_genders
+    genders_for_collection = []
+    GENDERS.each_with_index do |item, index|
+      genders_for_collection.push([item, GENDERS_LABELS[index]])
+    end
+    genders_for_collection
+  end
+
+  def gender_string
+    GENDERS_LABELS[GENDERS.index(gender)]
+  end
+
+  class << self #this is for ability to use "current_user" method in model
     def current_user=(user)
       Thread.current[:current_user] = user
     end
