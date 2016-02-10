@@ -1,7 +1,7 @@
 <h3>Загрузить ДЗ</h3>
 <br/>
 <% if current_user.has_any_role? :admin, :manager, :student, :teacher %>
-    <% if @actual_periods == [] %>
+    <% if @actual_periods.blank? %>
         <h3><span>Вы уже загрузили все домашние задания</span></h3>
     <% else %>
         <%= form_for @homework do |f| %>
@@ -21,4 +21,3 @@
         <% end %>
     <% end %>
 <% end %>
-

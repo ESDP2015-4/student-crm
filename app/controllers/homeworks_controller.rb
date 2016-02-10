@@ -6,11 +6,9 @@ class HomeworksController < ApplicationController
     if student?
       @homeworks = Homework.where(user: current_user)
     else
-      # @homeworks = Homework.all
       if params[:group_ids]
         @homeworks
       end
-      # @uploaded_hw_for_period = Homework.find_by period:
       @periods = Period.all
       @passed_periods = @periods.where("commence_datetime < ?", Time.zone.now).sort_by { |period| period.commence_datetime }
     end
@@ -22,7 +20,6 @@ class HomeworksController < ApplicationController
   end
 
   def periods
-    # @homework = Homework.find(params[:id])
     @periods = Period.all
     @passed_periods = @periods.where("commence_datetime < ?", Time.zone.now).sort_by { |period| period.commence_datetime }
   end
@@ -31,7 +28,6 @@ class HomeworksController < ApplicationController
     @periods = Period.all
     @passed_periods = @periods.where("commence_datetime < ?", Time.zone.now).sort_by { |period| period.commence_datetime }
     @period = Period.find(params[:period_id])
-    # @uploaded_hw = Homework.where('period_id = ? AND user_id = ?', @period.id, @period.group.students.each {|student| student})
   end
 
   def new
@@ -41,16 +37,13 @@ class HomeworksController < ApplicationController
     end
     @homework = Homework.new
     @homeworks = Homework.all
-    # @periods = Period.all
     today_date = Time.zone.now.to_json
-
+    student_groups_id = @current_user.student_groups.pluck(:id)
     @actual_periods = Period.find_by_sql("SELECT periods.id, periods.title FROM periods
-      INNER JOIN group_memberships ON periods.group_id = group_memberships.group_id
-     WHERE deadline > #{today_date}
-      AND group_memberships.user_id = #{current_user.id}
-     ;")
-
-
+      left JOIN homeworks on periods.id = homeworks.period_id
+      WHERE deadline > #{today_date}
+      AND periods.group_id IN (#{student_groups_id.join(', ')})
+      AND homeworks.id IS NULL;")
   end
 
   def create
