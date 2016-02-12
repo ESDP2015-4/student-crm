@@ -1,17 +1,39 @@
 class AttendancesController < ApplicationController
+
   def index
-    @group = Group.find 1
-    @students = @group.students
-    @periods = Period.where(group_id: @group.id)
-    @attendances = Attendance.where(period_id: @periods.ids, user_id: @students.ids)
+    @users = []
+    unless params[:group_ids].nil?
+      @groups = Group.find(params[:group_ids])
+      @groups.each do |group|
+        group.students.each do |student|
+          @users << student
+        end
+      end
+    end
+    #--------------------------
+    @periods = periods_filter
+    @attendances = Attendance.where(period_id: @periods.ids)
+    @able_periods = @periods.where('commence_datetime < ?', Time.zone.now )
   end
 
-  def mark
-    a = Attendance.find(params[:attendance_id])
-    if a.attended?
-      a.update(attended: false)
+
+  def periods_filter
+    if params[:group_ids]
+      @periods = Period.where(:group_id => params[:group_ids])
     else
-      a.update(attended: true)
+      @periods = Period.all
     end
   end
+
+
+  def check
+    attendance = Attendance.find(params[:attendance_id])
+    if attendance.attended?
+      attendance.update(attended: false)
+    else
+      attendance.update(attended: true)
+    end
+  end
+
 end
+

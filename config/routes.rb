@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   resources :attendances, only: :index
 
-  patch '/mark', to: 'attendances#mark', as: :mark
+  patch '/check', to: 'attendances#check', as: :check
 
   resources :study_units, except: [:destroy, :show]
 

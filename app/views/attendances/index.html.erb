@@ -1,24 +1,118 @@
-<h1>Attendances#index</h1>
-<p>Find me in app/views/attendances/index.html.erb</p>
-<h2><%= @group.name unless @group.nil? %></h2>
+<% content_for :javascript_includes do %>
+    <%= javascript_include_tag 'attendances' %>
+<% end %>
+
+<% unless params[:group_ids].nil? %>
+    <% @groups.each do |group| %>
+        <h4><%= group.name %></h4>
+    <% end %>
+<% end %>
+
+
+
+<!--///--><!--///--><!--///--><!--///--><!--///--><!--///-->
+<div class="row">
+  <div class="col-sm-4">
+    <div class="dropdown">
+      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Выбрать курс и группу
+        <span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <% number = 0 %>
+        <%= form_tag attendances_path, method: 'get', id: 'attendance' do %>
+            <li>
+              <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <% Course.all.each do |course| %>
+                    <% number += 1 %>
+                    <% href_name = 'collapse' + "#{number}" %>
+                    <div class="panel panel-default">
+                      <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                          <%= link_to course.name, "#{'#' + href_name}", class: 'collapsed', role: 'button', 'data-toggle' => 'collapse', 'data-parent' => "#accordion", 'aria-expanded' => "false", 'aria-controls' => "collapseTwo" %>
+                        </h4>
+                      </div>
+
+                      <div id="<%= href_name %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <% course.groups.each do |group| %>
+                            <div class="panel-body" role="tablist">
+                              <label class="filter">
+                                <%= radio_button_tag name='group_ids[]', group.id %>  <%= group.name %>
+                              </label>
+                            </div>
+                        <% end %>
+                      </div>
+
+                    </div>
+                <% end %>
+              </div>
+            </li>
+            <li style="text-align:center">
+              <%= submit_tag 'Найти', class: 'btn btn-info' %>
+            </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+
+<!--///--><!--///--><!--///--><!--///--><!--///--><!--///-->
+
+<!--///--><!--///--><!--///--><!--///--><!--///--><!--///-->
+
+  <div class="col-sm-4">
+    <div class="dropdown">
+      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Учебный блок
+        <span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <%= form_tag attendances_path, method: 'get', id: 'attendance' do %>
+            <li>
+              <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <% StudyUnit.all.each do |study_unit| %>
+                    <div class="panel panel-default">
+                      <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                          <%= link_to study_unit.title,  class: 'collapsed', role: 'button', 'data-toggle' => 'collapse', 'data-parent' => "#accordion", 'aria-expanded' => "false", 'aria-controls' => "collapseTwo" %>
+                        </h4>
+                      </div>
+
+                    </div>
+                <% end %>
+              </div>
+            </li>
+
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!--///--><!--///--><!--///--><!--///--><!--///--><!--///-->
+
+
+
 <table class="table table-bordered table-hover">
   <thead>
-  <th>Students</th>
-  <th>Count</th>
-  <% @periods.each do |period| %>
-      <th><%= period.commence_datetime.strftime('%c') %></th>
+  <th>Студенты</th>
+  <th>Кол-во</th>
+  <% @able_periods.each do |period| %>
+      <th><%= period.title %> <br>
+        <%= period.commence_datetime %>
+      </th>
   <% end %>
   </thead>
   <tbody>
-  <% @students.each do |student| %>
+  <% @users.each do |student| %>
       <tr>
         <td><%= student.full_name %></td>
         <td><%= student.attendances.where(attended: true).count %></td>
-        <% @periods.each do |period| %>
-            <% @attendances.each do |a| %>
-                <% if a.period == period and a.user == student %>
+        <% @able_periods.each do |period| %>
+            <% @attendances.each do |attendance| %>
+                <% if attendance.period == period and attendance.user == student %>
                     <td>
-                      <%= check_box_tag a, a.id, a.attended, data: {url: mark_path(attendance_id: a.id), remote: true, method: :patch} %>
+                      <label class="label">
+                        <%= check_box_tag attendance, attendance.id, attendance.attended,
+                                          data: {url: check_path(attendance_id: attendance.id),
+                                                 remote: true, method: :patch} %>
+                      </label>
                     </td>
                 <% end %>
             <% end %>
@@ -27,3 +121,7 @@
   <% end %>
   </tbody>
 </table>
+
+
+</div>
+
