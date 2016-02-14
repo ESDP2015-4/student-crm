@@ -1,21 +1,75 @@
 
+var ajax_query_in = function(selected_groups){
+    $.ajax({
+        type: 'GET',
+        url: '/selected_groups/',
+        data: {
+            "group_ids": selected_groups
+        },
+        success: function(data){
+            $('#calendar').fullCalendar('removeEvents');
+            $("#calendar").fullCalendar("addEventSource", data)
+            console.log(data)
+        }
+    });
+};
+
+var ajax_query = function(html_clicked){
+    $(html_clicked).click(function(){
+        var selected_groups = $(".panel-body label input[type=checkbox]:checked").map(function(){
+            return $(this).val()
+        }).get();
+        ajax_query_in(selected_groups)
+    });
+};
+
+var filtered_groups = function(checked_value){
+    var group_value = $(checked_value).closest('.panel-body').find('input[type="checkbox"]').val(),
+        title = $(checked_value).parent().text();
+    var htmle = '<button value="' + group_value + '" id="' + group_value + '" type="button" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + title + '</button>';
+    if ($('.checked_groups').children('#' + group_value + '')){
+        $('button[value="' + group_value + '"]').remove();
+    }
+    if($(checked_value).is(':checked')){
+        $('.checked_groups').append(htmle + ' ');
+    } else {
+        $('button[value="' + group_value + '"]').remove();
+    };
+};
+
+var check_show_all = function(){
+    var groups_ch = $('.panel-body label input[type="checkbox"]');
+    groups_ch.prop('checked', true);
+
+    groups_ch.each(function( index ) {
+        filtered_groups(this)
+    });
+
+    var selected_groups = $(".checked_groups button").map(function(){
+        return $(this).val()
+    }).get();
+    ajax_query_in(selected_groups)
+
+    $(".panel-title input:checkbox").cbFamily(function (){
+        return $(this).parents("div:first").next().find("input:checkbox");
+    });
+};
+
+$(document).on('page:load ready', function(){
+    check_show_all();
+});
+
 
 $(document).on('page:change', function(){
+
     // this for filter check boxes
     $(".panel-title input:checkbox").cbFamily(function (){
         return $(this).parents("div:first").next().find("input:checkbox");
     });
 
+    //this creates group buttons which shows filtered groups
     $('.panel-body label input[type="checkbox"]').change(function(){
-        var group_value = $(this).closest('.panel-body').find('input[type="checkbox"]').val(),
-            title = $(this).parent().text();
-        if($(this).is(':checked')){
-            var html = '<button value="' + group_value + '" type="button" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>' + title + '</button>';
-            $('.checked_groups').append(html + ' ');
-
-        } else {
-            $('button[value="' + group_value + '"]').remove();
-        };
+        filtered_groups(this)
     });
 
     $('.checked_groups').click(function(){
@@ -24,6 +78,20 @@ $(document).on('page:change', function(){
             $('input[value="' + group_value + '"]').attr('checked',false);
             $('button[value="' + group_value + '"]').remove();
         });
+    });
+
+    $('#remove_all').click(function(){
+        $('.checked_groups button').remove();
+        $(".panel-title input:checkbox").attr('checked',false);
+        $(".panel-body input:checkbox").attr('checked',false);
+        var selected_groups = $(".checked_groups button").map(function(){
+            return $(this).val()
+        }).get();
+        ajax_query_in(selected_groups);
+    });
+
+    $('#select_all').click(function(){
+        check_show_all();
     });
 
 
@@ -50,12 +118,11 @@ $(document).on('page:change', function(){
 
 
 
-
 //this is FullCalendar
 $(document).bind('page:change', function() {
 
     var url = $("#calendar").attr('data-request-url');
-    console.log(url);
+    //console.log(url);
 
 
 
@@ -116,7 +183,7 @@ $(document).bind('page:change', function() {
                 var doDelete = confirm('Вы действительно хотите удалить?');
 
                 if (doDelete) {
-                    var source = '/groups/:group_id/periods/' + calEvent.id;
+                    var source = '/periods/' + calEvent.id;
 
                     $('#calendar').fullCalendar('removeEvents', calEvent._id);
 
@@ -178,12 +245,34 @@ $(document).bind('page:change', function() {
 
             $('#myModal').modal('toggle');
         },
+
         editable: true,
-        eventDrop: function(event, delta, revertFunc) {
+        eventDrop: function(event, delta, revertFunc, view) {
             if (!confirm('Занятие ' + event.title + ' будет перенесено на дату ' +
                     event.start.format() + '.' + ' Сохранить изменения?')) {
                 revertFunc();
             }
+
+            var sourse = '/periods/' + event.id
+            $.ajax({
+                url: sourse,
+                type: "PUT",
+                data: JSON.stringify({
+                    "commence_datetime": event.start.format(),
+                    "title": event.title,
+                    "course_id": event.course_id,
+                    "group_id": event.group_id,
+                    "deadline": event.deadline,
+                    "study_unit_id": event.study_unit_id
+                }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(msg) {
+                    console.log('ajax request completed');
+                }
+
+            });
+
         },
 
         monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
@@ -200,40 +289,7 @@ $(document).bind('page:change', function() {
 
     });
 
-    $('.panel.panel-default').click(function(){
-        var selected_groups = $(".panel-body label input[type=checkbox]:checked").map(function(){
-            return $(this).val()
-        }).get();
-        $.ajax({
-            type: 'GET',
-            url: '/selected_groups/',
-            data: {
-                "group_ids": selected_groups
-            },
-            success: function(data){
-                $('#calendar').fullCalendar('removeEvents');
-                $("#calendar").fullCalendar("addEventSource", data)
-                console.log(data)
-            }
-        });
-    });
-
-    $('.checked_groups').click(function(){
-        var selected_groups = $(".panel-body label input[type=checkbox]:checked").map(function(){
-            return $(this).val()
-        }).get();
-        $.ajax({
-            type: 'GET',
-            url: '/selected_groups/',
-            data: {
-                "group_ids": selected_groups
-            },
-            success: function(data){
-                $('#calendar').fullCalendar('removeEvents');
-                $("#calendar").fullCalendar("addEventSource", data)
-                console.log(data)
-            }
-        });
-    });
+    ajax_query('.panel.panel-default');
+    ajax_query('.checked_groups');
 
 });

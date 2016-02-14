@@ -4,11 +4,6 @@ class PeriodsController < ApplicationController
   # before_action :set_course, only: [:new, :create, :edit, :update]
 
   def index
-    if params[:group_ids]
-      @periods = Period.where(:group_id => params[:group_ids])
-    else
-      @periods = Period.all
-    end
     @period = Period.new
   end
 
