@@ -94,7 +94,7 @@
       <th>Кол-во</th>
       <% @able_periods.each do |period| %>
           <th><%= period.title %> <br>
-            <%= period.commence_datetime %>
+            <%= period.commence_datetime.strftime('%H:%M  %d.%m.%y') %>
           </th>
       <% end %>
       </thead>
@@ -107,7 +107,7 @@
                 <% @attendances.each do |attendance| %>
                     <% if attendance.period == period and attendance.user == student %>
                         <td>
-                          <label class="label">
+                          <label style="display: block">
                             <%= check_box_tag attendance, attendance.id, attendance.attended,
                                               data: {url: check_path(attendance_id: attendance.id),
                                                      remote: true, method: :patch} %>
