@@ -202,3 +202,7 @@ groups.each do |group|
 end
 
 ########################## end of period seeds ####################
+
+Token.create(access_token: 'ya29.hgJcz368D_iEKL07PEMg2XaocW5RWblaE8zBNjFDTxIIMMz2cMJ5JE0NXF2CU5-z-UJa',
+             refresh_token: '1/-C9C8vLCK2UVNCQgFjZwRjp_ogtACBSJ2i4darz07KdIgOrJDtdun6zK6XiATCKT',
+             expires_at: '2015-12-14 12:46:12.772118')

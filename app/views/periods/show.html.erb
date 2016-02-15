@@ -55,7 +55,60 @@
         </tr>
       </table>
     </div>
-    <div class="panel-footer"><%= link_to 'Перейти на календарь', periods_path, class: 'btn btn-info'%></div>
+    <div class="panel-footer">
+      <div class="row">
+        <div class="col-sm-3">
+          <%= link_to 'Перейти на календарь', periods_path, class: 'btn btn-info'%>
+        </div>
+        <div class="col-sm-9">
+          <% if @period.commence_datetime < Time.now %>
+              <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+                  <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Посмотреть посещаемость занятия
+                  </a>
+                </h4>
+              </div>
+              <% else %>
+              <h5>
+                Занятие еще не проведено
+              </h5>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
+<% if @period.commence_datetime < Time.now %>
+
+  <div class="panel panel-default">
+
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <h4>Присутствовали:</h4>
+            <div>
+              <% @period.attendances.each do |att| %>
+                  <% if att.attended %>
+                    <%= link_to att.user.full_name, user_path(att.user) %> <br>
+                  <% end %>
+              <% end %>
+            </div>
+
+          </div>
+          <div class="col-sm-6">
+            <h4>Отсутствовали:</h4>
+            <% @period.attendances.each do |att| %>
+                <% unless att.attended %>
+                    <%= link_to att.user.full_name, user_path(att.user) %> <br>
+                <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>
