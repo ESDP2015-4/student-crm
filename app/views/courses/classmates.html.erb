@@ -1,0 +1,19 @@
+<h3>Мои однокурсники</h3>
+
+<table class="table table-condensed">
+  <tr>
+    <th>Имя</th>
+    <th>Эл. почта</th>
+    <th>Тел.</th>
+    <th>Skype</th>
+  </tr>
+
+  <% @classmates.each do |user| %>
+      <tr>
+        <td><%= user.full_name%></td>
+        <td><%= user.email %></td>
+        <td><%= user.phone1 %></td>
+        <td><%= user.skype %></td>
+      </tr>
+  <% end %>
+</table>
