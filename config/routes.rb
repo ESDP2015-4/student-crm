@@ -27,14 +27,19 @@ Rails.application.routes.draw do
 
   resources :courses do
     resources :course_elements
-    # resources :periods
+    get 'classmates' => 'courses#classmates', as: 'classmates'
+    resources :groups do
+
+      get 'periods/calendar_group/:group_id' => 'periods#calendar_group', as: 'periods_calendar_group'
+
+      resources :group_memberships
+
+      resources :attendances, only: :index
+    end
   end
 
-  resources :groups do
-    #resources :periods
-    get 'periods/calendar_group/:group_id' => 'periods#calendar_group', as: 'periods_calendar_group'
-    resources :group_memberships
-  end
+  get '/change_tab/:group_id/:group_tab_id' => 'groups#change_tab', as: 'change_group_tab'
+
 
   resources :periods
   get 'selected_groups' => 'periods#selected_groups', as: 'selected_groups'
