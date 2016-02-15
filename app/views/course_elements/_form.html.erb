@@ -1,4 +1,4 @@
-<% if current_user.has_any_role? :admin, :manager %>
+<% if admin? or teacher? or manager? %>
     <%= simple_form_for([@course, @course_element], html: {class: 'form-horizontal'},
                         wrapper: :horizontal_form,
                         wrapper_mappings: {
