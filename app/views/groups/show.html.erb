@@ -1,34 +1,34 @@
-<ol class="breadcrumb">
-  <li><a href="/groups/">Группы</a></li>
-  <li class="active">Просмотр группы</li>
-</ol>
+<!--<ol class="breadcrumb">-->
+<!--<li><a href="/groups/">Группы</a></li>-->
+<!--<li class="active">Просмотр группы</li>-->
+<!--</ol>-->
 
 <h1>Группа <%= @group.name %></h1>
-<%= link_to 'Редактировать', edit_group_path, class: 'btn btn-default' %>
-<%= link_to 'Добавить студентов', new_group_group_membership_path(@group.id), class: 'btn btn-primary' %>
-<%= link_to 'Календарь занятий', group_periods_calendar_group_path(@group), class: 'btn btn-default' %>
+<%= link_to 'Редактировать', edit_course_group_path, class: 'btn btn-default' %>
+<%= link_to 'Добавить студентов', new_course_group_group_membership_path(params[:course_id], @group.id), class: 'btn btn-primary' %>
+<%= link_to 'Календарь занятий', course_group_periods_calendar_group_path(params[:course_id], @group), class: 'btn btn-default' %>
 
 <h3>Курс: <%= @group.course.name %></h3>
-<br/>
-<h4>Студенты группы:</h4>
 
-<table class="table table-hover">
-  <thead>
-  <tr>
-    <th>Студент</th>
-    <th>Email</th>
-    <th>Действия</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% if @students %>
-      <% @students.each do |student| %>
-          <tr>
-            <td><%= link_to student.full_name, user_path(student) %></td>
-            <td><%= student.email %></td>
-            <td></td>
-          </tr>
-      <% end %>
-  <% end %>
-  </tbody>
-</table>
+<hr>
+
+<ul class="nav nav-tabs" id="group_tabs_list">
+  <li role="presentation" class="active" id="group_students_tab">
+    <%= link_to 'Студенты', change_group_tab_path(@group.id, 'group_students_tab'), remote: true %>   
+  </li>
+  <li role="presentation" class id="group_periods_tab">
+    <%= link_to 'Занятия', change_group_tab_path(@group.id, 'group_periods_tab'), remote: true %>   
+  </li>
+  <li role="presentation" id="group_attendances_tab">
+    <%= link_to 'Посещения', change_group_tab_path(@group.id, 'group_attendances_tab'), remote: true %>   
+  </li>
+  <li role="presentation" id="group_homeworks_tab">
+    <%= link_to 'Домашние задания', change_group_tab_path(@group.id, 'group_homeworks_tab'), remote: true %>   
+  </li>
+</ul>
+
+<div class="tab-content">
+  <div id="group_tab_content" class="tab-pane fade in active">
+    <%= render 'groups/students_list' %>
+  </div>
+</div>
