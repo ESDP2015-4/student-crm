@@ -266,34 +266,7 @@ $(document).bind('page:change', function() {
             $('#myModal').modal('toggle');
         },
 
-        editable: true,
-        eventDrop: function(event, delta, revertFunc, view) {
-            if (!confirm('Занятие ' + event.title + ' будет перенесено на дату ' +
-                    event.start.format() + '.' + ' Сохранить изменения?')) {
-                revertFunc();
-            }
 
-            var sourse = '/periods/' + event.id
-            $.ajax({
-                url: sourse,
-                type: "PUT",
-                data: JSON.stringify({
-                    "commence_datetime": event.start.format(),
-                    "title": event.title,
-                    "course_id": event.course_id,
-                    "group_id": event.group_id,
-                    "deadline": event.deadline,
-                    "study_unit_id": event.study_unit_id
-                }),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function(msg) {
-                    console.log('ajax request completed');
-                }
-
-            });
-
-        },
 
         monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
         monthNamesShort: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
