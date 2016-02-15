@@ -12,8 +12,18 @@ class AttendancesController < ApplicationController
     end
     #--------------------------
     @periods = periods_filter
-    @attendances = Attendance.where(period_id: @periods.ids)
-    @able_periods = @periods.where('commence_datetime < ?', Time.zone.now )
+    #--------------------------------
+    if params[:group_ids]
+      @attendances = Attendance.where(period_id: @periods.ids)
+    else
+      @attendances = []
+    end
+    #---------------------------------------
+    if params[:group_ids]
+      @able_periods = @periods.where('commence_datetime < ?', Time.zone.now)
+    else
+      @able_periods = []
+    end
   end
 
 
@@ -21,7 +31,7 @@ class AttendancesController < ApplicationController
     if params[:group_ids]
       @periods = Period.where(:group_id => params[:group_ids])
     else
-      @periods = Period.all
+      @periods = []
     end
   end
 
