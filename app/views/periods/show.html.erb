@@ -1,35 +1,61 @@
-<h3>Все занятия группы</h3>
-
-<table>
-  <tr>
-    <td>
-      <%= link_to 'Все периоды', periods_path(@period), class: 'btn btn-info'%>
-    </td>
-  </tr>
-</table>
-
-<br />
-
-<table class="table table-striped">
-  <tr>
-    <th>Группа</th>
-    <th>Тема занятий</th>
-    <th>Занятие</th>
-    <th>Дата</th>
-    <th>Действия</th>
-  </tr>
 
 
-  <% @periods.each do |period| %>
-      <tr>
-        <td><%= period.group.name %></td>
-        <td><%= link_to period.course_element.theme, period_path(course_id: period.course.id, id: period.id) %></td>
-        <td><%= period.course_element.element_type %></td>
-        <td><%= period.commence_datetime %></td>
-        <td>
-          <%= link_to 'Edit', edit_period_path(course_id: period.course.id, id: period.id), class: 'btn btn-warning'  %>
-        </td>
-      </tr>
-  <% end %>
 
-</table>
+<div class="row">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <b>
+          <%= @period.title %>
+        </b>
+
+        <%= link_to '', edit_period_path(@period), class: 'glyphicon glyphicon-pencil' %>
+        <%= link_to '', period_path(@period), class: 'glyphicon glyphicon-trash',
+                    method: :delete,
+                    data: {confirm: 'Действительно хотите удалить?'}
+        %>
+      </h4>
+    </div>
+    <div class="panel-body">
+      <table class="table">
+        <tr>
+          <td>Преподаватели:</td>
+          <td>
+            <% @period.group.teachers.each do |teacher| %>
+                <%= link_to teacher.full_name, user_path(teacher.id) %> <br>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td>Начало:</td>
+          <td><b><%= @period.commence_datetime.strftime("%d/%m/%Y %I:%M %p") %> </b></td>
+        </tr>
+        <tr>
+          <td>Группа:</td>
+          <td><%= link_to @period.group.name, group_path(@period.group) %></td>
+        </tr>
+        <tr>
+          <td>Курс:</td>
+          <td><%= link_to @period.course.name, course_path(@period.course) %></td>
+        </tr>
+        <tr>
+          <td>Тема элемента курса</td>
+          <td><%= link_to @period.course_element.theme,
+                          course_course_element_path(@period.course,
+                                                     @period.course_element) %>
+          </td>
+        </tr>
+        <tr>
+          <td>Раздаточные материалы:</td>
+          <td><% @period.course_element.readings.each do |reading| %>
+                <%= image_tag reading.icon_link %><%= link_to reading.title, reading.alternate_link, :target => "_blank" %>
+            <% end %></td>
+
+          <td></td>
+        </tr>
+      </table>
+    </div>
+    <div class="panel-footer"><%= link_to 'Перейти на календарь', periods_path, class: 'btn btn-info'%></div>
+  </div>
+</div>
+

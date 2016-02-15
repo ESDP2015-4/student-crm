@@ -18,4 +18,7 @@ class Period < ActiveRecord::Base
       Attendance.create!(user_id: student.id, period_id: self.id)
     end
   end
+
+  scope :progress, -> { order 'commence_datetime ASC' }
+  scope :reversed, -> { order 'commence_datetime DESC' }
 end

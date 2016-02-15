@@ -38,6 +38,7 @@ Rails.application.routes.draw do
 
   resources :periods
   get 'selected_groups' => 'periods#selected_groups', as: 'selected_groups'
+  get 'schedule_table' => 'periods#schedule_table', as: 'schedule_table'
 
   get 'about' => 'main#about'
   get 'contact' => 'main#contact'

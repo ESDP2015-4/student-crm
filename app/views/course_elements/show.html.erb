@@ -25,19 +25,3 @@
 
 <%= link_to 'Добавить раздаточный материал', course_elements_new_readings_path(@course_element), class: 'btn btn-success'  %>
 
-<h4> Таблицу ниже не удалять!!!! Пока идет разработка календаря занятий, это таблица нужна, чтобы визуально убедиться, что календарь показывает правильные события. Мне так удобно!</h4>
-
-<h2 class="btn btn-default btn-sm">Группы, к которым это занятие назначена</h2>
-
-<table class="table">
-  <tr>
-    <th>Группа</th>
-    <th>Время занятий</th>
-  </tr>
-  <% @course_element.periods do |period|  %>
-  <tr>
-    <td><%= period.group.name %></td>
-    <td><%= period.commence_datetime.to_date %> - <%= period.commence_datetime.to_s(:time) %></td>
-  </tr>
-  <% end %>
-</table>

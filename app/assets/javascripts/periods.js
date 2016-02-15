@@ -1,17 +1,36 @@
 
+
 var ajax_query_in = function(selected_groups){
-    $.ajax({
-        type: 'GET',
-        url: '/selected_groups/',
-        data: {
-            "group_ids": selected_groups
-        },
-        success: function(data){
-            $('#calendar').fullCalendar('removeEvents');
-            $("#calendar").fullCalendar("addEventSource", data)
-            console.log(data)
-        }
-    });
+    if (window.location.pathname == '/periods'){
+       var url_source = ('/selected_groups/')
+        $.ajax({
+            type: 'GET',
+            url: url_source,
+            data: {
+                "group_ids": selected_groups
+            },
+            success: function(data){
+                $('#calendar').fullCalendar('removeEvents');
+                $("#calendar").fullCalendar("addEventSource", data)
+                //console.log(data)
+            }
+        });
+    }
+    if (window.location.pathname == '/schedule_table'){
+        $.ajax({
+            type: 'GET',
+            url: '/schedule_table',
+            data: {
+                "group_ids": selected_groups
+            },
+            dataType: 'script',
+            success: function(result){
+
+                //console.log(data)
+            }
+        });
+    }
+
 };
 
 var ajax_query = function(html_clicked){
@@ -153,16 +172,17 @@ $(document).bind('page:change', function() {
             }else{
                 var time = hours+':'+minutes;
             }
-            var content = '<a href="'+'/courses/'+event.course_id+'/course_elements/'+event.course_element_id+'">'+
+            var content = '<a href="'+'/courses/'+event.course_id+
+                '/course_elements/'+event.course_element_id+'">'+
                 event.theme + '</a>' +
                 '<br> Тип занятия: ' +
                 event.element_type ;
 
-            console.log(event);
+            //console.log(event);
             element.html(time +
                 '<span class="removeEvent glyphicon glyphicon-trash pull-right"  data-action="delete"></span>'+
                 '<br>'+' '+event.name +'<br>' +
-                ' '+event.title
+                ' '+event.title + '<br>' + 'Уч. блок - ' + event.study_unit_id
             );
 
             element.popover({

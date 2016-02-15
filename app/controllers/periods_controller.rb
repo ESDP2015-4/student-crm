@@ -49,10 +49,14 @@ class PeriodsController < ApplicationController
     @periods = Period.where(:group_id => params[:group_ids])
   end
 
-  # def calendar_group
-  #   @group = Group.find(params[:group_id])
-  #   @periods = Period.where(group_id: @group.id)
-  # end
+  def calendar_group
+    @group = Group.find(params[:group_id])
+    @periods = Period.where(group_id: @group.id)
+  end
+
+  def schedule_table
+      @periods = Period.where(:group_id => params[:group_ids])
+  end
 
   private
 

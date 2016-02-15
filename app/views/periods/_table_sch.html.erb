@@ -1,0 +1,17 @@
+<tr>
+  <td><%= period.commence_datetime.strftime("%d/%m/%Y %I:%M %p") %></td>
+  <td><%= link_to period.group.name, group_path(period.group) %></td>
+  <td><%= link_to period.title, period_path(period) %></td>
+  <td><%= period.study_unit.title if period.study_unit %></td>
+  <td><%= link_to period.course_element.theme,
+                  course_course_element_path(period.course,
+                                             period.course_element) %>
+  </td>
+  <td>
+    <% period.course_element.readings.each do |reading| %>
+        <%= image_tag reading.icon_link %>
+        <%= link_to reading.title, reading.alternate_link, :target => "_blank" %>,
+    <% end %>
+  </td>
+
+</tr>

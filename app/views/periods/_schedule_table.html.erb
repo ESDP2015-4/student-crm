@@ -1,0 +1,47 @@
+<div id="content">
+  <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+    <li class="active"><a href="#red" data-toggle="tab">Запланированные</a></li>
+    <li><a href="#orange" data-toggle="tab">Прошедшие</a></li>
+    <li><%= link_to 'Перейти на календарь', periods_path, class: 'btn btn-default'%></a></li>
+  </ul>
+  <div id="my-tab-content" class="tab-content">
+
+    <div class="tab-pane active" id="red">
+      <table class="table">
+        <tr>
+          <th>Дата проведения</th>
+          <th>Группа</th>
+          <th>Занятие</th>
+          <th>Учебный блок</th>
+          <th>Тема</th>
+          <th>Раздаточные материалы</th>
+        </tr>
+        <% @periods.progress.each do |period| %>
+            <% if period.commence_datetime > Time.now %>
+                <%= render 'table_sch', period: period %>
+            <% end %>
+        <% end %>
+      </table>
+    </div>
+
+    <div class="tab-pane" id="orange">
+      <table class="table">
+        <tr>
+          <th>Дата проведения</th>
+          <th>Группа</th>
+          <th>Занятие</th>
+          <th>Учебный блок</th>
+          <th>Тема</th>
+          <th>Раздаточные материалы</th>
+        </tr>
+        <% @periods.reversed.each do |period| %>
+            <% if period.commence_datetime < Time.now %>
+                <%= render 'table_sch', period: period %>
+            <% end %>
+        <% end %>
+
+      </table>
+    </div>
+
+  </div>
+</div>
