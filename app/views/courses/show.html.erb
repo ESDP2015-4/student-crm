@@ -6,48 +6,89 @@
 
 <h4>Курс: <%= @course.name %></h4>
 
-<span>У курса есть группы:</span>
-<% @course.groups.each do |group| %>
-    <%= link_to group.name, group_path(group), class: 'btn btn-default btn-xs' %>
-<% end %>
-
-<hr>
 <% if admin? or manager? or teacher? %>
-  <%= link_to 'Добавить занятие', new_course_course_element_path(@course.id), class: 'btn btn-primary' %>
-<% end %>
-
-<h3>Занятия</h3>
-
-<table class="table table-striped">
-  <tr>
-    <th>Тип урока</th>
-    <th>Тема</th>
-    <% if admin? or manager? or teacher? %>
-    <th>Действия</th>
+    <span>У курса есть группы:</span>
+    <% @course.groups.each do |group| %>
+        <%= link_to group.name, course_group_path(@course, group), class: 'btn btn-default btn-xs' %>
     <% end %>
-  </tr>
 
-  <% @course_elements.each do |course_element| %>
+    <hr>
+    <%= link_to 'Добавить занятие', new_course_course_element_path(@course.id), class: 'btn btn-primary' %>
 
+    <h3>Занятия</h3>
+
+    <table class="table table-striped">
       <tr>
-        <td><%= course_element.element_type %></td>
-        <td><%= link_to course_element.theme, course_course_element_path(@course, course_element) %></td>
+        <th>Тип урока</th>
+        <th>Тема</th>
         <% if admin? or manager? or teacher? %>
-        <td>
-          <%= link_to 'Редактировать', edit_course_course_element_path(@course, course_element), class: 'btn btn-info btn-xs' %>
-          <%= link_to 'Удалить', course_course_element_path(@course, course_element),
-                      method: :delete,
-                      data: {confirm: 'Are you sure to remove this reading?'},
-                      class: 'btn btn-danger btn-xs'
-          %>
-        </td>
+            <th>Действия</th>
         <% end %>
       </tr>
-  <% end %>
-</table>
 
+      <% @course_elements.each do |course_element| %>
 
+          <tr>
+            <td><%= course_element.element_type %></td>
+            <td><%= link_to course_element.theme, course_course_element_path(@course, course_element) %></td>
+            <% if admin? or manager? or teacher? %>
+                <td>
+                  <%= link_to 'Редактировать', edit_course_course_element_path(@course, course_element), class: 'btn btn-info btn-xs' %>
+                  <%= link_to 'Удалить', course_course_element_path(@course, course_element),
+                              method: :delete,
+                              data: {confirm: 'Are you sure to remove this reading?'},
+                              class: 'btn btn-danger btn-xs'
+                  %>
+                </td>
+            <% end %>
+          </tr>
+      <% end %>
+    </table>
+<% end %>
 
+<% if student? %>
+    <hr>
+    <% StudyUnit.find_each do |su| %>
+        <h4><%= su.title %> учебный блок</h4>
+        <table class="table table-hover table-condensed">
+          <thead>
+          <th>Занятие</th>
+          <th>Тема</th>
+          <th>Дата и время</th>
+          <th>Дата сдачи</th>
+          <th>Оценка ДЗ</th>
+          </thead>
+          <tbody>
+          <% @periods.where(study_unit: su).each do |period| %>
+              <tr>
+                <td><%= period.title %></td>
+                <td><%= link_to period.course_element.theme, course_course_element_path(@course, period.course_element) %></td>
+                <td><%= period.commence_datetime.strftime('%y.%m.%d %H:%M') %></td>
+                <td>
+                  <% if period.deadline.nil? %>
+                      <p>Нет задания</p>
+                  <% else %>
+                      <%= period.deadline.strftime('%y.%m.%d %H:%M') %>
+                  <% end %>
+                </td>
+                <td>
 
+                  <% if period.deadline.nil? %>
+                      <p>---</p>
+                  <% else %>
+                      <% if Homework.where(period: period, user: current_user).first.nil? %>
+                          <p>Не сдано</p>
+                      <% else %>
+                          <%= Homework.where(period: period, user: current_user).first.grade %>
+                      <% end %>
+                  <% end %>
 
+                </td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+        <hr>
+    <% end %>
+<% end %>
 
