@@ -1,5 +1,5 @@
 <% if admin? or manager? %>
-    <%= simple_form_for @group do |f| %>
+    <%= simple_form_for ([@course, @group]) do |f| %>
 
         <% if @group.errors.any? %>
             <div class="errors">
@@ -11,16 +11,15 @@
               </ul>
             </div>
         <% end %>
-        <br/>
+        <div>
+          Курс: <%= @course.name %>
+          <%= f.hidden_field :course_id, value: @course.id %>
+        </div>
         <div>
           <%= f.input :name, label: 'Название группы', class: 'form-control',
                       placeholder: 'Введите название группы', input_html: {style: 'width:300px;'} %>
         </div>
-        <div>
-          <%= f.input :course_id, label: 'Курс',
-                      collection: Course.all,
-                      input_html: {style: 'width:300px'}, class: 'form-control' %>
-        </div>
+
         <hr>
         <div>
           <%= f.button :submit, 'Сохранить группу', class: 'btn btn-success' %>

@@ -2,7 +2,7 @@
 
 <% @students = @users.all_students_except(@group.student_ids) %>
 
-<%= simple_form_for([@group, @gm]) do |f| %>
+<%= simple_form_for([@course, @group, @gm]) do |f| %>
 
 
     <%= f.button :submit, 'Добавить студентов' %>
