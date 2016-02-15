@@ -1,0 +1,29 @@
+<h1>Attendances#index</h1>
+<p>Find me in app/views/attendances/index.html.erb</p>
+<h2><%= @group.name unless @group.nil? %></h2>
+<table class="table table-bordered table-hover">
+  <thead>
+  <th>Students</th>
+  <th>Count</th>
+  <% @periods.each do |period| %>
+      <th><%= period.commence_datetime.strftime('%c') %></th>
+  <% end %>
+  </thead>
+  <tbody>
+  <% @students.each do |student| %>
+      <tr>
+        <td><%= student.full_name %></td>
+        <td><%= student.attendances.where(attended: true).count %></td>
+        <% @periods.each do |period| %>
+            <% @attendances.each do |a| %>
+                <% if a.period == period and a.user == student %>
+                    <td>
+                      <%= check_box_tag a, a.id, a.attended, data: {url: check_path(attendance_id: a.id), remote: true, method: :patch} %>
+                    </td>
+                <% end %>
+            <% end %>
+        <% end %>
+      </tr>
+  <% end %>
+  </tbody>
+</table>>

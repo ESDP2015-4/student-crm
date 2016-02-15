@@ -1,0 +1,22 @@
+<h4>Студенты группы:</h4>
+
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>Студент</th>
+    <th>Email</th>
+    <th>Действия</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% if @students %>
+      <% @students.each do |student| %>
+          <tr>
+            <td><%= link_to student.full_name, user_path(student) %></td>
+            <td><%= student.email %></td>
+            <td></td>
+          </tr>
+      <% end %>
+  <% end %>
+  </tbody>
+</table>
