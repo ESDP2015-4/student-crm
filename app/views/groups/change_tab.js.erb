@@ -1,0 +1,6 @@
+console.log('changed');
+$('#group_tabs_list a').click(function (e) {
+  $('ul.nav-tabs li.active').removeClass('active');
+  $(this).parent('li').addClass('active');
+});
+$('#group_tab_content').html("<%= j render @partial %>");
