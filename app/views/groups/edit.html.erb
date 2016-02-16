@@ -1,9 +1,12 @@
 <ol class="breadcrumb">
   <li><a href="/groups/">Группы</a></li>
-  <li> <%= link_to 'Просмотр группы', group_path(@group) %></li>
+  <li> <%= link_to 'Просмотр группы', course_group_path(@course,@group) %></li>
   <li class="active">Редактирование группы</li>
 </ol>
 
 <h3>Редактирование группы</h3>
 
-<%= render 'form' %>
+<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+  <%= render 'form' %>
+</div>
+
