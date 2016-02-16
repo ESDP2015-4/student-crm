@@ -73,7 +73,7 @@ Before do
   )
   manager.add_role 'manager'
 
-  student = User.create!(name: 'Петр',
+  student1 = User.create!(name: 'Петр',
                          surname: 'Петров',
                          gender: 'Мужчина',
                          birthdate: '01.01.1990',
@@ -85,8 +85,23 @@ Before do
                          password: 'password',
                          password_confirmation: 'password'
   )
-  student.add_role 'student'
+  student1.add_role 'student'
+  student2 = User.create!(name: 'Виталий',
+                          surname: 'Дятлов',
+                          gender: 'Мужчина',
+                          birthdate: '01.01.1990',
+                          phone1: '+996772111111',
+                          phone2: '+996772222222',
+                          skype: 'skype.lol',
+                          passportdetails:'50-01',
+                          email: 'vitaliy@gmail.com',
+                          password: 'password',
+                          password_confirmation: 'password'
+  )
+  student2.add_role 'student'
 
   Course.create!(name: 'Test course')
+  Course.create!(name: 'Second course')
   CourseElement.create!(course_id: 1, theme: 'Test Control Work', element_type: 'Контрольная работа')
+  Group.create!(course_id: 1, name: 'Test group')
 end
