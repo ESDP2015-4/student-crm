@@ -53,7 +53,7 @@ class Ability
     elsif user.is_student?
       #Может управлять своим профилем
       can [:show, :update ], User, :id => user.id
-      can :manage, Homework
+      can :manage, Homework, :user_id => user.id
 
       # Может просматривать только свои курсы
       can [:read, :classmates], Course, :id => user.student_courses.ids

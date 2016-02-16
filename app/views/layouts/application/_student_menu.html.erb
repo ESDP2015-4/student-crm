@@ -8,7 +8,7 @@
               <span>&nbsp;Курсы</span>
           <% end %>
         </li>
-    <% elsif current_controller?('homeworks') %>
+    <% elsif current_controller?('homeworks') and current_action?('new') or current_action?('edit') %>
         <li>
           <%= link_to :back do %>
               <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
