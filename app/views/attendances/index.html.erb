@@ -69,15 +69,12 @@
                     <div class="panel panel-default">
                       <div class="panel-heading" role="tab" id="headingTwo">
                         <h4 class="panel-title">
-                          <%= check_box_tag study_unit.id %><%= study_unit.title %>
+                          <%= link_to study_unit.title %>
                         </h4>
                       </div>
                     </div>
                 <% end %>
               </div>
-            </li>
-            <li style="text-align:center">
-              <%= submit_tag 'Найти', class: 'btn btn-info' %>
             </li>
         <% end %>
       </ul>
