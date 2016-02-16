@@ -31,6 +31,9 @@ class CoursesController < ApplicationController
   def show
     @course = Course.find(params[:id])
     @course_elements = CourseElement.where(course: @course)
+    if student?
+       @periods = current_user.periods.where(group_id: @course.groups.ids)
+    end
   end
 
   def edit
@@ -52,6 +55,11 @@ class CoursesController < ApplicationController
     @course.destroy
 
     redirect_to courses_path
+  end
+
+  def classmates
+    @course = Course.find(params[:course_id])
+    @classmates = Course.find(params[:course_id]).groups.collect(&:students).flatten.uniq
   end
 
   private
