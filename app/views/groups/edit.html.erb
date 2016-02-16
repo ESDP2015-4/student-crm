@@ -6,32 +6,4 @@
 
 <h3>Редактирование группы</h3>
 
-<% if current_user.has_any_role? :admin, :manager %>
-    <%= simple_form_for @group do |f| %>
-
-        <% if @group.errors.any? %>
-            <div class="errors">
-              Total errors: <%= @group.errors.count %>
-              <ul>
-                <% @group.errors.full_messages.each do |message| %>
-                    <li><%= message %></li>
-                <% end %>
-              </ul>
-            </div>
-        <% end %>
-
-        <div>
-          <%= f.label 'Название группы' %><br/>
-          <%= f.text_field :name, class: 'form-control' %>
-        </div>
-        <br/>
-        <div>
-          <%= f.label 'Курс' %>
-          <%= f.collection_select :course_id, Course.all, :id, :name, class: 'form-control' %>
-        </div>
-        <hr>
-        <div>
-          <%= f.submit class: 'btn btn-primary btn-lg' %>
-        </div>
-    <% end %>
-<% end %>
+<%= render 'form' %>
