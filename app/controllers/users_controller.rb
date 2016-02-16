@@ -70,7 +70,10 @@ class UsersController < ApplicationController
                                  :passportdetails,
                                  :email,
                                  :image,
-                                 {:role_ids => []})
+                                 {:role_ids => []},
+                                 {:student_group_ids => []},
+                                 {:teacher_group_ids => []},
+                                 {:techsupport_group_ids => []})
   end
 
   def sort_column

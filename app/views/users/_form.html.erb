@@ -2,10 +2,10 @@
     <%= simple_form_for(@user, html: {class: 'form-horizontal'},
                         wrapper: :horizontal_form,
                         wrapper_mappings: {
-                                check_boxes: :horizontal_radio_and_checkboxes,
-                                radio_buttons: :horizontal_radio_and_checkboxes,
-                                file: :horizontal_file_input,
-                                boolean: :horizontal_boolean
+                            check_boxes: :horizontal_radio_and_checkboxes,
+                            radio_buttons: :horizontal_radio_and_checkboxes,
+                            file: :horizontal_file_input,
+                            boolean: :horizontal_boolean
                         }) do |f| %>
 
         <div class="row">
@@ -44,6 +44,22 @@
             <%= f.input :skype, label: 'Skype', placeholder: 'Skype',
                         input_html: {style: 'width:200px;'} %>
             <%= f.association :roles, label: 'Роли', as: :check_boxes %>
+            <% if @user.is_student? %>
+                Student groups:
+                <hr>
+                <%= f.association :student_groups, label: 'Groups', as: :check_boxes %>
+            <% end %>
+            <% if @user.is_teacher? %>
+                Teacher groups:
+                <hr>
+                <%= f.association :teacher_groups, label: 'Groups', as: :check_boxes %>
+            <% end %>
+            <% if @user.is_techsupport? %>
+                Techsupport groups:
+                <hr>
+                <%= f.association :techsupport_groups, label: 'Groups', as: :check_boxes %>
+            <% end %>
+
           </div>
         </div>
         <hr>
@@ -59,10 +75,10 @@
     <%= simple_form_for(@user, html: {class: 'form-horizontal'},
                         wrapper: :horizontal_form,
                         wrapper_mappings: {
-                                check_boxes: :horizontal_radio_and_checkboxes,
-                                radio_buttons: :horizontal_radio_and_checkboxes,
-                                file: :horizontal_file_input,
-                                boolean: :horizontal_boolean
+                            check_boxes: :horizontal_radio_and_checkboxes,
+                            radio_buttons: :horizontal_radio_and_checkboxes,
+                            file: :horizontal_file_input,
+                            boolean: :horizontal_boolean
                         }) do |f| %>
 
         <div class="row">
