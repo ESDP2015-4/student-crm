@@ -5,8 +5,7 @@
 
 <h1>Группа <%= @group.name %></h1>
 <%= link_to 'Редактировать', edit_course_group_path, class: 'btn btn-default' %>
-<%= link_to 'Добавить студентов', new_course_group_group_membership_path(params[:course_id], @group.id), class: 'btn btn-primary' %>
-<%= link_to 'Календарь занятий', course_group_periods_calendar_group_path(params[:course_id], @group), class: 'btn btn-default' %>
+<%= link_to 'Добавить студентов', new_course_group_group_membership_path(params[:course_id], @group.id), class: 'btn btn-default' %>
 
 <h3>Курс: <%= @group.course.name %></h3>
 
