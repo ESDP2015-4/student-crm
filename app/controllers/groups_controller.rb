@@ -1,6 +1,7 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
+  helper_method :has_periods?
 
   def index
     @course = Course.find(params[:course_id])
@@ -81,8 +82,10 @@ class GroupsController < ApplicationController
     respond_to do |format|
       format.js { @partial }
     end
+  end
 
-
+  def has_periods?(su)
+    Group.find(params[:group_id]).periods.exists?(study_unit: su)
   end
 
   private
