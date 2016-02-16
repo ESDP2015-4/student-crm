@@ -1,6 +1,3 @@
-<h1>Attendances#index</h1>
-<p>Find me in app/views/attendances/index.html.erb</p>
-<h2><%= @group.name unless @group.nil? %></h2>
 <table class="table table-bordered table-hover">
   <thead>
   <th>Students</th>
@@ -17,8 +14,10 @@
         <% @periods.each do |period| %>
             <% @attendances.each do |a| %>
                 <% if a.period == period and a.user == student %>
-                    <td>
-                      <%= check_box_tag a, a.id, a.attended, data: {url: check_path(attendance_id: a.id), remote: true, method: :patch} %>
+                    <td class="group-attendance-td">
+                      <label class="group-attendance-lbl">
+                        <%= check_box_tag a, a.id, a.attended, data: {url: check_path(attendance_id: a.id), remote: true, method: :patch} %>
+                      </label>
                     </td>
                 <% end %>
             <% end %>
@@ -26,4 +25,4 @@
       </tr>
   <% end %>
   </tbody>
-</table>>
+</table>
