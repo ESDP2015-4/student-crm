@@ -1,5 +1,5 @@
 <h3>Список всех групп</h3>
-<%= link_to 'Добавить новую группу', new_group_path, class: 'btn btn-primary' %>
+<%= link_to 'Добавить новую группу', new_course_group_path(@course), class: 'btn btn-primary' %>
 <br/>
 <br/>
 
@@ -13,13 +13,13 @@
 
   <% @groups.each do |group| %>
       <tr>
-        <td><%= link_to group.name, group_path(group) %></td>
+        <td><%= link_to group.name, course_group_path(@course, group) %></td>
         <td><%= link_to group.course.name, course_path(group.course_id) %></td>
         <td><%= group.students.count %></td>
         <td>
-          <%= link_to 'Добавить студентов', new_group_group_membership_path(group), class: 'btn btn-primary' %>
-          <%= link_to 'Просмотр', group_path(group), class: 'btn btn-info' %>
-          <%= link_to 'Редактировать', edit_group_path(group), class: 'btn btn-warning' %>
+          <%= link_to 'Добавить студентов', new_course_group_group_membership_path(@course, group), class: 'btn btn-primary' %>
+          <%= link_to 'Просмотр', course_group_path(@course, group), class: 'btn btn-info' %>
+          <%= link_to 'Редактировать', edit_course_group_path(@course, group), class: 'btn btn-warning' %>
         </td>
       </tr>
   <% end %>
