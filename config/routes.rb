@@ -32,7 +32,7 @@ Rails.application.routes.draw do
 
       get 'periods/calendar_group/:group_id' => 'periods#calendar_group', as: 'periods_calendar_group'
 
-      resources :group_memberships
+      resources :group_memberships, only: [:new, :create]
 
       resources :attendances, only: :index
     end
