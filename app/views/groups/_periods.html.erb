@@ -1,3 +1,46 @@
-<h1>Periods</h1>
 
-<%= @periods.count %>
+<div class="panel-group">
+  <% StudyUnit.find_each do |su| %>
+      <% if has_periods?(su)%>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" href="#collapse<%= su.id %>"><%= su.title %> учебный блок</a>
+          </h4>
+        </div>
+        <div id="collapse<%= su.id %>" class="panel-collapse collapse">
+          <div class="panel-body">
+            <table class="table">
+              <thead>
+                <th>Дата проведения</th>
+                <th>Занятие</th>
+                <th>Тема</th>
+                <th>Раздаточные материалы</th>
+              </thead>
+              <tbody>
+              <% @periods.progress.where(study_unit: su).each do |period| %>
+                  <tr>
+                    <td><%= period.commence_datetime.strftime("%d/%m/%Y %I:%M %p") %></td>
+                    <td><%= link_to period.title, period_path(period) %></td>
+                    <td><%= link_to period.course_element.theme,
+                                    course_course_element_path(period.course,
+                                                               period.course_element) %>
+                    </td>
+                    <td>
+                      <% period.course_element.readings.each do |reading| %>
+                          <%= image_tag reading.icon_link %>
+                          <%= link_to reading.title, reading.alternate_link, :target => "_blank" %>,
+                      <% end %>
+                    </td>
+
+                  </tr>
+              <% end %>
+              </tbody>
+
+            </table>
+          </div>
+        </div>
+      </div>
+      <% end %>
+  <% end %>
+</div>
