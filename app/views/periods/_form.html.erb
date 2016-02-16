@@ -29,7 +29,10 @@
 
         <%= f.input :study_unit_id,
                     label: 'Учебный блок',
-                    collection: StudyUnit.all %>
+                    collection: StudyUnit.all,
+                    label_method: :title,
+                    value_method: :id,
+                    include_blank: true%>
 
         <div style="padding-left: 30px;">
           <%= f.input :commence_datetime,

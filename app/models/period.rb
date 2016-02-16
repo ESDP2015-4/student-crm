@@ -10,6 +10,7 @@ class Period < ActiveRecord::Base
   validates :course_id, presence: true
   validates :group_id, presence: true
   validates :title, presence: true, length: {minimum: 5}
+  validates :study_unit_id, presence: true
 
   after_save :create_attendances
   # Если сохранили новое занятие, то необходимо создать для этого занятие посещаемость для студентов:

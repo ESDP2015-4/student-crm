@@ -71,7 +71,8 @@ class PeriodsController < ApplicationController
                                    :course_id,
                                    :commence_datetime,
                                    :title,
-                                   :deadline
+                                   :deadline,
+                                   :study_unit_id
     )
   end
 
