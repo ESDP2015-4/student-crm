@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   include ApplicationHelper
-  helper_method :current_controller?
+  helper_method :current_controller?, :current_action?
 
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
@@ -46,6 +46,10 @@ class ApplicationController < ActionController::Base
   # Используем для проверки во вьшках
   def current_controller?(names)
     names.include?(params[:controller]) unless params[:controller].blank? || false
+  end
+
+  def current_action?(names)
+    names.include?(params[:action]) unless params[:action].blank? || false
   end
 
 end
