@@ -1,27 +1,46 @@
 <!-- Sidebar -->
 <div id="sidebar-wrapper">
   <ul class="sidebar-nav">
-
-    <li>
-      <%= link_to courses_path do %>
-          <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-          <span>&nbsp;Курсы</span>
-      <% end %>
-    </li>
-
-    <li>
-      <%= link_to new_homework_path do %>
-          <span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
-          <span>&nbsp;Загрузить ДЗ</span>
-      <% end %>
-    </li>
-    <li>
-      <%= link_to homeworks_path do %>
-          <span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>
-          <span>&nbsp;Просмотреть ДЗ</span>
-      <% end %>
-    </li>
-
+    <% if current_page?(root_path) or current_controller?('users') %>
+        <li>
+          <%= link_to root_path do %>
+              <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+              <span>&nbsp;Курсы</span>
+          <% end %>
+        </li>
+    <% elsif current_controller?('homeworks') %>
+        <li>
+          <%= link_to :back do %>
+              <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+              <span>&nbsp;Назад</span>
+          <% end %>
+        </li>
+    <% else %>
+        <li>
+          <%= link_to course_path(@course) do %>
+              <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+              <span>&nbsp;Курс</span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to new_homework_path do %>
+              <span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
+              <span>&nbsp;Загрузить ДЗ</span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to homeworks_path do %>
+              <span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>
+              <span>&nbsp;Просмотреть ДЗ</span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to course_classmates_path(@course) do %>
+              <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+              <span>&nbsp;Classmates</span>
+          <% end %>
+        </li>
+    <% end %>
   </ul>
 </div>
 
