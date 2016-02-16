@@ -22,7 +22,13 @@
         <td><%= period.group.name %></td>
         <td><%= period.course.name %></td>
         <td><%= period.commence_datetime.strftime('%d.%m.%y') %></td>
-        <td><%= period.deadline.strftime('%d.%m.%y') %></td>
+        <td>
+          <% if period.deadline.nil? %>
+              <p>Нет задания</p>
+          <% else %>
+              <%= period.deadline.strftime('%d.%m.%y') %>
+          <% end %>
+        </td>
       </tr>
   <% end %>
 </table>
