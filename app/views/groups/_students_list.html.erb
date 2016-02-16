@@ -14,7 +14,7 @@
           <tr>
             <td><%= link_to student.full_name, user_path(student) %></td>
             <td><%= student.email %></td>
-            <td></td>
+            <td><%= link_to 'Редактировать', edit_user_path(student), class: 'btn btn-default'%></td>
           </tr>
       <% end %>
   <% end %>
