@@ -25,10 +25,10 @@ Rails.application.routes.draw do
 
   resources :users, :except => [:destroy]
 
-  resources :courses do
-    resources :course_elements
+  resources :courses, :except => [:destroy] do
+    resources :course_elements, :except => [:destroy]
     get 'classmates' => 'courses#classmates', as: 'classmates'
-    resources :groups do
+    resources :groups, except: [:destroy] do
 
       get 'periods/calendar_group/:group_id' => 'periods#calendar_group', as: 'periods_calendar_group'
 
@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   get '/change_tab/:group_id/:group_tab_id' => 'groups#change_tab', as: 'change_group_tab'
 
 
-  resources :periods
+  resources :periods, except: [:destroy]
   get 'selected_groups' => 'periods#selected_groups', as: 'selected_groups'
   get 'schedule_table' => 'periods#schedule_table', as: 'schedule_table'
 
