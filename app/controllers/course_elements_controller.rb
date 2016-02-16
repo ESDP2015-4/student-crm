@@ -48,7 +48,6 @@ class CourseElementsController < ApplicationController
   def new_readings
     @course_element = CourseElement.find(params[:id])
     google_files
-
   end
 
   def create_readings
@@ -81,57 +80,26 @@ class CourseElementsController < ApplicationController
     client.authorization.access_token = Token.last.fresh_token
     drive_api = client.discovered_api('drive', 'v2')
 
-    @results = client.execute!(
-        :api_method => drive_api.files.list,
-        :parameters => { :maxResults => 1000 })
-    @root_array = []
-
-    all_array = []
-    @results.data.items.each do |file|
-      all_array.push({
-                         id: file.id,
-                         title: file.title,
-                         parents: file.parents,
-                         icon: file.icon_link,
-                         link: file.alternate_link
-                     })
-    end
-
-    # all_array.each do |file|
-    #   file[:parents].each do |parent|
-    #     if parent[:is_root]
-    #       @root_array.push file
-    #       all_array.delete file
-    #     end
-    #   end
-    #   if file.parents.length == 0
-    #     @root_array.push file
-    #     all_array.delete file
-    #   end
-    # end
-
-    # all_array.each do |file|
-    #   @root_array.each do |folder|
-    #     if file.id == folder.id
-    #       folder[:children].push file
-    #       all_array.delete file
-    #     end
-    #   end
-    # end
-
-    @root_array = all_array
-
-  end
-
-  def google_folders
-    client = Google::APIClient.new
-    client.authorization.access_token = Token.last.fresh_token
-    drive_api = client.discovered_api('drive', 'v2')
-
-    @root = client.execute!(
-        :api_method => drive_api.children.list,
-        :parameters => { 'folderId' => 'root',
-                         :maxResults => 1000 })
+    @result = Array.new
+    page_token = nil
+    begin
+      parameters = {:orderBy => 'folder'}
+      if page_token.to_s != ''
+        parameters['pageToken'] = page_token
+      end
+      api_result = client.execute(
+          :api_method => drive_api.files.list,
+          :parameters => parameters)
+      if api_result.status == 200
+        files = api_result.data
+        @result.concat(files.items)
+        page_token = files.next_page_token
+      else
+        puts "An error occurred: #{result.data['error']['message']}"
+        page_token = nil
+      end
+    end while page_token.to_s != ''
+    @result
   end
 
 end

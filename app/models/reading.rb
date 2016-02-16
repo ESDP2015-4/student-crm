@@ -9,10 +9,9 @@ class Reading < ActiveRecord::Base
 
     Period.all.each do |period|
 
-
       if Time.now >= period.commence_datetime - 3.hours && Time.now < period.commence_datetime - 2.hours
-        # puts "alert time: #{(period.commence_datetime - 3.hours).strftime('%d/%m/%Y %I:%M %p')})"
-        # puts "#{period.title} is today, time for lesson: #{period.commence_datetime.strftime('%d/%m/%Y %I:%M %p')}"
+        puts "alert time: #{(period.commence_datetime - 3.hours).strftime('%d/%m/%Y %I:%M %p')})"
+        puts "#{period.title} is today, time for lesson: #{period.commence_datetime.strftime('%d/%m/%Y %I:%M %p')}"
         client = Google::APIClient.new
         perm_type = 'user'
         role = 'reader'
@@ -20,20 +19,11 @@ class Reading < ActiveRecord::Base
 
         period.group.students.each do |student|
           UserMailer.invitation_to_period_event(student, period).deliver
-          # puts "Mail sent to #{student.full_name}"
+          puts "Mail sent to #{student.full_name}"
           value.push student.email
         end
         period.course_element.readings.each do |file|
           Reading.insert_google_permission(client, file.file_id, value, perm_type, role)
-          if @result.status == 200
-
-            puts "Success #{Time.now.strftime("%d/%m/%Y %I:%M %p")}"
-            # puts @result.data
-          else
-            @error =  "An error occurred: #{@result.data['error']['message']}"
-            puts @error
-            puts " #{Time.now.strftime("%d/%m/%Y %I:%M %p")}"
-          end
         end
       end
     end
@@ -54,5 +44,13 @@ class Reading < ActiveRecord::Base
         :body_object => new_permission,
         :parameters => { 'fileId' => file_id })
 
+    if @result.status == 200
+      puts "Success #{Time.now.strftime("%d/%m/%Y %I:%M %p")}"
+      # puts @result.data
+    else
+      @error =  "An error occurred: #{@result.data['error']['message']}"
+      puts @error
+      puts " #{Time.now.strftime("%d/%m/%Y %I:%M %p")}"
+    end
   end
 end

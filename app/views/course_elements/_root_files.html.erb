@@ -1,0 +1,19 @@
+<div class="panel">
+  <div class="panel-heading" role="tab" id="headingTwo">
+    <h4 class="panel-title">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" aria-expanded="false" aria-controls="collapseTwo">
+            <%= image_tag f.icon_link %>  <%= f.title %>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <%= link_to 'Открыть', f.alternate_link, class: 'btn btn-default btn-sm', :target => "_blank" %>
+        </div>
+        <div class="col-md-2">
+          <%= render 'form_hidden', file: f %>
+        </div>
+      </div>
+    </h4>
+  </div>
+</div>
