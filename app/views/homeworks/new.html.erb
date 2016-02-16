@@ -5,10 +5,16 @@
         <h3><span>Вы уже загрузили все домашние задания</span></h3>
     <% else %>
         <%= form_for @homework do |f| %>
-            <%= f.label 'Выберите занятие' %>
-            <br/>
-            <%= f.collection_select(:period_id, @actual_periods, :id, :title) %>
-            <br/>
+
+            <% if session[:hw_period_id].nil? %>
+                <%= f.label 'Выберите занятие' %>
+                <br/>
+                <%= f.collection_select(:period_id, @actual_periods, :id, :title) %>
+                <br/>
+            <% else %>
+                <%= f.hidden_field :period_id, value: session[:hw_period_id] %>
+            <% end %>
+
             <br/>
             <%= f.label 'Выберите архив с заданием' %>
             <br/>

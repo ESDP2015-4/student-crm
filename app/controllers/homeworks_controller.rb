@@ -4,7 +4,8 @@ class HomeworksController < ApplicationController
 
   def index
     if student?
-      @homeworks = Homework.where(user: current_user)
+      @course = Course.find(params[:course_id])
+      @homeworks = Homework.where(user: current_user, period: @course.periods)
     else
       if params[:group_ids]
         @homeworks
@@ -31,6 +32,9 @@ class HomeworksController < ApplicationController
   end
 
   def new
+    if params[:hw_period_id]
+      session[:hw_period_id] = params[:hw_period_id]
+    end
     if current_user.student_groups.empty?
       redirect_to homeworks_path
       flash[:alert] = 'Вы не записаны ни в одну группу'
@@ -52,6 +56,7 @@ class HomeworksController < ApplicationController
     @homework.grade = 1
     @homework.user_id = current_user.id
     if @homework.save
+      session[:hw_period_id] = nil
       flash[:success] = 'Домашнее задание загружено'
       redirect_to homeworks_path
     else

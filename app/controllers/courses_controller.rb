@@ -1,6 +1,7 @@
 class CoursesController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
+  helper_method :has_periods?
 
   def index
     if student?
@@ -60,6 +61,10 @@ class CoursesController < ApplicationController
   def classmates
     @course = Course.find(params[:course_id])
     @classmates = Course.find(params[:course_id]).groups.collect(&:students).flatten.uniq
+  end
+
+  def has_periods?(su)
+    Course.find(params[:id]).periods.exists?(study_unit: su)
   end
 
   private

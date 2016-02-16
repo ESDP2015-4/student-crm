@@ -22,14 +22,14 @@
               <span>&nbsp;Курс</span>
           <% end %>
         </li>
+        <!--<li>-->
+          <!--<%= link_to new_homework_path do %>-->
+              <!--<span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>-->
+              <!--<span>&nbsp;Загрузить ДЗ</span>-->
+          <!--<% end %>-->
+        <!--</li>-->
         <li>
-          <%= link_to new_homework_path do %>
-              <span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
-              <span>&nbsp;Загрузить ДЗ</span>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to homeworks_path do %>
+          <%= link_to course_student_homeworks_path(@course) do %>
               <span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>
               <span>&nbsp;Просмотреть ДЗ</span>
           <% end %>

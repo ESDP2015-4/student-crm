@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   resources :courses, :except => [:destroy] do
     resources :course_elements, :except => [:destroy]
     get 'classmates' => 'courses#classmates', as: 'classmates'
+    get 'student_homeworks' => 'homeworks#index', as: 'student_homeworks'
     resources :groups, except: [:destroy] do
 
       get 'periods/calendar_group/:group_id' => 'periods#calendar_group', as: 'periods_calendar_group'
