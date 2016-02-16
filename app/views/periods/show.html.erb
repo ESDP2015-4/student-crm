@@ -10,10 +10,7 @@
         </b>
 
         <%= link_to '', edit_period_path(@period), class: 'glyphicon glyphicon-pencil' %>
-        <%= link_to '', period_path(@period), class: 'glyphicon glyphicon-trash',
-                    method: :delete,
-                    data: {confirm: 'Действительно хотите удалить?'}
-        %>
+
       </h4>
     </div>
     <div class="panel-body">
@@ -32,7 +29,7 @@
         </tr>
         <tr>
           <td>Группа:</td>
-          <td><%= link_to @period.group.name, group_path(@period.group) %></td>
+          <td><%= link_to @period.group.name, course_group_path(@period.course,@period.group) %></td>
         </tr>
         <tr>
           <td>Курс:</td>
