@@ -74,12 +74,12 @@
                           <tr>
                             <td><%= period.title %></td>
                             <td><%= link_to period.course_element.theme, course_course_element_path(@course, period.course_element) %></td>
-                            <td><%= period.commence_datetime.strftime('%y.%m.%d %H:%M') %></td>
+                            <td><%= period.commence_datetime.strftime('%H:%M  %d.%m.%y') %></td>
                             <td>
                               <% if period.deadline.nil? %>
                                   <p>Нет задания</p>
                               <% else %>
-                                  <%= period.deadline.strftime('%y.%m.%d %H:%M') %>
+                                  <%= period.deadline.strftime('%H:%M  %d.%m.%y') %>
                               <% end %>
                             </td>
                             <td>
