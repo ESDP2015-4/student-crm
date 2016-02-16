@@ -36,7 +36,7 @@ class Ability
 
       can [:create], CourseElement
 
-      can :read, Group
+      can [:read, :change_tab], Group
 
       can :manage, Attendance
 
