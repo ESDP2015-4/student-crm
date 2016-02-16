@@ -34,6 +34,8 @@ class Ability
       # Может управлять раздатками только своих курсов
       can [:manage], CourseElement, :id => CourseElement.where(course_id: user.teacher_courses.ids).ids
 
+      can [:create], CourseElement
+
       can :read, Group
 
       can :manage, Attendance
@@ -54,7 +56,7 @@ class Ability
       can :manage, Homework
 
       # Может просматривать только свои курсы
-      can [:read], Course, :id => user.student_courses.ids
+      can [:read, :classmates], Course, :id => user.student_courses.ids
 
       # Может просматривать раздатки только своих курсов
       can [:read], CourseElement, :id => CourseElement.where(course_id: user.student_courses.ids).ids
