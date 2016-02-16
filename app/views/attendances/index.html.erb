@@ -107,7 +107,7 @@
                 <% @attendances.each do |attendance| %>
                     <% if attendance.period == period and attendance.user == student %>
                         <td>
-                          <label style="display: block">
+                          <label class="label">
                             <%= check_box_tag attendance, attendance.id, attendance.attended,
                                               data: {url: check_path(attendance_id: attendance.id),
                                                      remote: true, method: :patch} %>
