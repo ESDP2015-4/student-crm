@@ -8,7 +8,7 @@
                     <h4 class="panel-title">
                       <div class="row">
                         <div class="col-md-8">
-                          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#<%= ch.id %>" aria-expanded="false" aria-controls="collapseTwo">
+                          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#<%= ch.id + parent.id %>" aria-expanded="false" aria-controls="collapseTwo">
                             <%= image_tag ch.icon_link %>  <%= ch.title %>
                           </a>
                         </div>
@@ -21,7 +21,7 @@
                       </div>
                     </h4>
                   </div>
-                  <div id="<%= ch.id %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                  <div id="<%= ch.id + parent.id %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
                     <div class="panel-body">
                       <%= render 'new_readings', file: ch %>
                     </div>
