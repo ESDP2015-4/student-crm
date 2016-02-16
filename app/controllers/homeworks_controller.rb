@@ -58,7 +58,11 @@ class HomeworksController < ApplicationController
     if @homework.save
       session[:hw_period_id] = nil
       flash[:success] = 'Домашнее задание загружено'
-      redirect_to homeworks_path
+      if student?
+        redirect_to course_student_homeworks_path(@homework.period.course)
+      else
+        redirect_to homeworks_path
+      end
     else
       redirect_to new_homework_path
     end
