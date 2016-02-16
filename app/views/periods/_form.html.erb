@@ -26,20 +26,24 @@
                     value_method: :id,
                     include_blank: true
         %>
-        <%= f.input :commence_datetime,
-                    label: 'Дата события',
-                    minute_step: 30,
-                    start_hour: 07,
-                    end_hour: 21
-        %>
-        <%= f.input :deadline,
-                    label: 'Срок сдачи ДЗ'
-        %>
 
+        <%= f.input :study_unit_id,
+                    label: 'Учебный блок',
+                    collection: StudyUnit.all %>
 
+        <div style="padding-left: 30px;">
+          <%= f.input :commence_datetime,
+                      label: 'Дата события',
+                      minute_step: 30,
+                      start_hour: 07,
+                      end_hour: 21
+          %>
+          <%= f.input :deadline,
+                      label: 'Срок сдачи ДЗ'
+          %>
+        </div>
         <%= f.button :submit, 'Создать занятие', class: 'btn3d btn btn-primary' %>
     <% end %>
-
 <% end %>
 
 
