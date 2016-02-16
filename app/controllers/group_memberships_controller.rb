@@ -10,12 +10,17 @@ class GroupMembershipsController < ApplicationController
   end
 
   def create
-    params.require(:group_membership).permit(:user_ids, :group_id, :course_id)
+    @gm = GroupMembership.new(group_membership_params)
     params[:group_membership][:user_id].each do |student_id|
       GroupMembership.create!(group_id: params[:group_id], user_id: student_id)
     end
-
     redirect_to course_group_path(params[:course_id],params[:group_id])
+  end
+
+  private
+
+  def group_membership_params
+    params.require(:group_membership).permit(:user_ids, :group_id, :course_id)
   end
 
 end
