@@ -47,6 +47,7 @@ class HomeworksController < ApplicationController
   end
 
   def create
+    Homework.rename_archive
     @homework = Homework.new(homework_params)
     @homework.grade = 1
     @homework.user_id = current_user.id
@@ -63,6 +64,7 @@ class HomeworksController < ApplicationController
   end
 
   def update
+    Homework.rename_archive
     @homework = Homework.find(params[:id])
     if @homework.update(homework_params)
       flash[:success] = 'Изменения успешно внесены'
