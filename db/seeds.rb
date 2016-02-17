@@ -13,16 +13,16 @@ StudyUnit.create!(title:'Третий')
 StudyUnit.create!(title:'Четвертый')
 StudyUnit.create!(title:'Пятый')
 
-# Create phone codes
-phonecodes = (550..559).to_a
-phonecodes.push (700..709).to_a
-phonecodes.push (770..779).to_a
-phonecodes.flatten!
+# # Create phone codes
+# phonecodes = (550..559).to_a
+# phonecodes.push (700..709).to_a
+# phonecodes.push (770..779).to_a
+# phonecodes.flatten!
 
 # Default password for test users
 password = 'password'
 
-# Creating students
+# # Creating students
 # 50.times do
 #   User.create!(
 #       name: Faker::Name.first_name,
@@ -42,17 +42,54 @@ password = 'password'
 # end
 
 # Test user with manager role
-# manager = User.create!(name: 'manager',
-#                        surname: 'manager',
-#                        gender: 'Мужчина',
-#                        birthdate: '02.09.1992',
-#                        phone1: '+996772180825',
-#                        phone2: '+996772180825',
-#                        skype: 'skype.daniyar',
-#                        passportdetails:'abijjljlk',
-#                        email: 'manager@gmail.com', password: password, password_confirmation: password)
-#
-# manager.add_role 'manager'
+user1 = User.create!(name: 'Altyn',
+                       surname: 'manager',
+                       gender: 'Мужчина',
+                       birthdate: '02.09.1972',
+                       phone1: '+996555180825',
+                       phone2: '+996555180825',
+                       skype: 'skype.afdgsa',
+                       passportdetails:'abijjljlk',
+                       email: 'altiwbek@gmail.com', password: password, password_confirmation: password)
+
+user1.add_role 'admin'
+
+user2 = User.create!(name: 'Amir',
+                       surname: 'manager',
+                       gender: 'Мужчина',
+                       birthdate: '02.09.1992',
+                       phone1: '+996772187825',
+                       phone2: '+996772184525',
+                       skype: 'skype.were',
+                       passportdetails:'asdfdsafsaf',
+                       email: 'a.mullabaev@gmail.com', password: password, password_confirmation: password)
+
+user2.add_role 'admin'
+
+
+user3 = User.create!(name: 'Roma',
+                       surname: 'manager',
+                       gender: 'Мужчина',
+                       birthdate: '02.09.1992',
+                       phone1: '+996772100825',
+                       phone2: '+996772114525',
+                       skype: 'skypiyut.were',
+                       passportdetails:'asdfdsafsaf',
+                       email: 'ramablack93@gmail.com', password: password, password_confirmation: password)
+
+user3.add_role 'admin'
+
+user4 = User.create!(name: 'Max',
+                       surname: 'manager',
+                       gender: 'Мужчина',
+                       birthdate: '02.09.1992',
+                       phone1: '+996772100000',
+                       phone2: '+996772111111',
+                       skype: 'skypejuere',
+                       passportdetails:'asdfdsafsaf',
+                       email: 'sabyrov@gmail.com', password: password, password_confirmation: password)
+
+user4.add_role 'admin'
 
 # Test user with a student role
 # student = User.create!(name: 'Student',
@@ -68,19 +105,19 @@ password = 'password'
 # student.add_role 'student'
 
 # Test user with an admin role
-admin = User.create!(name: 'Admin',
+user5 = User.create!(name: 'Admin',
                      surname: 'Lastname',
                      gender: 'Мужчина',
                      birthdate: '02.09.1992',
-                     phone1: '+996772180825',
-                     phone2: '+996772180825',
+                     phone1: '+996772180725',
+                     phone2: '+996772190825',
                      skype: 'skype.admin',
                      passportdetails:'MVD 50-01',
                      email: 'shamkeev@gmail.com', password: password, password_confirmation: password)
 
-admin.add_role 'admin'
+user5.add_role 'admin'
 
-# Test user with a teacher role
+# # Test user with a teacher role
 # teacher = User.create!(name: 'Teacher',
 #                      surname: 'Lastname',
 #                      gender: 'Мужчина',
@@ -93,7 +130,7 @@ admin.add_role 'admin'
 #
 # teacher.add_role 'teacher'
 
-# Test user with a techsupport role
+# # Test user with a techsupport role
 # support = User.create!(name: 'Tech',
 #                      surname: 'Support',
 #                      gender: 'Мужчина',
@@ -130,7 +167,7 @@ student_id = 0 # used to add created students to groups by id
         course: course
     )
 
-    # Add 5 students to a group
+    # # Add 5 students to a group
     # 5.times do
     #   #increment student_id to get different student ids
     #   student_id += 1
@@ -139,7 +176,7 @@ student_id = 0 # used to add created students to groups by id
     #       user_id: student_id,
     #       active: true)
     # end
-    # Add teacher to a group
+    # # Add teacher to a group
     # TeachersGroup.create!(group: group,
     #       user_id: teacher.id,
     #       active: true)
@@ -186,15 +223,25 @@ end
 groups.each do |group|
   c_el_id = 0
   t -= 20.days
+  count = 0
   10.times do
     t = set_week_day(t)
     c_el_id += 1
+    count += 1
+    if count <= 3
+      study_unit = 1
+    elsif count <= 6
+      study_unit = 2
+    else
+      study_unit = 3
+    end
     Period.create!(
         title:"Lesson #{c_el_id}",
         group_id: group.id,
         course_id: group.course_id,
         course_element_id: c_el_id,
-        commence_datetime: t
+        commence_datetime: t,
+        study_unit_id: study_unit
     )
   end
   t = set_hour(t)
