@@ -17,7 +17,7 @@
                         <div class="panel-heading">
                           <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion2" href="#collapse-hw-<%= period.id%>">
-                              <%= period.title %>. Дата проведения:<%= period.commence_datetime.strftime("%d.%m.%y")%>,   Дэдлайн: <%=period.deadline.strftime("%d.%m.%y %H:%M") %>
+                              <%= period.title %>. Дата проведения:<%= period.commence_datetime.strftime("%d.%m.%y")%>,   Дэдлайн: <%=period.deadline.strftime("%d.%m.%y %H:%M") if !period.deadline.nil? %> <%= "---" if period.deadline.nil?%>
                             </a>
                           </h4>
                         </div>
