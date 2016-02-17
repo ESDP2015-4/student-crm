@@ -1,7 +1,7 @@
-def login
+def login(email)
   visit("/users/sign_in")
   within('#login_form') do
-    fill_in 'Эл. почта', :with => 'manager@gmail.com'
+    fill_in 'Эл. почта', :with => email
     fill_in 'Пароль', :with => 'password'
   end
   click_button('Войти')
@@ -11,8 +11,11 @@ When(/^я захожу на главную страницу$/) do
   visit('/')
 end
 
+When(/^я захожу на сайт как "([^"]*)"$/) do |user_email|
+  login(user_email)
+end
+
 When(/^я захожу в меню "([^"]*)"$/) do |menu|
-  login()
   page.find(:xpath, ".//*[@id='sidebar-wrapper']/ul/li/a/span[contains(.,'#{menu}')]").click
 end
 
@@ -46,4 +49,10 @@ end
 
 When(/^я ввожу в поле "([^"]*)" значение "([^"]*)"$/) do |field, value|
   fill_in field, with: value
+end
+
+When(/^в таблице возле "([^"]*)" я кликаю на "([^"]*)"$/) do |field, link|
+  within(:xpath, "//tbody/tr[td/a='#{field}']") do
+    click_on(link)
+  end
 end

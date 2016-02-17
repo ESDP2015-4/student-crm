@@ -59,49 +59,90 @@ Cucumber::Rails::Database.javascript_strategy = :truncation
 Capybara.default_driver = :selenium
 
 Before do
-  manager = User.create!(name: 'manager',
-                         surname: 'manager',
-                         gender: 'Мужчина',
-                         birthdate: '02.09.1992',
-                         phone1: '+996772180825',
-                         phone2: '+996772180825',
-                         skype: 'skype.daniyar',
-                         passportdetails:'abijjljlk',
-                         email: 'manager@gmail.com',
-                         password: 'password',
-                         password_confirmation: 'password'
-  )
-  manager.add_role 'manager'
+  Role.create!(id: 1, name: 'student')
+  Role.create!(id: 2, name: 'manager')
+  Role.create!(id: 3, name: 'admin')
 
-  student1 = User.create!(name: 'Петр',
-                         surname: 'Петров',
-                         gender: 'Мужчина',
-                         birthdate: '01.01.1990',
-                         phone1: '+996772654321',
-                         phone2: '+996772123456',
-                         skype: 'skype',
-                         passportdetails:'5001',
-                         email: 'student@gmail.com',
-                         password: 'password',
-                         password_confirmation: 'password'
+  admin = User.create!(id: 1,
+                       name: 'Admin',
+                       surname: 'Adminovich',
+                       gender: 'Мужчина',
+                       birthdate: '01.01.1990',
+                       phone1: '+996772180825',
+                       phone2: '+996772180825',
+                       skype: 'skype.admin',
+                       passportdetails: 'шнишнашнаппи',
+                       email: 'admin@gmail.com',
+                       password: 'password',
+                       password_confirmation: 'password'
+  )
+  admin.add_role 'admin'
+
+  student1 = User.create!(id: 2,
+                          name: 'Петр',
+                          surname: 'Петров',
+                          gender: 'Мужчина',
+                          birthdate: '01.01.1990',
+                          phone1: '+996772654321',
+                          phone2: '+996772123456',
+                          skype: 'skype',
+                          passportdetails: '5001',
+                          email: 'student@gmail.com',
+                          password: 'password',
+                          password_confirmation: 'password',
+                          roles: [Role.find_by(name: 'student')]
   )
   student1.add_role 'student'
-  student2 = User.create!(name: 'Виталий',
+  student2 = User.create!(id: 3,
+                          name: 'Виталий',
                           surname: 'Дятлов',
                           gender: 'Мужчина',
                           birthdate: '01.01.1990',
                           phone1: '+996772111111',
                           phone2: '+996772222222',
                           skype: 'skype.lol',
-                          passportdetails:'50-01',
+                          passportdetails: '50-01',
                           email: 'vitaliy@gmail.com',
                           password: 'password',
-                          password_confirmation: 'password'
+                          password_confirmation: 'password',
+                          roles: [Role.find_by(name: 'student')]
   )
   student2.add_role 'student'
+  student3 = User.create!(id: 4,
+                          name: 'Владимир',
+                          surname: 'Путин',
+                          gender: 'Мужчина',
+                          birthdate: '01.01.1990',
+                          phone1: '+996772111111',
+                          phone2: '+996772222222',
+                          skype: 'skype.crab',
+                          passportdetails: '50-01',
+                          email: 'putinka@gmail.com',
+                          password: 'password',
+                          password_confirmation: 'password',
+                          roles: [Role.find_by(name: 'student')]
+  )
+  student3.add_role 'student'
+  student4 = User.create!(id: 5,
+                          name: 'Барак',
+                          surname: 'Обама',
+                          gender: 'Мужчина',
+                          birthdate: '01.01.1990',
+                          phone1: '+996772111111',
+                          phone2: '+996772222222',
+                          skype: 'skype.nigga',
+                          passportdetails: '50-01',
+                          email: 'shokoladka@gmail.com',
+                          password: 'password',
+                          password_confirmation: 'password',
+                          roles: [Role.find_by(name: 'student')]
+  )
+  student4.add_role 'student'
 
-  Course.create!(name: 'Test course')
-  Course.create!(name: 'Second course')
-  CourseElement.create!(course_id: 1, theme: 'Test Control Work', element_type: 'Контрольная работа')
-  Group.create!(course_id: 1, name: 'Test group')
+  Course.create!(id: 1, name: 'Test course')
+  # Course.create!(name: 'Second course')
+  CourseElement.create!(id: 1, course_id: 1, theme: 'Test Control Work', element_type: 'Контрольная работа')
+  Group.create!(id: 1, course_id: 1, name: 'Test group')
+  GroupMembership.create!(group_id: 1, user_id: 4, active: true)
+  GroupMembership.create!(group_id: 1, user_id: 5, active: true)
 end
