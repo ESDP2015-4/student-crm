@@ -49,7 +49,6 @@
 
 <% if student? %>
     <hr>
-    <h2>Collapsible Panel</h2>
     <div class="panel-group" id="accordion">
       <% StudyUnit.find_each do |su| %>
           <% if has_periods?(su) %>
