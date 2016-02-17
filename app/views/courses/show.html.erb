@@ -87,10 +87,10 @@
                                   <p>---</p>
                               <% else %>
                                   <% if Homework.where(period: period, user: current_user).first.nil? %>
-                                      <% if period.commence_datetime.past? && period.deadline.future? %>
-                                          <%= link_to 'Загрузить', new_homework_path(:hw_period_id => period.id) %>
-                                      <% else %>
+                                      <% if period.deadline.past? %>
                                           <p>Не успел</p>
+                                      <% else %>
+                                          <%= link_to 'Загрузить', new_homework_path(:hw_period_id => period.id) %>
                                       <% end %>
 
                                   <% else %>

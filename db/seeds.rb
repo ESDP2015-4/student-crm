@@ -241,6 +241,7 @@ groups.each do |group|
         course_id: group.course_id,
         course_element_id: c_el_id,
         commence_datetime: t,
+        deadline: t + 7.days,
         study_unit_id: study_unit
     )
   end

@@ -11,6 +11,11 @@ class Period < ActiveRecord::Base
   validates :group_id, presence: true
   validates :title, presence: true, length: {minimum: 5}
   validates :study_unit_id, presence: true
+  validate :check_deadline_greater_than_commence
+
+  def check_deadline_greater_than_commence
+    errors.add(:deadline, "Дэдлайн должен быть позже чем дата занятия") if !deadline.blank? && deadline <= commence_datetime
+  end
 
   after_save :create_attendances
   # Если сохранили новое занятие, то необходимо создать для этого занятие посещаемость для студентов:
