@@ -1,9 +1,25 @@
-<h1>Education process management system</h1>
-<h2>ESDP team #4</h2>
-
+<h1>Образовательный центр IT Attractor</h1>
+<h3>ESDP команда №4</h3>
+<hr>
 <% if student? %>
     <h3>Мои курсы:</h3>
-  <% current_user.student_courses.each do |course|%>
+    <% current_user.student_courses.each do |course| %>
+        <h3><%= link_to course.name, course_path(course) %></h3>
+    <% end %>
+
+<% elsif teacher? %>
+    <h3>Мои курсы:</h3>
+    <% current_user.teacher_courses.each do |course| %>
+        <h3><%= link_to course.name, course_path(course) %></h3>
+    <% end %>
+<% elsif techsupport? %>
+    <h3>Мои курсы:</h3>
+    <% current_user.techsupport_courses.each do |course| %>
+        <h3><%= link_to course.name, course_path(course) %></h3>
+    <% end %>
+<% elsif admin? or manager? %>
+    <h3>Все курсы:</h3>
+    <% Course.find_each do |course| %>
         <h3><%= link_to course.name, course_path(course) %></h3>
     <% end %>
 <% end %>
