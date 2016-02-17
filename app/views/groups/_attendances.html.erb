@@ -1,28 +1,47 @@
-<table class="table table-bordered table-hover">
-  <thead>
-  <th>Students</th>
-  <th>Count</th>
-  <% @periods.each do |period| %>
-      <th><%= period.commence_datetime.strftime('%c') %></th>
+
+<div class="panel-group" id="accordion">
+  <% StudyUnit.find_each do |su| %>
+      <% if has_periods?(su)%>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= su.id %>"><%= su.title %> учебный блок</a>
+              </h4>
+            </div>
+            <div id="collapse<%= su.id %>" class="panel-collapse collapse">
+              <div class="panel-body">
+                <table class="table table-hover">
+                  <thead>
+                  <th>Студент</th>
+                  <th style="max-width: 10px;">Кол-во</th>
+                  <% @periods.where(study_unit: su).each do |period| %>
+                      <th style="max-width: 30px;"><%= period.commence_datetime.strftime('%c') %></th>
+                  <% end %>
+                  </thead>
+                  <tbody>
+                  <% @students.each do |student| %>
+                      <tr>
+                        <td><%= student.full_name %></td>
+                        <td id="attendance-count"><%= student.attendances.where(attended: true).count %></td>
+                        <% @periods.each do |period| %>
+                            <% @attendances.each do |a| %>
+                                <% if a.period == period and a.user == student and a.period.study_unit == su %>
+                                    <td class="group-attendance-td">
+                                      <label class="group-attendance-lbl">
+                                        <%= check_box_tag a, a.id, a.attended, data: {url: check_path(attendance_id: a.id), remote: true, method: :patch} %>
+                                      </label>
+                                    </td>
+                                <% end %>
+                            <% end %>
+                        <% end %>
+                      </tr>
+                  <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+      <% end %>
   <% end %>
-  </thead>
-  <tbody>
-  <% @students.each do |student| %>
-      <tr>
-        <td><%= student.full_name %></td>
-        <td><%= student.attendances.where(attended: true).count %></td>
-        <% @periods.each do |period| %>
-            <% @attendances.each do |a| %>
-                <% if a.period == period and a.user == student %>
-                    <td class="group-attendance-td">
-                      <label class="group-attendance-lbl">
-                        <%= check_box_tag a, a.id, a.attended, data: {url: check_path(attendance_id: a.id), remote: true, method: :patch} %>
-                      </label>
-                    </td>
-                <% end %>
-            <% end %>
-        <% end %>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+</div>
+
