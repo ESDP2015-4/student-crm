@@ -70,6 +70,9 @@ class HomeworksController < ApplicationController
 
   def edit
     @homework = Homework.find(params[:id])
+    if params[:hw_back_path] == 'group_hw'
+      session[:hw_back_path] = 'group_hw'
+    end
   end
 
   def update
@@ -77,9 +80,19 @@ class HomeworksController < ApplicationController
     @homework = Homework.find(params[:id])
     if @homework.update(homework_params)
       flash[:success] = 'Изменения успешно внесены'
-      redirect_to homeworks_path
+      if session[:hw_back_path] == 'group_hw'
+        redirect_to course_group_path(@homework.period.course, @homework.period.group)
+        session[:hw_back_path] = nil
+      else
+        if student?
+          redirect_to course_student_homeworks_path(@homework.period.course)
+        else
+          redirect_to homeworks_path
+        end
+      end
+
     else
-      render 'update'
+      render 'edit'
     end
   end
 
