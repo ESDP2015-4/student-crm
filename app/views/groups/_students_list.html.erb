@@ -1,10 +1,10 @@
-<h4>Студенты группы:</h4>
-
 <table class="table table-hover">
   <thead>
   <tr>
     <th>Студент</th>
     <th>Email</th>
+    <th>Телефон</th>
+    <th>Скайп</th>
     <th>Действия</th>
   </tr>
   </thead>
@@ -14,6 +14,8 @@
           <tr>
             <td><%= link_to student.full_name, user_path(student) %></td>
             <td><%= student.email %></td>
+            <td><%= student.phone1 %></td>
+            <td><%= student.skype %></td>
             <td><%= link_to 'Редактировать', edit_user_path(student), class: 'btn btn-default'%></td>
           </tr>
       <% end %>

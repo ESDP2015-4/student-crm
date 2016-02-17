@@ -41,6 +41,19 @@
           <% end %>
         </li>
 
+    <% elsif current_controller?('users') and current_action?('show') %>
+        <li>
+          <%= link_to :back do %>
+              <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+              <span>&nbsp;Назад</span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to root_path do %>
+              <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+              <span>&nbsp;Курсы</span>
+          <% end %>
+        </li>
     <% else %>
         <li>
           <%= link_to root_path do %>

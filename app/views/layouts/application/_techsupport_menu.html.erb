@@ -2,20 +2,54 @@
 <div id="sidebar-wrapper">
   <ul class="sidebar-nav">
 
-    <li>
-      <%= link_to courses_path do %>
-          <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-          <span>&nbsp;Курсы</span>
-      <% end %>
-    </li>
+    <% if current_controller?('main') %>
+        <li>
+          <%= link_to root_path do %>
+              <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+              <span>&nbsp;Курсы</span>
+          <% end %>
+        </li>
+    <% elsif current_controller?('courses') and current_action?('show') %>
+        <% @course.groups.each do |group| %>
+            <li>
+              <%= link_to course_group_path(@course, group) do %>
+                  <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                  <span>&nbsp;Группа <%= group.name %></span>
+              <% end %>
+            </li>
+        <% end %>
+        <!--<li>-->
+        <!--<%= link_to course_groups_path(@course) do %>-->
+            <!--<span class="glyphicon glyphicon-list" aria-hidden="true"></span>-->
+            <!--<span>&nbsp;Группы</span>-->
+            <!--
+        <% end %>-->
+        <!--</li>-->
+        <!--<li>-->
+        <!--<%= link_to periods_homework_path do %>-->
+            <!--<span class="glyphicon glyphicon-duplicate" aria-hidden="true"></span>-->
+            <!--<span>&nbsp;Просмотреть ДЗ</span>-->
+            <!--<span class="badge" style="text-indent: 0px;"><%= Homework.where(grade: 1).length %></span>-->
+            <!--
+        <% end %>-->
+        <!--</li>-->
+    <% elsif current_controller?('groups') and current_action?('show') %>
+        <li>
+          <%= link_to course_path(@group.course) do %>
+              <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+              <span>&nbsp;Курс <%= @group.course.name %></span>
+          <% end %>
+        </li>
 
-    <li>
-      <%= link_to groups_path do %>
-          <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-          <span>&nbsp;Группы</span>
-      <% end %>
-    </li>
-
+    <% else %>
+        <li>
+          <%= link_to root_path do %>
+              <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+              <span>&nbsp;Курсы</span>
+          <% end %>
+        </li>
+    <% end %>
+    <hr>
     <li>
       <div role=tablist>
         <div role=tab id=collapseListGroupHeading1>
@@ -52,6 +86,15 @@
           <span>&nbsp;Календарь</span>
       <% end %>
     </li>
+
+    <!--<li>-->
+    <!--<%= link_to attendances_path do %>-->
+        <!--<span class="glyphicon glyphicon-th" aria-hidden="true"></span>-->
+        <!--<span>&nbsp;Посещаемость</span>-->
+        <!--
+    <% end %>-->
+    <!--</li>-->
+
 
   </ul>
 </div>
