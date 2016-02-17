@@ -98,8 +98,10 @@
           <div class="col-sm-6">
             <h4>Отсутствовали:</h4>
             <% @period.attendances.each do |att| %>
+                <% unless att.user.nil? %>
                 <% if !att.attended %>
                     <%= link_to att.user.full_name, user_path(att.user) %> <br>
+                <% end %>
                 <% end %>
             <% end %>
           </div>
