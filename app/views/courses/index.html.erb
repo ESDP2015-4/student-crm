@@ -17,7 +17,6 @@
         <% if admin? or manager? %>
             <td>
               <%= link_to 'Редактировать', edit_course_path(course), class: 'btn btn-info' %>
-              <%= link_to 'Удалить', course_path(course), method: :delete, data: {confirm: 'Вы действительно хотите удалить?'}, class: 'btn btn-danger' %>
             </td>
         <% end %>
       </tr>
